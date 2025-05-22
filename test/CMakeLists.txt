@@ -1,0 +1,18 @@
+# Add test source
+add_executable(my_tests
+    test_main.cpp
+    addition_test.cpp
+)
+
+# Link with GTest
+target_link_libraries(my_tests
+    gtest_main
+    src
+)
+
+# Enable CTest
+enable_testing()
+
+# Discover and register tests
+include(GoogleTest)
+gtest_discover_tests(my_tests)
