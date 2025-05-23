@@ -1,7 +1,6 @@
 # Add test source
 add_executable(my_tests
     test_main.cpp
-    addition_test.cpp
     MoveDialog_test.cpp
 )
 
