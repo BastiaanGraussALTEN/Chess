@@ -23,7 +23,14 @@ void MoveDialog::SetMove(std::string move)
     }
 }
 
-std::string MoveDialog::GetDialog()
+void MoveDialog::ShowDialog()
+{
+    std::string moveHistory = GetMoveHistory();
+    std::string dialog = GetSingleLineDialog();
+    std::cout << moveHistory << dialog;
+}
+
+std::string MoveDialog::GetSingleLineDialog()
 {
     if (m_moveNumber % 2 == 0)
     {
