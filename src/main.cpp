@@ -7,8 +7,9 @@ int main()
     MoveDialog moveDialog;
     while(true)
     {
+        std::string moveHistory = moveDialog.GetMoveHistory();
         std::string dialog = moveDialog.GetDialog();
-        std::cout << dialog;
+        std::cout << moveHistory << dialog;
         std::cin >> move;
         moveDialog.SetMove(move);
     }

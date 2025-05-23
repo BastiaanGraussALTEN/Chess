@@ -1,39 +1,55 @@
 #include "gtest/gtest.h"
 #include "../src/MoveDialog.h"
 
-TEST(additionTest, firstDialog) 
+TEST(MoveDialogTest, firstDialog) 
 {
-    //arrange
+    // Arrange
     MoveDialog moveDialog;
 
-    //act
+    // Act
     std::string dialog = moveDialog.GetDialog();
 
-    //assert
-    EXPECT_EQ (dialog,  "White to move");
+    // Assert
+    EXPECT_EQ(dialog,  "White to move, insert your Move: ");
 }
 
-TEST(additionTest, dialogAfterMove) 
+TEST(MoveDialogTest, dialogAfterMove) 
 {
-    //arrange
+    // Arrange
     MoveDialog moveDialog;
 
-    //act
+    // Act
     moveDialog.SetMove("move1");
 
-    //assert
-    EXPECT_EQ (moveDialog.GetDialog(), "Black to move");
+    // Assert
+    EXPECT_EQ(moveDialog.GetDialog(), "Black to move, insert your Move: ");
 }
 
-TEST(additionTest, dialogAfterTwoMoves) 
+TEST(MoveDialogTest, dialogAfterTwoMoves) 
 {
-    //arrange
+    // Arrange
     MoveDialog moveDialog;
 
-    //act
+    // Act
     moveDialog.SetMove("move1");
     moveDialog.SetMove("move2");
 
-    //assert
-    EXPECT_EQ (moveDialog.GetDialog(), "White to move");
+    // Assert
+    EXPECT_EQ(moveDialog.GetDialog(), "White to move, insert your Move: ");
+}
+
+TEST(MoveDialogTest, showingDialogHistory)
+{
+    // Arrange
+    MoveDialog moveDialog;
+    moveDialog.SetMove("move1");
+    moveDialog.SetMove("move2");
+    moveDialog.SetMove("move3");
+    moveDialog.SetMove("move4");
+    
+    // Act
+    std::string expectedMoveHistory = "\nMove history:\nmove1\tmove2\nmove3\tmove4\n\n";
+
+    // Assert
+    EXPECT_EQ(moveDialog.GetMoveHistory(), expectedMoveHistory);
 }
