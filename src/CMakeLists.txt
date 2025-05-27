@@ -2,11 +2,16 @@
 set(SRC_FILES
     main.cpp
     MoveDialog.cpp
+    Coord.cpp
+    Pawn.cpp
+    Piece.cpp
 )
 
 # Set the header files for the main project
 set(HEADER_FILES
     MoveDialog.h
+    Pawn.h
+    Piece.h
 )
 
 # Add the executable or library

@@ -2,6 +2,7 @@
 add_executable(my_tests
     test_main.cpp
     MoveDialog_test.cpp
+    Pawn_test.cpp
 )
 
 # Link with GTest
