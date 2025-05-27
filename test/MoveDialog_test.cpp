@@ -15,7 +15,7 @@ TEST(MoveDialogTest, firstDialog)
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\n\n\nWhite to move, insert your Move: ");
+    EXPECT_EQ(output,  "White to move, insert your Move: ");
 }
 
 TEST(MoveDialogTest, dialogAfterMove) 
@@ -33,7 +33,7 @@ TEST(MoveDialogTest, dialogAfterMove)
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\nWhite1\t\n\nBlack to move, insert your Move: ");
+    EXPECT_EQ(output,  "\nMove history:\n1. White1\n\nBlack to move, insert your Move: ");
 }
 
 TEST(MoveDialogTest, dialogAfterTwoMoves) 
@@ -53,5 +53,5 @@ TEST(MoveDialogTest, dialogAfterTwoMoves)
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\nWhite1\tBlack1\nWhite2\t\n\nBlack to move, insert your Move: ");
+    EXPECT_EQ(output,  "\nMove history:\n1. White1 Black1\n2. White2\n\nBlack to move, insert your Move: ");
 }

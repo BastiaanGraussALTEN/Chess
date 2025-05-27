@@ -9,18 +9,7 @@ MoveDialog::MoveDialog()
 void MoveDialog::SetMove(std::string move)
 {
     m_moveNumber += 1;
-    if(m_moveNumber % 2 == 0)
-    {
-        m_moveHistory.push_back(move);
-    }
-    if(m_moveNumber % 2 != 0 && m_moveNumber > 1)
-    {
-        m_moveHistory.push_back("\n" + move + "\t");
-    }
-    if(m_moveNumber % 2 != 0 && m_moveNumber == 1)
-    {
-        m_moveHistory.push_back(move + "\t");
-    }
+    m_moveHistory.push_back(move);
 }
 
 void MoveDialog::ShowDialog()
@@ -44,7 +33,25 @@ std::string MoveDialog::GetSingleLineDialog()
 
 std::string MoveDialog::GetMoveHistory()
 {
-    std::string oneString = std::accumulate(m_moveHistory.begin(), m_moveHistory.end(), std::string(""));
-    oneString = "\nMove history:\n" + oneString + "\n\n";
-    return oneString;
+    if(m_moveNumber == 0)
+    {
+        return "";
+    }
+
+    std::string moveHistoryString = "\nMove history:";
+    for(int i = 0; i < m_moveHistory.size(); i++)
+    {
+        // White to move
+        if(i % 2 == 0)
+        {
+            moveHistoryString += "\n";
+            int whiteMoveNumber = i / 2 + 1;
+            moveHistoryString += std::to_string(whiteMoveNumber) + ".";
+        }
+        
+        moveHistoryString += " " + m_moveHistory[i];
+    }
+    
+    moveHistoryString += "\n\n";
+    return moveHistoryString;
 }
