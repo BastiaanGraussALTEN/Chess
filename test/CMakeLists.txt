@@ -1,7 +1,7 @@
 # Add test source
 add_executable(my_tests
     test_main.cpp
-    # MoveDialog_test.cpp
+    MoveDialog_test.cpp
 )
 
 # Link with GTest

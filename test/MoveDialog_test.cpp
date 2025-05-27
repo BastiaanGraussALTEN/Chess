@@ -1,55 +1,57 @@
 #include "gtest/gtest.h"
 #include "../src/MoveDialog.h"
 
-// TEST(MoveDialogTest, firstDialog) 
-// {
-//     // Arrange
-//     MoveDialog moveDialog;
+TEST(MoveDialogTest, firstDialog) 
+{
+    // Arrange
+    MoveDialog moveDialog;
+    std::stringstream buffer;
+    std::streambuf* oldCoutStreamBuf = std::cout.rdbuf();
+    std::cout.rdbuf(buffer.rdbuf());
 
-//     // Act
-//     std::string dialog = moveDialog.GetSingleLineDialog();
+    // Act
+    moveDialog.ShowDialog();
+    std::cout.rdbuf(oldCoutStreamBuf);
+    std::string output = buffer.str();
 
-//     // Assert
-//     EXPECT_EQ(dialog,  "White to move, insert your Move: ");
-// }
+    // Assert
+    EXPECT_EQ(output,  "\nMove history:\n\n\nWhite to move, insert your Move: ");
+}
 
-// TEST(MoveDialogTest, dialogAfterMove) 
-// {
-//     // Arrange
-//     MoveDialog moveDialog;
+TEST(MoveDialogTest, dialogAfterMove) 
+{
+    // Arrange
+    MoveDialog moveDialog;
+    std::stringstream buffer;
+    std::streambuf* oldCoutStreamBuf = std::cout.rdbuf();
+    std::cout.rdbuf(buffer.rdbuf());
+    moveDialog.SetMove("White1");
 
-//     // Act
-//     moveDialog.SetMove("move1");
+    // Act
+    moveDialog.ShowDialog();
+    std::cout.rdbuf(oldCoutStreamBuf);
+    std::string output = buffer.str();
 
-//     // Assert
-//     EXPECT_EQ(moveDialog.GetSingleLineDialog(), "Black to move, insert your Move: ");
-// }
+    // Assert
+    EXPECT_EQ(output,  "\nMove history:\nWhite1\t\n\nBlack to move, insert your Move: ");
+}
 
-// TEST(MoveDialogTest, dialogAfterTwoMoves) 
-// {
-//     // Arrange
-//     MoveDialog moveDialog;
+TEST(MoveDialogTest, dialogAfterTwoMoves) 
+{
+    // Arrange
+    MoveDialog moveDialog;
+    std::stringstream buffer;
+    std::streambuf* oldCoutStreamBuf = std::cout.rdbuf();
+    std::cout.rdbuf(buffer.rdbuf());
+    moveDialog.SetMove("White1");
+    moveDialog.SetMove("Black1");
+    moveDialog.SetMove("White2");
 
-//     // Act
-//     moveDialog.SetMove("move1");
-//     moveDialog.SetMove("move2");
+    // Act
+    moveDialog.ShowDialog();
+    std::cout.rdbuf(oldCoutStreamBuf);
+    std::string output = buffer.str();
 
-//     // Assert
-//     EXPECT_EQ(moveDialog.GetSingleLineDialog(), "White to move, insert your Move: ");
-// }
-
-// TEST(MoveDialogTest, showingDialogHistory)
-// {
-//     // Arrange
-//     MoveDialog moveDialog;
-//     moveDialog.SetMove("move1");
-//     moveDialog.SetMove("move2");
-//     moveDialog.SetMove("move3");
-//     moveDialog.SetMove("move4");
-    
-//     // Act
-//     std::string expectedMoveHistory = "\nMove history:\nmove1\tmove2\nmove3\tmove4\n\n";
-
-//     // Assert
-//     EXPECT_EQ(moveDialog.GetMoveHistory(), expectedMoveHistory);
-// }
+    // Assert
+    EXPECT_EQ(output,  "\nMove history:\nWhite1\tBlack1\nWhite2\t\n\nBlack to move, insert your Move: ");
+}
