@@ -6,7 +6,7 @@
 class Pawn : public Piece
 {
     public:
-    Pawn(bool isPieceWhite, Coord positionOfPiece);
+        Pawn(bool isWhite, Coord position);
 };
 
 #endif

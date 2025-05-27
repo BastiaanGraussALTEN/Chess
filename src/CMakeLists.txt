@@ -1,6 +1,7 @@
 # Set the source files for the main project
 set(SRC_FILES
     main.cpp
+    Bishop.cpp
     MoveDialog.cpp
     Coord.cpp
     Pawn.cpp
@@ -9,6 +10,7 @@ set(SRC_FILES
 
 # Set the header files for the main project
 set(HEADER_FILES
+    Bishop.h
     MoveDialog.h
     Pawn.h
     Piece.h
