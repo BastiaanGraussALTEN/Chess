@@ -4,16 +4,24 @@ set(SRC_FILES
     Bishop.cpp
     MoveDialog.cpp
     Coord.cpp
+    King.cpp
+    Knight.cpp
     Pawn.cpp
     Piece.cpp
+    Queen.cpp
+    Rook.cpp
 )
 
 # Set the header files for the main project
 set(HEADER_FILES
     Bishop.h
     MoveDialog.h
+    King.h
+    Knight.h
     Pawn.h
     Piece.h
+    Queen.h
+    Rook.h
 )
 
 # Add the executable or library
