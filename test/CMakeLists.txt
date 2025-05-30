@@ -2,6 +2,7 @@
 add_executable(my_tests
     test_main.cpp
     Board_test.cpp
+    Coord_test.cpp
     MoveDialog_test.cpp
     Piece_test.cpp
 )
