@@ -7,11 +7,13 @@
 class Board
 {
     public:
+        Board();
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         void AddPiece(const std::shared_ptr<Piece>& piece);
         void RemovePiece(const Coord& coord);
     private:
         std::vector<std::shared_ptr<Piece>> m_pieces;
+        void CreateInitialBoardState();
 };
 
 #endif

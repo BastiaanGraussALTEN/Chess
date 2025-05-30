@@ -13,6 +13,18 @@ TEST(CoordTest, coordCanBeConstructed)
     EXPECT_EQ(coord.y,  2);
 }
 
+TEST(CoordTest, coordCanBeConstructed2)
+{
+    // Arrange 
+    Coord coord = Coord(8,8);
+
+    // Act - no act
+
+    // Assert
+    EXPECT_EQ(coord.x,  8);
+    EXPECT_EQ(coord.y,  8);
+}
+
 TEST(CoordTest, exceptionThrownWhenOutOfRange)
 {
     // Arrange - no arrange
