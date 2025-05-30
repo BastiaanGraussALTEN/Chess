@@ -7,6 +7,7 @@ class Knight : public Piece
 {
     public:
         Knight(bool isWhite, Coord position);
+        ~Knight() override;
 };
 
 #endif

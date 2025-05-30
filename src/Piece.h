@@ -6,9 +6,10 @@
 class Piece
 {
     public:
-    Piece(bool isPieceWhite, Coord positionOfPiece);
-    bool isWhite;
-    Coord position;
+        Piece(bool isPieceWhite, Coord positionOfPiece);
+        virtual ~Piece();
+        bool isWhite;
+        Coord position;
 };
 
 #endif

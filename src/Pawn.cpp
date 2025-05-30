@@ -3,3 +3,7 @@
 Pawn::Pawn(bool isWhite, Coord position) : Piece(isWhite, position)
 {
 }
+
+Pawn::~Pawn()
+{
+}

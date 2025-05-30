@@ -7,6 +7,7 @@ class Queen : public Piece
 {
     public:
         Queen(bool isWhite, Coord position);
+        ~Queen() override;
 };
 
 #endif

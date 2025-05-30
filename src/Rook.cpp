@@ -3,3 +3,7 @@
 Rook::Rook(bool isWhite, Coord position) : Piece(isWhite, position)
 {
 }
+
+Rook::~Rook()
+{
+}

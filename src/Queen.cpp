@@ -3,3 +3,7 @@
 Queen::Queen(bool isWhite, Coord position) : Piece(isWhite, position)
 {
 }
+
+Queen::~Queen()
+{
+}

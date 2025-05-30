@@ -7,6 +7,7 @@ class King : public Piece
 {
     public:
         King(bool isWhite, Coord position);
+        ~King() override;
 };
 
 #endif

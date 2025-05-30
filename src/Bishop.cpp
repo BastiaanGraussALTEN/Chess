@@ -3,3 +3,7 @@
 Bishop::Bishop(bool isWhite, Coord position) : Piece(isWhite, position)
 {
 }
+
+Bishop::~Bishop()
+{
+}
