@@ -8,6 +8,7 @@ set(SRC_FILES
     Knight.cpp
     Pawn.cpp
     Piece.cpp
+    PieceFactory.cpp
     Queen.cpp
     Rook.cpp
 )
@@ -20,6 +21,7 @@ set(HEADER_FILES
     Knight.h
     Pawn.h
     Piece.h
+    PieceFactory.h
     Queen.h
     Rook.h
 )
