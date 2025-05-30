@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Board.h"
 #include "MoveDialog.h"
 
 int main()

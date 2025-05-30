@@ -2,6 +2,7 @@
 set(SRC_FILES
     main.cpp
     Bishop.cpp
+    Board.cpp
     MoveDialog.cpp
     Coord.cpp
     King.cpp
@@ -16,6 +17,7 @@ set(SRC_FILES
 # Set the header files for the main project
 set(HEADER_FILES
     Bishop.h
+    Board.h
     MoveDialog.h
     King.h
     Knight.h
