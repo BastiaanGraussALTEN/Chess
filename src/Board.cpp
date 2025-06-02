@@ -39,27 +39,27 @@ void Board::CreateInitialBoardState()
     // Create pawns
     for (int i = 1; i < 9; i++)
     {
-        AddPiece(PieceFactory::CreatePawn(true, Coord(i, 2)));
-        AddPiece(PieceFactory::CreatePawn(false, Coord(i, 7)));
+        AddPiece(PieceFactory::CreatePawn(Color::White, Coord(i, 2)));
+        AddPiece(PieceFactory::CreatePawn(Color::Black, Coord(i, 7)));
     }
 
     // Create white pieces
-    AddPiece(PieceFactory::CreateRook(true, Coord(1, 1)));
-    AddPiece(PieceFactory::CreateKnight(true, Coord(2, 1)));
-    AddPiece(PieceFactory::CreateBishop(true, Coord(3, 1)));
-    AddPiece(PieceFactory::CreateQueen(true, Coord(4, 1)));
-    AddPiece(PieceFactory::CreateKing(true, Coord(5, 1)));
-    AddPiece(PieceFactory::CreateBishop(true, Coord(6, 1)));
-    AddPiece(PieceFactory::CreateKnight(true, Coord(7, 1)));
-    AddPiece(PieceFactory::CreateRook(true, Coord(8, 1)));
+    AddPiece(PieceFactory::CreateRook(Color::White, Coord(1, 1)));
+    AddPiece(PieceFactory::CreateKnight(Color::White, Coord(2, 1)));
+    AddPiece(PieceFactory::CreateBishop(Color::White, Coord(3, 1)));
+    AddPiece(PieceFactory::CreateQueen(Color::White, Coord(4, 1)));
+    AddPiece(PieceFactory::CreateKing(Color::White, Coord(5, 1)));
+    AddPiece(PieceFactory::CreateBishop(Color::White, Coord(6, 1)));
+    AddPiece(PieceFactory::CreateKnight(Color::White, Coord(7, 1)));
+    AddPiece(PieceFactory::CreateRook(Color::White, Coord(8, 1)));
     
     // Create black pieces
-    AddPiece(PieceFactory::CreateRook(false, Coord(1, 8)));
-    AddPiece(PieceFactory::CreateKnight(false, Coord(2, 8)));
-    AddPiece(PieceFactory::CreateBishop(false, Coord(3, 8)));
-    AddPiece(PieceFactory::CreateQueen(false, Coord(4, 8)));
-    AddPiece(PieceFactory::CreateKing(false, Coord(5, 8)));
-    AddPiece(PieceFactory::CreateBishop(false, Coord(6, 8)));
-    AddPiece(PieceFactory::CreateKnight(false, Coord(7, 8)));
-    AddPiece(PieceFactory::CreateRook(false, Coord(8, 8)));
+    AddPiece(PieceFactory::CreateRook(Color::Black, Coord(1, 8)));
+    AddPiece(PieceFactory::CreateKnight(Color::Black, Coord(2, 8)));
+    AddPiece(PieceFactory::CreateBishop(Color::Black, Coord(3, 8)));
+    AddPiece(PieceFactory::CreateQueen(Color::Black, Coord(4, 8)));
+    AddPiece(PieceFactory::CreateKing(Color::Black, Coord(5, 8)));
+    AddPiece(PieceFactory::CreateBishop(Color::Black, Coord(6, 8)));
+    AddPiece(PieceFactory::CreateKnight(Color::Black, Coord(7, 8)));
+    AddPiece(PieceFactory::CreateRook(Color::Black, Coord(8, 8)));
 }

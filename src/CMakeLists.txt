@@ -3,6 +3,7 @@ set(SRC_FILES
     main.cpp
     Bishop.cpp
     Board.cpp
+    Color.cpp
     MoveDialog.cpp
     Coord.cpp
     King.cpp

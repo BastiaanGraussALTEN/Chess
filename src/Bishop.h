@@ -6,7 +6,7 @@
 class Bishop : public Piece
 {
     public:
-        Bishop(bool isWhite, Coord position);
+        Bishop(Color color, Coord position);
         ~Bishop() override;
 };
 

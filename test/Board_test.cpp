@@ -7,7 +7,7 @@ TEST(BoardTest, pieceCanBeAdded)
     Board board;
 
     // Act
-    board.AddPiece(PieceFactory::CreatePawn(true, Coord(4, 4)));
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Coord(4, 4)));
     std::vector<std::shared_ptr<Piece>> pieces = board.GetPieces();
 
     // Assert
@@ -22,7 +22,7 @@ TEST(BoardTest, pieceCantBeAddedIfOtherPieceAlreadyThere)
     // Act - no act
 
     // Assert
-    EXPECT_THROW(board.AddPiece(PieceFactory::CreatePawn(true, Coord(1, 1)));, std::out_of_range);
+    EXPECT_THROW(board.AddPiece(PieceFactory::CreatePawn(Color::White, Coord(1, 1)));, std::out_of_range);
 }
 
 TEST(BoardTest, pieceCanBeRemoved)
@@ -42,7 +42,7 @@ TEST(BoardTest, pieceWontBeRemovedWrongCoord)
 {
     // Arrange
     Board board;
-    board.AddPiece(PieceFactory::CreatePawn(true, Coord(4, 4)));
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Coord(4, 4)));
     board.RemovePiece(Coord(4, 5));
 
     // Act

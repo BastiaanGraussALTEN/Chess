@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-Rook::Rook(bool isWhite, Coord position) : Piece(isWhite, position)
+Rook::Rook(Color color, Coord position) : Piece(color, position)
 {
 }
 

@@ -1,14 +1,15 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include "Color.cpp"
 #include "Coord.cpp"
 
 class Piece
 {
     public:
-        Piece(bool isPieceWhite, Coord positionOfPiece);
+        Piece(Color color, Coord positionOfPiece);
         virtual ~Piece();
-        bool isWhite;
+        Color color;
         Coord position;
 };
 

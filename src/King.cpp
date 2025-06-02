@@ -1,6 +1,6 @@
 #include "King.h"
 
-King::King(bool isWhite, Coord position) : Piece(isWhite, position)
+King::King(Color color, Coord position) : Piece(color, position)
 {
 }
 

@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(bool isWhite, Coord position) : Piece(isWhite, position)
+Pawn::Pawn(Color color, Coord position) : Piece(color, position)
 {
 }
 

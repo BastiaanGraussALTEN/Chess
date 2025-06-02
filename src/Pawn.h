@@ -6,7 +6,7 @@
 class Pawn : public Piece
 {
     public:
-        Pawn(bool isWhite, Coord position);
+        Pawn(Color color, Coord position);
         ~Pawn() override;
 };
 

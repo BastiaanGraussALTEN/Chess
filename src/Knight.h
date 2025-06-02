@@ -6,7 +6,7 @@
 class Knight : public Piece
 {
     public:
-        Knight(bool isWhite, Coord position);
+        Knight(Color color, Coord position);
         ~Knight() override;
 };
 
