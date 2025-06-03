@@ -5,7 +5,6 @@ set(SRC_FILES
     Board.cpp
     Color.cpp
     MoveDialog.cpp
-    Coord.cpp
     King.cpp
     Knight.cpp
     LegalityChecker.cpp
@@ -14,6 +13,7 @@ set(SRC_FILES
     PieceFactory.cpp
     Queen.cpp
     Rook.cpp
+    Square.cpp
 )
 
 # Set the header files for the main project

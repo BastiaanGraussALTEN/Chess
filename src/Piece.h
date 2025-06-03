@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Color.cpp"
-#include "Coord.cpp"
+#include "Square.cpp"
 
 class Piece
 {
