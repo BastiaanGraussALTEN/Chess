@@ -63,3 +63,43 @@ TEST(BoardTest, boardIsInitializedCorrectly)
     // Assert
     EXPECT_EQ(pieces.size(), 32);
 }
+
+TEST(BoardTest, GetPieceFromCoordWhenNoPiecesOnBoard)
+{
+    // Arrange
+    Board board;
+    board.RemovePiece(Coord(1, 1));
+
+    // Act
+    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(1, 1));
+
+    // Assert
+    EXPECT_TRUE(ptr == nullptr);
+}
+
+TEST(BoardTest, GetPieceFromCoordWrongCoord)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(4, 4));
+
+    // Assert
+    EXPECT_TRUE(ptr == nullptr);
+}
+
+TEST(BoardTest, GetPieceFromCoord)
+{
+    // Arrange
+    Board board;
+    board.RemovePiece(Coord(1, 1));
+
+    // Act
+    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(1, 1));
+
+    // Assert
+    EXPECT_EQ(ptr->color, Color::White);
+    EXPECT_EQ(ptr->position.x, 1);
+    EXPECT_EQ(ptr->position.y, 1);
+}

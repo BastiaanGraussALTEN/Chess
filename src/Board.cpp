@@ -34,6 +34,19 @@ void Board::RemovePiece(const Coord &coord)
     }
 }
 
+std::shared_ptr<Piece> Board::GetPieceFromCoord(const Coord &coord)
+{
+    for (int i = 0; i < m_pieces.size(); i++)
+    {
+        if ( m_pieces[i]->position.x == coord.x && m_pieces[i]->position.y == coord.y)
+        {
+            return m_pieces[i];
+        }
+    }
+
+    return nullptr;
+}
+
 void Board::CreateInitialBoardState()
 {
     // Create pawns
