@@ -8,8 +8,12 @@ class LegalityChecker
 {
     public:
         LegalityChecker(const Board& board);
-        bool CheckMoveLegality(Move move) const;
+        bool CheckMoveLegality(const Move& move) const;
     private:
+        bool IsMoveDiagonal(const Move& move) const;
+        bool IsMoveOrthogonal(const Move& move) const;
+        bool IsPieceInDiagonal(const Move& move) const;
+        bool IsPieceInLine(const Move& move) const;
         Board m_board;
 };
 

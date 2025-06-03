@@ -27,7 +27,7 @@ TEST(LegalityCheckerTest, LegalMovesArePossible)
     ASSERT_TRUE(isLegal);
 }
 
-TEST(LegalityCheckerTest, IllegalMovesArePossible)
+TEST(LegalityCheckerTest, KnightCantMakeIllegalMove)
 {
     // Arrange
     Board board;
@@ -37,6 +37,36 @@ TEST(LegalityCheckerTest, IllegalMovesArePossible)
 
     // Act
     bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
+
+    // Assert
+    ASSERT_FALSE(isLegal);
+}
+
+TEST(LegalityCheckerTest, RookCantMoveThroughPawns)
+{
+    // Arrange
+    Board board;
+    LegalityChecker legalityChecker(board);
+    // 1. Ra4
+    Move rookMove = Move(Square(1, 1), Square(1, 4));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(rookMove);
+
+    // Assert
+    ASSERT_FALSE(isLegal);
+}
+
+TEST(LegalityCheckerTest, BishopCantMoveThroughPawns)
+{
+    // Arrange
+    Board board;
+    LegalityChecker legalityChecker(board);
+    // 1. Be3
+    Move bishopMove = Move(Square(3, 1), Square(5, 3));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(bishopMove);
 
     // Assert
     ASSERT_FALSE(isLegal);
