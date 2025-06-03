@@ -172,6 +172,32 @@ TEST(PieceTest, knightCanBeMadeUsingFactory)
     EXPECT_EQ(knight->color, Color::White);
 }
 
+TEST(PieceTest, knightGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(4,4);
+    auto knight = PieceFactory::CreateKnight(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = knight->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  8);
+}
+
+TEST(PieceTest, knightGivesCorrectPossibleMovesInCorner) 
+{
+    // Arrange
+    Coord coord = Coord(1,1);
+    auto knight = PieceFactory::CreateKnight(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = knight->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  2);
+}
+
 TEST(PieceTest, rookCanBeMade) 
 {
     // Arrange
