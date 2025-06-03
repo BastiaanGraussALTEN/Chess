@@ -35,7 +35,7 @@ void Board::RemovePiece(const Coord &coord)
     }
 }
 
-std::shared_ptr<Piece> Board::GetPieceFromCoord(const Coord &coord)
+std::shared_ptr<Piece> Board::GetPieceFromCoord(const Coord &coord) const
 {
     for (const auto& piece : m_pieces)
     {
