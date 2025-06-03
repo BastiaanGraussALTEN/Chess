@@ -8,6 +8,7 @@ set(SRC_FILES
     Coord.cpp
     King.cpp
     Knight.cpp
+    LegalityChecker.cpp
     Pawn.cpp
     Piece.cpp
     PieceFactory.cpp
@@ -22,6 +23,7 @@ set(HEADER_FILES
     MoveDialog.h
     King.h
     Knight.h
+    LegalityChecker.h
     Pawn.h
     Piece.h
     PieceFactory.h
