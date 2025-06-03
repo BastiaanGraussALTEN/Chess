@@ -12,11 +12,12 @@ const std::vector<std::shared_ptr<Piece>> &Board::GetPieces() const
 
 void Board::AddPiece(const std::shared_ptr<Piece> &piece)
 {
-    for (int i = 0; i < m_pieces.size(); i++)
+    for (const auto& boardPiece : m_pieces)
     {
-        if ( m_pieces[i]->position.x == piece->position.x && m_pieces[i]->position.y == piece->position.y)
+        if ( boardPiece->position == piece->position)
         {
             throw std::out_of_range("there is a piece already on this coord");
+
         }
     }
 
@@ -27,7 +28,7 @@ void Board::RemovePiece(const Coord &coord)
 {
     for (int i = 0; i < m_pieces.size(); i++)
     {
-        if ( m_pieces[i]->position.x == coord.x && m_pieces[i]->position.y == coord.y)
+        if ( m_pieces[i]->position == coord)
         {
             m_pieces.erase( m_pieces.begin() + i );
         }
@@ -36,11 +37,11 @@ void Board::RemovePiece(const Coord &coord)
 
 std::shared_ptr<Piece> Board::GetPieceFromCoord(const Coord &coord)
 {
-    for (int i = 0; i < m_pieces.size(); i++)
+    for (const auto& piece : m_pieces)
     {
-        if ( m_pieces[i]->position.x == coord.x && m_pieces[i]->position.y == coord.y)
+        if ( piece->position == coord)
         {
-            return m_pieces[i];
+            return piece;
         }
     }
 

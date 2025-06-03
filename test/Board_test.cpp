@@ -93,7 +93,6 @@ TEST(BoardTest, GetPieceFromCoord)
 {
     // Arrange
     Board board;
-    board.RemovePiece(Coord(1, 1));
 
     // Act
     std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(1, 1));

@@ -16,8 +16,13 @@ struct Coord
             throw std::out_of_range("y is out of range");
         }
     };
+    bool operator==(const Coord& rhs)
+    {
+        return this->x == rhs.x && this->y == rhs.y;
+    }
     int x;
     int y;
 };
+
 
 #endif
