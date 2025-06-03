@@ -8,11 +8,11 @@
 class Piece
 {
     public:
-        Piece(Color color, Coord positionOfPiece);
+        Piece(Color color, Square positionOfPiece);
         virtual ~Piece();
-        virtual std::vector<Coord> GetPossibleMoves() const = 0;
+        virtual std::vector<Square> GetPossibleMoves() const = 0;
         Color color;
-        Coord position;
+        Square position;
 };
 
 #endif

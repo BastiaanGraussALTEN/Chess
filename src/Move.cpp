@@ -5,9 +5,9 @@
 
 struct Move
 {
-    Move(Coord startCoord, Coord endCoord) :  Start(startCoord), End(endCoord){};
-    Coord Start;
-    Coord End;
+    Move(Square startCoord, Square endCoord) :  Start(startCoord), End(endCoord){};
+    Square Start;
+    Square End;
 };
 
 #endif

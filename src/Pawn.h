@@ -6,9 +6,9 @@
 class Pawn : public Piece
 {
     public:
-        Pawn(Color color, Coord position);
+        Pawn(Color color, Square position);
         ~Pawn() override;
-        std::vector<Coord> GetPossibleMoves() const;
+        std::vector<Square> GetPossibleMoves() const;
         bool hasMoved;
 };
 

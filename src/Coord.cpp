@@ -3,9 +3,9 @@
 
 #include <stdexcept>
 
-struct Coord
+struct Square
 {
-    Coord(int x_coord, int y_coord) :  x(x_coord), y(y_coord)
+    Square(int x_coord, int y_coord) :  x(x_coord), y(y_coord)
     {
         if (x < 1 || x > 8)
         {
@@ -16,7 +16,7 @@ struct Coord
             throw std::out_of_range("y is out of range");
         }
     };
-    bool operator==(const Coord& rhs) const
+    bool operator==(const Square& rhs) const
     {
         return this->x == rhs.x && this->y == rhs.y;
     }

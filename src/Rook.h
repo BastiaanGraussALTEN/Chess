@@ -6,9 +6,9 @@
 class Rook : public Piece
 {
     public:
-        Rook(Color color, Coord position);
+        Rook(Color color, Square position);
         ~Rook() override;
-        std::vector<Coord> GetPossibleMoves() const;
+        std::vector<Square> GetPossibleMoves() const;
 };
 
 #endif

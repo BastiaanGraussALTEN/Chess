@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(Color color, Coord position) : Piece(color, position)
+Pawn::Pawn(Color color, Square position) : Piece(color, position)
 {
     hasMoved = false;
 }
@@ -9,26 +9,26 @@ Pawn::~Pawn()
 {
 }
 
-std::vector<Coord> Pawn::GetPossibleMoves() const
+std::vector<Square> Pawn::GetPossibleMoves() const
 {
-    std::vector<Coord> possibleMoves;
+    std::vector<Square> possibleMoves;
     if (color == Color::White)
     {
         if (position.y + 1 < 9)
         {
-            possibleMoves.push_back(Coord(position.x, position.y + 1));
+            possibleMoves.push_back(Square(position.x, position.y + 1));
             if (position.x + 1 < 9)
             {
-                possibleMoves.push_back(Coord(position.x + 1, position.y + 1));
+                possibleMoves.push_back(Square(position.x + 1, position.y + 1));
             }
             if (position.x - 1 > 0)
             {
-                possibleMoves.push_back(Coord(position.x - 1, position.y + 1));
+                possibleMoves.push_back(Square(position.x - 1, position.y + 1));
             }
         }
         if (hasMoved == false && position.y + 2 < 9)
         {
-            possibleMoves.push_back(Coord(position.x, position.y + 2));
+            possibleMoves.push_back(Square(position.x, position.y + 2));
         }
     }
 
@@ -36,19 +36,19 @@ std::vector<Coord> Pawn::GetPossibleMoves() const
     {
         if (position.y - 1 > 0)
         {
-            possibleMoves.push_back(Coord(position.x, position.y - 1));
+            possibleMoves.push_back(Square(position.x, position.y - 1));
             if (position.x + 1 < 9)
             {
-                possibleMoves.push_back(Coord(position.x + 1, position.y - 1));
+                possibleMoves.push_back(Square(position.x + 1, position.y - 1));
             }
             if (position.x - 1 > 0)
             {
-                possibleMoves.push_back(Coord(position.x - 1, position.y - 1));
+                possibleMoves.push_back(Square(position.x - 1, position.y - 1));
             }
         }
         if (hasMoved == false && position.y - 2 > 0)
         {
-            possibleMoves.push_back(Coord(position.x, position.y - 2));
+            possibleMoves.push_back(Square(position.x, position.y - 2));
         }
     }
     return possibleMoves;

@@ -4,7 +4,7 @@
 TEST(CoordTest, coordCanBeConstructed)
 {
     // Arrange 
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act - no act
 
@@ -16,7 +16,7 @@ TEST(CoordTest, coordCanBeConstructed)
 TEST(CoordTest, coordCanBeConstructed2)
 {
     // Arrange 
-    Coord coord = Coord(8,8);
+    Square coord = Square(8,8);
 
     // Act - no act
 
@@ -32,8 +32,8 @@ TEST(CoordTest, exceptionThrownWhenOutOfRange)
     // Act - no act
 
     // Assert
-    EXPECT_THROW(Coord(0, 1), std::out_of_range);
-    EXPECT_THROW(Coord(1, 0), std::out_of_range);
-    EXPECT_THROW(Coord(9, 1), std::out_of_range);
-    EXPECT_THROW(Coord(1, 9), std::out_of_range);
+    EXPECT_THROW(Square(0, 1), std::out_of_range);
+    EXPECT_THROW(Square(1, 0), std::out_of_range);
+    EXPECT_THROW(Square(9, 1), std::out_of_range);
+    EXPECT_THROW(Square(1, 9), std::out_of_range);
 }

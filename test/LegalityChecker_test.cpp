@@ -18,7 +18,7 @@ TEST(LegalityCheckerTest, LegalMovesArePossible)
     Board board;
     LegalityChecker legalityChecker(board);
     // 1. Nc3
-    Move knightMove = Move(Coord(2, 1), Coord(3, 3));
+    Move knightMove = Move(Square(2, 1), Square(3, 3));
 
     // Act
     bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
@@ -33,7 +33,7 @@ TEST(LegalityCheckerTest, IllegalMovesArePossible)
     Board board;
     LegalityChecker legalityChecker(board);
     // 1. Nc4
-    Move knightMove = Move(Coord(2, 1), Coord(3, 4));
+    Move knightMove = Move(Square(2, 1), Square(3, 4));
 
     // Act
     bool isLegal = legalityChecker.CheckMoveLegality(knightMove);

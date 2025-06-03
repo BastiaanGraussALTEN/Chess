@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-Knight::Knight(Color color, Coord position) : Piece(color, position)
+Knight::Knight(Color color, Square position) : Piece(color, position)
 {
 }
 
@@ -8,18 +8,18 @@ Knight::~Knight()
 {
 }
 
-std::vector<Coord> Knight::GetPossibleMoves() const
+std::vector<Square> Knight::GetPossibleMoves() const
 {
-    std::vector<Coord> possibleMoves;
+    std::vector<Square> possibleMoves;
     if (position.x + 2 < 9)
     {
         if (position.y + 1 < 9 )
         {
-            possibleMoves.push_back(Coord(position.x + 2, position.y + 1));
+            possibleMoves.push_back(Square(position.x + 2, position.y + 1));
         }
         if (position.y - 1 > 0 )
         {
-            possibleMoves.push_back(Coord(position.x + 2, position.y - 1));
+            possibleMoves.push_back(Square(position.x + 2, position.y - 1));
         }
     }
 
@@ -27,11 +27,11 @@ std::vector<Coord> Knight::GetPossibleMoves() const
     {
         if (position.y + 1 < 9 )
         {
-            possibleMoves.push_back(Coord(position.x - 2, position.y + 1));
+            possibleMoves.push_back(Square(position.x - 2, position.y + 1));
         }
         if (position.y - 1 > 0 )
         {
-            possibleMoves.push_back(Coord(position.x - 2, position.y - 1));
+            possibleMoves.push_back(Square(position.x - 2, position.y - 1));
         }
     }
 
@@ -39,11 +39,11 @@ std::vector<Coord> Knight::GetPossibleMoves() const
     {
         if (position.x + 1 < 9 )
         {
-            possibleMoves.push_back(Coord(position.x + 1, position.y + 2));
+            possibleMoves.push_back(Square(position.x + 1, position.y + 2));
         }
         if (position.x - 1 > 0 )
         {
-            possibleMoves.push_back(Coord(position.x - 1, position.y + 2));
+            possibleMoves.push_back(Square(position.x - 1, position.y + 2));
         }
     }
 
@@ -51,11 +51,11 @@ std::vector<Coord> Knight::GetPossibleMoves() const
     {
         if (position.x + 1 < 9 )
         {
-            possibleMoves.push_back(Coord(position.x + 1, position.y - 2));
+            possibleMoves.push_back(Square(position.x + 1, position.y - 2));
         }
         if (position.x - 1 > 0 )
         {
-            possibleMoves.push_back(Coord(position.x - 1, position.y - 2));
+            possibleMoves.push_back(Square(position.x - 1, position.y - 2));
         }
     }
 

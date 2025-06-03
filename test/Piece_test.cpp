@@ -4,7 +4,7 @@
 TEST(PieceTest, pawnCanBeMade) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     Pawn pawn = Pawn(Color::White, coord);
@@ -17,7 +17,7 @@ TEST(PieceTest, pawnCanBeMade)
 TEST(PieceTest, pawnCanBeMadeUsingFactory) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     auto pawn = PieceFactory::CreatePawn(Color::White, coord);
@@ -30,11 +30,11 @@ TEST(PieceTest, pawnCanBeMadeUsingFactory)
 TEST(PieceTest, pawnGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(2, 2);
+    Square coord = Square(2, 2);
     auto pawn = PieceFactory::CreatePawn(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = pawn->GetPossibleMoves();
+    std::vector<Square> possibleMoves = pawn->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  4);
@@ -43,11 +43,11 @@ TEST(PieceTest, pawnGivesCorrectPossibleMoves)
 TEST(PieceTest, pawnGivesCorrectPossibleMovesInCorner) 
 {
     // Arrange
-    Coord coord = Coord(1, 2);
+    Square coord = Square(1, 2);
     auto pawn = PieceFactory::CreatePawn(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = pawn->GetPossibleMoves();
+    std::vector<Square> possibleMoves = pawn->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  3);
@@ -56,13 +56,13 @@ TEST(PieceTest, pawnGivesCorrectPossibleMovesInCorner)
 TEST(PieceTest, pawnGivesCorrectPossibleMovesAfterMove) 
 {
     // Arrange
-    Coord coord = Coord(6, 2);
+    Square coord = Square(6, 2);
     auto piece = PieceFactory::CreatePawn(Color::White, coord);
     auto pawnPtr = std::dynamic_pointer_cast<Pawn>(piece);
     pawnPtr->hasMoved = true;
 
     // Act
-    std::vector<Coord> possibleMoves = pawnPtr->GetPossibleMoves();
+    std::vector<Square> possibleMoves = pawnPtr->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  3);
@@ -71,11 +71,11 @@ TEST(PieceTest, pawnGivesCorrectPossibleMovesAfterMove)
 TEST(PieceTest, blackPawnGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(6, 1);
+    Square coord = Square(6, 1);
     auto pawn = PieceFactory::CreatePawn(Color::Black, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = pawn->GetPossibleMoves();
+    std::vector<Square> possibleMoves = pawn->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  0);
@@ -84,7 +84,7 @@ TEST(PieceTest, blackPawnGivesCorrectPossibleMoves)
 TEST(PieceTest, bishopCanBeMade) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     Bishop bishop = Bishop(Color::White, coord);
@@ -97,7 +97,7 @@ TEST(PieceTest, bishopCanBeMade)
 TEST(PieceTest, bishopCanBeMadeUsingFactory) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     auto bishop = PieceFactory::CreateBishop(Color::White, coord);
@@ -110,11 +110,11 @@ TEST(PieceTest, bishopCanBeMadeUsingFactory)
 TEST(PieceTest, bishopGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(2,3);
+    Square coord = Square(2,3);
     auto bishop = PieceFactory::CreateBishop(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = bishop->GetPossibleMoves();
+    std::vector<Square> possibleMoves = bishop->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  9);
@@ -123,11 +123,11 @@ TEST(PieceTest, bishopGivesCorrectPossibleMoves)
 TEST(PieceTest, bishopGivesCorrectPossibleMovesWhenPlacedMiddle) 
 {
     // Arrange
-    Coord coord = Coord(4,5);
+    Square coord = Square(4,5);
     auto bishop = PieceFactory::CreateBishop(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = bishop->GetPossibleMoves();
+    std::vector<Square> possibleMoves = bishop->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  13);
@@ -136,11 +136,11 @@ TEST(PieceTest, bishopGivesCorrectPossibleMovesWhenPlacedMiddle)
 TEST(PieceTest, bishopGivesCorrectPossibleMovesWhenPlacedCorner) 
 {
     // Arrange
-    Coord coord = Coord(1,1);
+    Square coord = Square(1,1);
     auto bishop = PieceFactory::CreateBishop(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = bishop->GetPossibleMoves();
+    std::vector<Square> possibleMoves = bishop->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  7);
@@ -149,7 +149,7 @@ TEST(PieceTest, bishopGivesCorrectPossibleMovesWhenPlacedCorner)
 TEST(PieceTest, knightCanBeMade) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     Knight knight = Knight(Color::White, coord);
@@ -162,7 +162,7 @@ TEST(PieceTest, knightCanBeMade)
 TEST(PieceTest, knightCanBeMadeUsingFactory) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     auto knight = PieceFactory::CreateKnight(Color::White, coord);
@@ -175,11 +175,11 @@ TEST(PieceTest, knightCanBeMadeUsingFactory)
 TEST(PieceTest, knightGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(4,4);
+    Square coord = Square(4,4);
     auto knight = PieceFactory::CreateKnight(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = knight->GetPossibleMoves();
+    std::vector<Square> possibleMoves = knight->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  8);
@@ -188,11 +188,11 @@ TEST(PieceTest, knightGivesCorrectPossibleMoves)
 TEST(PieceTest, knightGivesCorrectPossibleMovesInCorner) 
 {
     // Arrange
-    Coord coord = Coord(1,1);
+    Square coord = Square(1,1);
     auto knight = PieceFactory::CreateKnight(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = knight->GetPossibleMoves();
+    std::vector<Square> possibleMoves = knight->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  2);
@@ -201,7 +201,7 @@ TEST(PieceTest, knightGivesCorrectPossibleMovesInCorner)
 TEST(PieceTest, rookCanBeMade) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     Rook rook = Rook(Color::White, coord);
@@ -214,7 +214,7 @@ TEST(PieceTest, rookCanBeMade)
 TEST(PieceTest, rookCanBeMadeUsingFactory) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     auto rook = PieceFactory::CreateRook(Color::White, coord);
@@ -227,11 +227,11 @@ TEST(PieceTest, rookCanBeMadeUsingFactory)
 TEST(PieceTest, rookGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
     auto rook = PieceFactory::CreateRook(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = rook->GetPossibleMoves();
+    std::vector<Square> possibleMoves = rook->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  14);
@@ -240,7 +240,7 @@ TEST(PieceTest, rookGivesCorrectPossibleMoves)
 TEST(PieceTest, queenCanBeMade) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     Queen queen = Queen(Color::White, coord);
@@ -253,7 +253,7 @@ TEST(PieceTest, queenCanBeMade)
 TEST(PieceTest, queenCanBeMadeUsingFactory) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     auto queen = PieceFactory::CreateQueen(Color::White, coord);
@@ -266,11 +266,11 @@ TEST(PieceTest, queenCanBeMadeUsingFactory)
 TEST(PieceTest, queenGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(4,5);
+    Square coord = Square(4,5);
     auto queen = PieceFactory::CreateQueen(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = queen->GetPossibleMoves();
+    std::vector<Square> possibleMoves = queen->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  27);
@@ -279,11 +279,11 @@ TEST(PieceTest, queenGivesCorrectPossibleMoves)
 TEST(PieceTest, queenGivesCorrectPossibleMovesInCorner) 
 {
     // Arrange
-    Coord coord = Coord(1,1);
+    Square coord = Square(1,1);
     auto queen = PieceFactory::CreateQueen(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = queen->GetPossibleMoves();
+    std::vector<Square> possibleMoves = queen->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  21);
@@ -292,7 +292,7 @@ TEST(PieceTest, queenGivesCorrectPossibleMovesInCorner)
 TEST(PieceTest, kingCanBeMade) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     King king = King(Color::White, coord);
@@ -305,7 +305,7 @@ TEST(PieceTest, kingCanBeMade)
 TEST(PieceTest, kingCanBeMadeUsingFactory) 
 {
     // Arrange
-    Coord coord = Coord(1,2);
+    Square coord = Square(1,2);
 
     // Act
     auto king = PieceFactory::CreateKing(Color::White, coord);
@@ -318,11 +318,11 @@ TEST(PieceTest, kingCanBeMadeUsingFactory)
 TEST(PieceTest, kingGivesCorrectPossibleMoves) 
 {
     // Arrange
-    Coord coord = Coord(2,2);
+    Square coord = Square(2,2);
     auto king = PieceFactory::CreateKing(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = king->GetPossibleMoves();
+    std::vector<Square> possibleMoves = king->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  8);
@@ -331,11 +331,11 @@ TEST(PieceTest, kingGivesCorrectPossibleMoves)
 TEST(PieceTest, kingGivesCorrectPossibleMovesInCorner) 
 {
     // Arrange
-    Coord coord = Coord(1,1);
+    Square coord = Square(1,1);
     auto king = PieceFactory::CreateKing(Color::White, coord);
 
     // Act
-    std::vector<Coord> possibleMoves = king->GetPossibleMoves();
+    std::vector<Square> possibleMoves = king->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  3);

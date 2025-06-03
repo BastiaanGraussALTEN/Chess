@@ -10,8 +10,8 @@ class Board
         Board();
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         void AddPiece(const std::shared_ptr<Piece>& piece);
-        void RemovePiece(const Coord& coord);
-        std::shared_ptr<Piece> GetPieceFromCoord(const Coord& coord) const;
+        void RemovePiece(const Square& coord);
+        std::shared_ptr<Piece> GetPieceFromCoord(const Square& coord) const;
     private:
         std::vector<std::shared_ptr<Piece>> m_pieces;
         void CreateInitialBoardState();

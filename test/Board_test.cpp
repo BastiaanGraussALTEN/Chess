@@ -7,7 +7,7 @@ TEST(BoardTest, pieceCanBeAdded)
     Board board;
 
     // Act
-    board.AddPiece(PieceFactory::CreatePawn(Color::White, Coord(4, 4)));
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(4, 4)));
     std::vector<std::shared_ptr<Piece>> pieces = board.GetPieces();
 
     // Assert
@@ -22,14 +22,14 @@ TEST(BoardTest, pieceCantBeAddedIfOtherPieceAlreadyThere)
     // Act - no act
 
     // Assert
-    EXPECT_THROW(board.AddPiece(PieceFactory::CreatePawn(Color::White, Coord(1, 1)));, std::out_of_range);
+    EXPECT_THROW(board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(1, 1)));, std::out_of_range);
 }
 
 TEST(BoardTest, pieceCanBeRemoved)
 {
     // Arrange
     Board board;
-    board.RemovePiece(Coord(1, 2));
+    board.RemovePiece(Square(1, 2));
 
     // Act
     std::vector<std::shared_ptr<Piece>> pieces = board.GetPieces();
@@ -42,8 +42,8 @@ TEST(BoardTest, pieceWontBeRemovedWrongCoord)
 {
     // Arrange
     Board board;
-    board.AddPiece(PieceFactory::CreatePawn(Color::White, Coord(4, 4)));
-    board.RemovePiece(Coord(4, 5));
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(4, 4)));
+    board.RemovePiece(Square(4, 5));
 
     // Act
     std::vector<std::shared_ptr<Piece>> pieces = board.GetPieces();
@@ -68,10 +68,10 @@ TEST(BoardTest, GetPieceFromCoordWhenNoPiecesOnBoard)
 {
     // Arrange
     Board board;
-    board.RemovePiece(Coord(1, 1));
+    board.RemovePiece(Square(1, 1));
 
     // Act
-    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(1, 1));
+    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(1, 1));
 
     // Assert
     EXPECT_TRUE(ptr == nullptr);
@@ -83,7 +83,7 @@ TEST(BoardTest, GetPieceFromCoordWrongCoord)
     Board board;
 
     // Act
-    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(4, 4));
+    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(4, 4));
 
     // Assert
     EXPECT_TRUE(ptr == nullptr);
@@ -95,7 +95,7 @@ TEST(BoardTest, GetPieceFromCoord)
     Board board;
 
     // Act
-    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Coord(1, 1));
+    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(1, 1));
 
     // Assert
     EXPECT_EQ(ptr->color, Color::White);
