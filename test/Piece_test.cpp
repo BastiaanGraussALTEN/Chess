@@ -183,6 +183,32 @@ TEST(PieceTest, queenCanBeMadeUsingFactory)
     EXPECT_EQ(queen->color, Color::White);
 }
 
+TEST(PieceTest, queenGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(4,5);
+    auto queen = PieceFactory::CreateQueen(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = queen->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  27);
+}
+
+TEST(PieceTest, queenGivesCorrectPossibleMovesInCorner) 
+{
+    // Arrange
+    Coord coord = Coord(1,1);
+    auto queen = PieceFactory::CreateQueen(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = queen->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  21);
+}
+
 TEST(PieceTest, kingCanBeMade) 
 {
     // Arrange
