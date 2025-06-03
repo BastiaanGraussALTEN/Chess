@@ -208,3 +208,29 @@ TEST(PieceTest, kingCanBeMadeUsingFactory)
     EXPECT_EQ(king->position,  coord);
     EXPECT_EQ(king->color, Color::White);
 }
+
+TEST(PieceTest, kingGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(2,2);
+    auto king = PieceFactory::CreateKing(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = king->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  8);
+}
+
+TEST(PieceTest, kingGivesCorrectPossibleMovesInCorner) 
+{
+    // Arrange
+    Coord coord = Coord(1,1);
+    auto king = PieceFactory::CreateKing(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = king->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  3);
+}
