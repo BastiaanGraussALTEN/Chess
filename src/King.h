@@ -8,6 +8,7 @@ class King : public Piece
     public:
         King(Color color, Coord position);
         ~King() override;
+        std::vector<Coord> GetPossibleMoves();
 };
 
 #endif
