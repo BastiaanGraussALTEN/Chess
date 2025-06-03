@@ -53,6 +53,45 @@ TEST(PieceTest, bishopCanBeMadeUsingFactory)
     EXPECT_EQ(bishop->color, Color::White);
 }
 
+TEST(PieceTest, bishopGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(2,3);
+    auto bishop = PieceFactory::CreateBishop(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = bishop->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  9);
+}
+
+TEST(PieceTest, bishopGivesCorrectPossibleMovesWhenPlacedMiddle) 
+{
+    // Arrange
+    Coord coord = Coord(4,5);
+    auto bishop = PieceFactory::CreateBishop(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = bishop->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  13);
+}
+
+TEST(PieceTest, bishopGivesCorrectPossibleMovesWhenPlacedCorner) 
+{
+    // Arrange
+    Coord coord = Coord(1,1);
+    auto bishop = PieceFactory::CreateBishop(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = bishop->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  7);
+}
+
 TEST(PieceTest, knightCanBeMade) 
 {
     // Arrange
