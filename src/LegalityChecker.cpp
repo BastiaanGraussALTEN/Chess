@@ -42,21 +42,36 @@ bool LegalityChecker::IsMoveDiagonal(const Move &move) const
 
 bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
 {
-    int inBetweenStep = abs(move.end.x - move.start.x) - 1;
-    if (inBetweenStep == 0)
+    int amountOfInBetweenSquares = abs(move.end.x - move.start.x) - 1;
+    if (amountOfInBetweenSquares == 0)
     {
         return false;
     }
 
-    std::vector<Square> inBetweenSteps;
+    std::vector<Square> inBetweenSquares = GetDiagonalsInBetween(move, amountOfInBetweenSquares);
+    
+    for (const Square& square : inBetweenSquares)
+    {
+        auto pieceOnSquare = m_board.GetPieceFromCoord(square);
+        if (pieceOnSquare != nullptr)
+        {
+            return true;
+        }
+    }
 
+    return false;
+}
+
+std::vector<Square> LegalityChecker::GetDiagonalsInBetween(const Move &move, int amoundtOfInBetweenSteps) const
+{
+    std::vector<Square> inBetweenSteps;
     // move is to the right
     if (move.end.x - move.start.x > 0)
     {
         // move is upwards
         if (move.end.y - move.start.y > 0)
         {
-            for (int i = 1; i < inBetweenStep + 1; i++)
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
             {
                 inBetweenSteps.push_back(Square(move.start.x + i, move.start.y + i));
             }
@@ -65,7 +80,7 @@ bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
         // move is downwards
         if (move.end.y - move.start.y < 0)
         {
-            for (int i = 1; i < inBetweenStep + 1; i++)
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
             {
                 inBetweenSteps.push_back(Square(move.start.x + i, move.start.y - i));
             }
@@ -78,7 +93,7 @@ bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
         // move is upwards
         if (move.end.y - move.start.y > 0)
         {
-            for (int i = 1; i < inBetweenStep + 1; i++)
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
             {
                 inBetweenSteps.push_back(Square(move.start.x - i, move.start.y + i));
             }
@@ -87,23 +102,14 @@ bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
         // move is downwards
         if (move.end.y - move.start.y < 0)
         {
-            for (int i = 1; i < inBetweenStep + 1; i++)
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
             {
                 inBetweenSteps.push_back(Square(move.start.x - i, move.start.y - i));
             }
         }
     }
-    
-    for (const Square& square : inBetweenSteps)
-    {
-        auto pieceOnSquare = m_board.GetPieceFromCoord(square);
-        if (pieceOnSquare != nullptr)
-        {
-            return true;
-        }
-    }
 
-    return false;
+    return inBetweenSteps;
 }
 
 bool LegalityChecker::IsMoveOrthogonal(const Move &move) const
