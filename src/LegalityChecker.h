@@ -15,6 +15,7 @@ class LegalityChecker
         bool IsPieceInDiagonal(const Move& move) const;
         bool IsPieceInLine(const Move& move) const;
         std::vector<Square> GetDiagonalsInBetween(const Move &move, int amoundtOfInBetweenSteps) const;
+        std::vector<Square> GetOrthogonalsInBetween(const Move &move, int amoundtOfInBetweenSteps) const;
         Board m_board;
 };
 

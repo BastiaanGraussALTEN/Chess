@@ -128,8 +128,72 @@ bool LegalityChecker::IsMoveOrthogonal(const Move &move) const
 
 bool LegalityChecker::IsPieceInLine(const Move &move) const
 {
-    // create spaces between start and end
+    int amountOfInBetweenSquares;
+    if (move.start.x == move.end.x)
+    {
+        amountOfInBetweenSquares = abs(move.end.y - move.start.y) - 1;
+    }
+    if (move.start.y == move.end.y)
+    {
+        amountOfInBetweenSquares = abs(move.end.x - move.start.x) - 1;
+    }
+    if (amountOfInBetweenSquares == 0)
+    {
+        return false;
+    }
+
+    std::vector<Square> inBetweenSquares = GetOrthogonalsInBetween(move, amountOfInBetweenSquares);
     
-    // check if there are pieces in the way
+    for (const Square& square : inBetweenSquares)
+    {
+        auto pieceOnSquare = m_board.GetPieceFromCoord(square);
+        if (pieceOnSquare != nullptr)
+        {
+            return true;
+        }
+    }
+
     return false;
+}
+
+std::vector<Square> LegalityChecker::GetOrthogonalsInBetween(const Move &move, int amoundtOfInBetweenSteps) const
+{
+    std::vector<Square> inBetweenSteps;
+    // move is to the right
+    if (move.end.x - move.start.x > 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x + i, move.start.y));
+        }
+    }
+
+    // move is to the left
+    if (move.end.x - move.start.x < 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x - i, move.start.y));
+        }
+    }
+
+    // move is upwards
+    if (move.end.y - move.start.y > 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x, move.start.y + i));
+        }
+    }
+
+    // move is downwards
+    if (move.end.y - move.start.y < 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x, move.start.y - i));
+        }
+    }
+
+    return inBetweenSteps;
 }
