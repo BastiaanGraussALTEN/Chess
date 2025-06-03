@@ -105,6 +105,19 @@ TEST(PieceTest, rookCanBeMadeUsingFactory)
     EXPECT_EQ(rook->color, Color::White);
 }
 
+TEST(PieceTest, rookGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(1,2);
+    auto rook = PieceFactory::CreateRook(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = rook->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  14);
+}
+
 TEST(PieceTest, queenCanBeMade) 
 {
     // Arrange
