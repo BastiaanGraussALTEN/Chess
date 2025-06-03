@@ -27,6 +27,60 @@ TEST(PieceTest, pawnCanBeMadeUsingFactory)
     EXPECT_EQ(pawn->color, Color::White);
 }
 
+TEST(PieceTest, pawnGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(2, 2);
+    auto pawn = PieceFactory::CreatePawn(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = pawn->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  4);
+}
+
+TEST(PieceTest, pawnGivesCorrectPossibleMovesInCorner) 
+{
+    // Arrange
+    Coord coord = Coord(1, 2);
+    auto pawn = PieceFactory::CreatePawn(Color::White, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = pawn->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  3);
+}
+
+TEST(PieceTest, pawnGivesCorrectPossibleMovesAfterMove) 
+{
+    // Arrange
+    Coord coord = Coord(6, 2);
+    auto piece = PieceFactory::CreatePawn(Color::White, coord);
+    auto pawnPtr = std::dynamic_pointer_cast<Pawn>(piece);
+    pawnPtr->hasMoved = true;
+
+    // Act
+    std::vector<Coord> possibleMoves = pawnPtr->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  3);
+}
+
+TEST(PieceTest, blackPawnGivesCorrectPossibleMoves) 
+{
+    // Arrange
+    Coord coord = Coord(6, 1);
+    auto pawn = PieceFactory::CreatePawn(Color::Black, coord);
+
+    // Act
+    std::vector<Coord> possibleMoves = pawn->GetPossibleMoves();
+
+    // Assert
+    EXPECT_EQ(possibleMoves.size(),  0);
+}
+
 TEST(PieceTest, bishopCanBeMade) 
 {
     // Arrange

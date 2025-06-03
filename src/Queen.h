@@ -8,7 +8,7 @@ class Queen : public Piece
     public:
         Queen(Color color, Coord position);
         ~Queen() override;
-        std::vector<Coord> GetPossibleMoves();
+        std::vector<Coord> GetPossibleMoves() const;
 };
 
 #endif

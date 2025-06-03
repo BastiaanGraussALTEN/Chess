@@ -8,7 +8,7 @@ Queen::~Queen()
 {
 }
 
-std::vector<Coord> Queen::GetPossibleMoves()
+std::vector<Coord> Queen::GetPossibleMoves() const
 {
     std::vector<Coord> possibleMoves;
     for (int i = 1; i < 8; i++)

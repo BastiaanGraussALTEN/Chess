@@ -8,7 +8,7 @@ class Knight : public Piece
     public:
         Knight(Color color, Coord position);
         ~Knight() override;
-        std::vector<Coord> GetPossibleMoves();
+        std::vector<Coord> GetPossibleMoves() const;
 };
 
 #endif

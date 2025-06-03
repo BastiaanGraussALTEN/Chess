@@ -8,7 +8,7 @@ Bishop::~Bishop()
 {
 }
 
-std::vector<Coord> Bishop::GetPossibleMoves()
+std::vector<Coord> Bishop::GetPossibleMoves() const
 {
     std::vector<Coord> possibleMoves;
     for (int i = 1; i < 8; i++)

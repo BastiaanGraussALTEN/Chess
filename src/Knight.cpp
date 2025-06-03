@@ -8,7 +8,7 @@ Knight::~Knight()
 {
 }
 
-std::vector<Coord> Knight::GetPossibleMoves()
+std::vector<Coord> Knight::GetPossibleMoves() const
 {
     return std::vector<Coord>();
 }
