@@ -14,7 +14,7 @@ int main()
     // }
     Board board;
     LegalityChecker legalityChecker(board);
-    Move bishopMove = Move(Square(1, 1), Square(1, 4));
-    bool isLegal = legalityChecker.CheckMoveLegality(bishopMove);
+    Move rookMove = Move(Square(1, 1), Square(1, 4));
+    bool isLegal = legalityChecker.CheckMoveLegality(rookMove);
     return 0;
 }
