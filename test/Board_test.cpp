@@ -118,8 +118,15 @@ TEST(BoardTest, PieceCanNotBeMovedIfNoPieceThere)
 TEST(BoardTest, PieceCanBeMoved)
 {
     // Arrange
-
+    Board board;
+    // 1.Nc3
+    Move move = Move(Square(2,1), Square(3,3));
+    
     // Act
+    board.MovePiece(move);
+    auto oldSquare = board.GetPieceFromCoord(Square(2,1));
+    auto newSquare = board.GetPieceFromCoord(Square(3,3));
     
     // Assert
+    EXPECT_EQ(oldSquare, nullptr);
 }
