@@ -6,9 +6,9 @@
 class Bishop : public Piece
 {
     public:
-        Bishop(Color color, Square position);
+        explicit Bishop(Color color, Square position);
         ~Bishop() override;
-        std::vector<Square> GetPossibleMoves() const;
+        std::vector<Square> GetPossibleMoves() const override;
 };
 
 #endif

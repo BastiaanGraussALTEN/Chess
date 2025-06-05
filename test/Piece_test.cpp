@@ -12,6 +12,7 @@ TEST(PieceTest, pawnCanBeMade)
     // Assert
     EXPECT_EQ(pawn.position,  coord);
     EXPECT_EQ(pawn.color, Color::White);
+    EXPECT_EQ(pawn.pieceType, PieceType::PawnType);
 }
 
 TEST(PieceTest, pawnCanBeMadeUsingFactory) 
@@ -25,6 +26,7 @@ TEST(PieceTest, pawnCanBeMadeUsingFactory)
     // Assert
     EXPECT_EQ(pawn->position,  coord);
     EXPECT_EQ(pawn->color, Color::White);
+    EXPECT_EQ(pawn->pieceType, PieceType::PawnType);
 }
 
 TEST(PieceTest, pawnGivesCorrectPossibleMoves) 
@@ -92,6 +94,7 @@ TEST(PieceTest, bishopCanBeMade)
     // Assert
     EXPECT_EQ(bishop.position,  coord);
     EXPECT_EQ(bishop.color, Color::White);
+    EXPECT_EQ(bishop.pieceType, PieceType::BishopType);
 }
 
 TEST(PieceTest, bishopCanBeMadeUsingFactory) 
@@ -105,6 +108,7 @@ TEST(PieceTest, bishopCanBeMadeUsingFactory)
     // Assert
     EXPECT_EQ(bishop->position,  coord);
     EXPECT_EQ(bishop->color, Color::White);
+    EXPECT_EQ(bishop->pieceType, PieceType::BishopType);
 }
 
 TEST(PieceTest, bishopGivesCorrectPossibleMoves) 
@@ -157,6 +161,7 @@ TEST(PieceTest, knightCanBeMade)
     // Assert
     EXPECT_EQ(knight.position,  coord);
     EXPECT_EQ(knight.color, Color::White);
+    EXPECT_EQ(knight.pieceType, PieceType::KnightType);
 }
 
 TEST(PieceTest, knightCanBeMadeUsingFactory) 
@@ -170,6 +175,7 @@ TEST(PieceTest, knightCanBeMadeUsingFactory)
     // Assert
     EXPECT_EQ(knight->position,  coord);
     EXPECT_EQ(knight->color, Color::White);
+    EXPECT_EQ(knight->pieceType, PieceType::KnightType);
 }
 
 TEST(PieceTest, knightGivesCorrectPossibleMoves) 
@@ -209,6 +215,7 @@ TEST(PieceTest, rookCanBeMade)
     // Assert
     EXPECT_EQ(rook.position,  coord);
     EXPECT_EQ(rook.color, Color::White);
+    EXPECT_EQ(rook.pieceType, PieceType::RookType);
 }
 
 TEST(PieceTest, rookCanBeMadeUsingFactory) 
@@ -222,6 +229,7 @@ TEST(PieceTest, rookCanBeMadeUsingFactory)
     // Assert
     EXPECT_EQ(rook->position,  coord);
     EXPECT_EQ(rook->color, Color::White);
+    EXPECT_EQ(rook->pieceType, PieceType::RookType);
 }
 
 TEST(PieceTest, rookGivesCorrectPossibleMoves) 
@@ -248,6 +256,7 @@ TEST(PieceTest, queenCanBeMade)
     // Assert
     EXPECT_EQ(queen.position,  coord);
     EXPECT_EQ(queen.color, Color::White);
+    EXPECT_EQ(queen.pieceType, PieceType::QueenType);
 }
 
 TEST(PieceTest, queenCanBeMadeUsingFactory) 
@@ -261,6 +270,7 @@ TEST(PieceTest, queenCanBeMadeUsingFactory)
     // Assert
     EXPECT_EQ(queen->position,  coord);
     EXPECT_EQ(queen->color, Color::White);
+    EXPECT_EQ(queen->pieceType, PieceType::QueenType);
 }
 
 TEST(PieceTest, queenGivesCorrectPossibleMoves) 
@@ -300,6 +310,7 @@ TEST(PieceTest, kingCanBeMade)
     // Assert
     EXPECT_EQ(king.position,  coord);
     EXPECT_EQ(king.color, Color::White);
+    EXPECT_EQ(king.pieceType, PieceType::KingType);
 }
 
 TEST(PieceTest, kingCanBeMadeUsingFactory) 
@@ -313,6 +324,7 @@ TEST(PieceTest, kingCanBeMadeUsingFactory)
     // Assert
     EXPECT_EQ(king->position,  coord);
     EXPECT_EQ(king->color, Color::White);
+    EXPECT_EQ(king->pieceType, PieceType::KingType);
 }
 
 TEST(PieceTest, kingGivesCorrectPossibleMoves) 

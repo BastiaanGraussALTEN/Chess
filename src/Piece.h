@@ -4,14 +4,16 @@
 #include <vector>
 #include "Color.h"
 #include "Square.h"
+#include "PieceType.h"
 
 class Piece
 {
     public:
-        Piece(Color color, Square positionOfPiece);
+        explicit Piece(Color color, PieceType pieceType, Square positionOfPiece);
         virtual ~Piece();
         virtual std::vector<Square> GetPossibleMoves() const = 0;
         Color color;
+        PieceType pieceType;
         Square position;
 };
 

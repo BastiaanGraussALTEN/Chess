@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(Color color, Square position) : Piece(color, position)
+Pawn::Pawn(Color color, Square position) : Piece(color, PieceType::PawnType, position)
 {
     hasMoved = false;
 }
@@ -31,7 +31,7 @@ std::vector<Square> Pawn::GetPossibleMoves() const
             possibleMoves.push_back(Square(position.x, position.y + 2));
         }
     }
-
+    
     if (color == Color::Black)
     {
         if (position.y - 1 > 0)

@@ -6,9 +6,9 @@
 class King : public Piece
 {
     public:
-        King(Color color, Square position);
+        explicit King(Color color, Square position);
         ~King() override;
-        std::vector<Square> GetPossibleMoves() const;
+        std::vector<Square> GetPossibleMoves() const override;
         bool hasMoved;
 };
 

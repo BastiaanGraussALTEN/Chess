@@ -1,6 +1,6 @@
 #include "King.h"
 
-King::King(Color color, Square position) : Piece(color, position)
+King::King(Color color, Square position) : Piece(color, PieceType::KingType, position)
 {
     hasMoved = false;
 }

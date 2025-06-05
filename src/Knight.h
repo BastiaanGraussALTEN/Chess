@@ -6,9 +6,9 @@
 class Knight : public Piece
 {
     public:
-        Knight(Color color, Square position);
+        explicit Knight(Color color, Square position);
         ~Knight() override;
-        std::vector<Square> GetPossibleMoves() const;
+        std::vector<Square> GetPossibleMoves() const override;
 };
 
 #endif

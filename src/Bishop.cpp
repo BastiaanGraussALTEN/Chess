@@ -1,6 +1,6 @@
 #include "Bishop.h"
 
-Bishop::Bishop(Color color, Square position) : Piece(color, position)
+Bishop::Bishop(Color color, Square position) : Piece(color, PieceType::BishopType, position)
 {
 }
 
