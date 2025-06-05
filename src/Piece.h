@@ -2,8 +2,8 @@
 #define PIECE_H
 
 #include <vector>
-#include "Color.cpp"
-#include "Square.cpp"
+#include "Color.h"
+#include "Square.h"
 
 class Piece
 {

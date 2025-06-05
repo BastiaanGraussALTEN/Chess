@@ -3,7 +3,6 @@ set(SRC_FILES
     main.cpp
     Bishop.cpp
     Board.cpp
-    Color.cpp
     MoveDialog.cpp
     King.cpp
     Knight.cpp
@@ -13,13 +12,14 @@ set(SRC_FILES
     PieceFactory.cpp
     Queen.cpp
     Rook.cpp
-    Square.cpp
-)
-
-# Set the header files for the main project
-set(HEADER_FILES
+    )
+    
+    # Set the header files for the main project
+    set(HEADER_FILES
     Bishop.h
     Board.h
+    Color.h
+    Move.h
     MoveDialog.h
     King.h
     Knight.h
@@ -29,6 +29,7 @@ set(HEADER_FILES
     PieceFactory.h
     Queen.h
     Rook.h
+    Square.h
 )
 
 # Add the executable or library

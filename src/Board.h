@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "PieceFactory.h"
-#include "Move.cpp"
+#include "Move.h"
 
 class Board
 {

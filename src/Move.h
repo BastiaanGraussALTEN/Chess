@@ -1,7 +1,7 @@
-#ifndef MOVE
-#define MOVE
+#ifndef MOVE_H
+#define MOVE_H
 
-#include "Square.cpp"
+#include "Square.h"
 
 struct Move
 {

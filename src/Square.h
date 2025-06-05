@@ -1,5 +1,5 @@
-#ifndef COORD
-#define COORD
+#ifndef SQUARE_H
+#define SQUARE_H
 
 #include <stdexcept>
 
