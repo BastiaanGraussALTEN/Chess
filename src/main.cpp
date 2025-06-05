@@ -4,22 +4,27 @@
 
 int main()
 {
-    // std::string move;
-    // MoveDialog moveDialog;
-    // while(true)
-    // {
-    //     moveDialog.ShowDialog();
-    //     std::cin >> move;
-    //     moveDialog.SetMove(move);
-    // }
+    std::string move;
+    MoveDialog moveDialog;
+    while(true)
+    {
+        moveDialog.ShowDialog();
+        std::cin >> move;
+        moveDialog.SetMove(move);
+    }
 
-    // Arrange
     Board board;
     LegalityChecker legalityChecker(board);
-    // 1. Nc3
     Move knightMove = Move(Square(2, 1), Square(3, 3));
-
-    // Act
     bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
+    bool isCapture = legalityChecker.DoesMoveCapturePiece(knightMove);
+    if(isLegal)
+    {
+        if (isCapture)
+        {
+            board.RemovePiece(knightMove.end);
+        }
+        board.MovePiece(knightMove);
+    }
     return 0;
 }
