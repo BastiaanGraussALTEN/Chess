@@ -16,8 +16,7 @@ void Board::AddPiece(const std::shared_ptr<Piece> &piece)
     {
         if ( boardPiece->position == piece->position)
         {
-            throw std::out_of_range("there is a piece already on this coord");
-
+            throw std::invalid_argument("there is a piece already on this square");
         }
     }
 
@@ -32,6 +31,15 @@ void Board::RemovePiece(const Square &coord)
         {
             m_pieces.erase( m_pieces.begin() + i );
         }
+    }
+}
+
+void Board::MovePiece(const Move &move)
+{
+    auto piece = GetPieceFromCoord(move.start);
+    if (piece == nullptr)
+    {
+        throw std::invalid_argument("there is no piece on this square");
     }
 }
 

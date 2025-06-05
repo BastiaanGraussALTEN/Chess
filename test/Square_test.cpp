@@ -32,8 +32,8 @@ TEST(CoordTest, exceptionThrownWhenOutOfRange)
     // Act - no act
 
     // Assert
-    EXPECT_THROW(Square(0, 1), std::out_of_range);
-    EXPECT_THROW(Square(1, 0), std::out_of_range);
-    EXPECT_THROW(Square(9, 1), std::out_of_range);
-    EXPECT_THROW(Square(1, 9), std::out_of_range);
+    EXPECT_THROW(Square(0, 1), std::invalid_argument);
+    EXPECT_THROW(Square(1, 0), std::invalid_argument);
+    EXPECT_THROW(Square(9, 1), std::invalid_argument);
+    EXPECT_THROW(Square(1, 9), std::invalid_argument);
 }

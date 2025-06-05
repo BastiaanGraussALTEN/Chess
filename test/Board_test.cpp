@@ -22,7 +22,7 @@ TEST(BoardTest, pieceCantBeAddedIfOtherPieceAlreadyThere)
     // Act - no act
 
     // Assert
-    EXPECT_THROW(board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(1, 1)));, std::out_of_range);
+    EXPECT_THROW(board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(1, 1)));, std::invalid_argument);
 }
 
 TEST(BoardTest, pieceCanBeRemoved)
@@ -101,4 +101,25 @@ TEST(BoardTest, GetPieceFromCoord)
     EXPECT_EQ(ptr->color, Color::White);
     EXPECT_EQ(ptr->position.x, 1);
     EXPECT_EQ(ptr->position.y, 1);
+}
+
+TEST(BoardTest, PieceCanNotBeMovedIfNoPieceThere)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    Move move = Move(Square(4,4), Square(5,5));
+
+    // Assert
+    EXPECT_THROW(board.MovePiece(move), std::invalid_argument);
+}
+
+TEST(BoardTest, PieceCanBeMoved)
+{
+    // Arrange
+
+    // Act
+    
+    // Assert
 }

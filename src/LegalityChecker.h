@@ -2,7 +2,6 @@
 #define LEGALITYCHECKER_H
 
 #include "Board.h"
-#include "Move.cpp"
 
 class LegalityChecker
 {

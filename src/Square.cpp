@@ -9,11 +9,11 @@ struct Square
     {
         if (x < 1 || x > 8)
         {
-            throw std::out_of_range("x is out of range");
+            throw std::invalid_argument("x is not between 1-8");
         }
         if (y < 1 || y > 8)
         {
-            throw std::out_of_range("y is out of range");
+            throw std::invalid_argument("y is not between 1-8");
         }
     };
     bool operator==(const Square& rhs) const
