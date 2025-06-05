@@ -102,12 +102,29 @@ TEST(LegalityCheckerTest, RookCantMoveThroughPawns)
     ASSERT_FALSE(isLegal);
 }
 
-TEST(LegalityCheckerTest, RookCantMoveThroughPieceFarAway)
+TEST(LegalityCheckerTest, RookCantMoveThroughOwnPieceFarAway)
 {
     // Arrange
     Board board;
     board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(4, 3)));
-    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(8, 3)));
+    board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 3)));
+    LegalityChecker legalityChecker(board);
+    // 1. Ra3
+    Move rookMove = Move(Square(8, 3), Square(1, 3));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(rookMove);
+
+    // Assert
+    ASSERT_FALSE(isLegal);
+}
+
+TEST(LegalityCheckerTest, RookCantMoveThroughOtherPieceFarAway)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(4, 3)));
+    board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 3)));
     LegalityChecker legalityChecker(board);
     // 1. Ra3
     Move rookMove = Move(Square(8, 3), Square(1, 3));
