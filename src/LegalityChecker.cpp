@@ -8,6 +8,11 @@ LegalityChecker::LegalityChecker(const Board& board) : m_board(board)
 bool LegalityChecker::CheckMoveLegality(const Move& move) const
 {
     auto piece = m_board.GetPieceFromCoord(move.start);
+    if (piece == nullptr)
+    {
+        return false;
+    }
+    
     std::vector<Square> possibleMoves = piece->GetPossibleMoves();
     if (std::find(possibleMoves.begin(), possibleMoves.end(), move.end) == possibleMoves.end())
     {
