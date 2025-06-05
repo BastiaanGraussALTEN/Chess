@@ -76,6 +76,20 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
     return true;
 }
 
+bool LegalityChecker::DoesMoveCapturePiece(const Move &move) const
+{
+    auto piece = m_board.GetPieceFromCoord(move.start);
+    auto pieceOnEnd = m_board.GetPieceFromCoord(move.end);
+    if (pieceOnEnd != nullptr)
+    {
+        if(pieceOnEnd->color != piece->color)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool LegalityChecker::IsMoveDiagonal(const Move &move) const
 {
     if (abs(move.start.x - move.end.x) == abs(move.start.y - move.end.y))

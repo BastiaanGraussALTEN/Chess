@@ -272,3 +272,77 @@ TEST(LegalityCheckerTest, PawnCanNotMove2ForwardsIfItHasAlreadyMoved)
     // Assert
     ASSERT_FALSE(isLegal);
 }
+
+TEST(LegalityCheckerTest, PawnCapturingPieceIsRecognized)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(3,3)));
+    LegalityChecker legalityChecker(board);
+    Move pawnMove = Move(Square(2,2), Square(3,3));
+
+    // Act
+    bool doesCapture = legalityChecker.DoesMoveCapturePiece(pawnMove);
+
+    // Assert
+    ASSERT_TRUE(doesCapture);
+}
+
+TEST(LegalityCheckerTest, PawnNotCapturingPieceIsRecognized)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(3,3)));
+    LegalityChecker legalityChecker(board);
+    Move pawnMove = Move(Square(2,2), Square(2,3));
+
+    // Act
+    bool doesCapture = legalityChecker.DoesMoveCapturePiece(pawnMove);
+
+    // Assert
+    ASSERT_FALSE(doesCapture);
+}
+
+TEST(LegalityCheckerTest, KnightCapturingPieceIsRecognized)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(3,3)));
+    LegalityChecker legalityChecker(board);
+    Move knightMove = Move(Square(2,1), Square(3,3));
+
+    // Act
+    bool doesCapture = legalityChecker.DoesMoveCapturePiece(knightMove);
+
+    // Assert
+    ASSERT_TRUE(doesCapture);
+}
+
+TEST(LegalityCheckerTest, KnightCantCaptureOwnPiece)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(3,3)));
+    LegalityChecker legalityChecker(board);
+    Move knightMove = Move(Square(2,1), Square(3,3));
+
+    // Act
+    bool doesCapture = legalityChecker.DoesMoveCapturePiece(knightMove);
+
+    // Assert
+    ASSERT_FALSE(doesCapture);
+}
+
+TEST(LegalityCheckerTest, KnightNotCapturingPieceIsRecognized)
+{
+    // Arrange
+    Board board;
+    LegalityChecker legalityChecker(board);
+    Move pawnMove = Move(Square(2,1), Square(2,3));
+
+    // Act
+    bool doesCapture = legalityChecker.DoesMoveCapturePiece(pawnMove);
+
+    // Assert
+    ASSERT_FALSE(doesCapture);
+}
