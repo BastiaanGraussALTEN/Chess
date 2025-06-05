@@ -211,3 +211,64 @@ TEST(LegalityCheckerTest, LegalToCaptureOtherPiece)
     // Assert
     ASSERT_TRUE(isLegal);
 }
+
+TEST(LegalityCheckerTest, PawnCanNotMoveDiagonally)
+{
+    // Arrange
+    Board board;
+    LegalityChecker legalityChecker(board);
+    Move pawnMove = Move(Square(2,2), Square(3,3));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(pawnMove);
+
+    // Assert
+    ASSERT_FALSE(isLegal);
+}
+
+TEST(LegalityCheckerTest, PawnCanCaptureDiagonally)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(3,3)));
+    LegalityChecker legalityChecker(board);
+    Move knightMove = Move(Square(2,2), Square(3,3));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
+
+    // Assert
+    ASSERT_TRUE(isLegal);
+}
+
+TEST(LegalityCheckerTest, PawnCanNotCaptureStraight)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(2,3)));
+    LegalityChecker legalityChecker(board);
+    Move knightMove = Move(Square(2,2), Square(2,3));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
+
+    // Assert
+    ASSERT_FALSE(isLegal);
+}
+
+TEST(LegalityCheckerTest, PawnCanNotMove2ForwardsIfItHasAlreadyMoved)
+{
+    // Arrange
+    Board board;
+    auto piece = board.GetPieceFromCoord(Square(2,2));
+    auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
+    pawn->hasMoved = true;
+    LegalityChecker legalityChecker(board);
+    Move pawnMove = Move(Square(2,2), Square(2,4));
+
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(pawnMove);
+
+    // Assert
+    ASSERT_FALSE(isLegal);
+}

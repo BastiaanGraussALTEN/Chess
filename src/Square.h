@@ -16,6 +16,7 @@ struct Square
             throw std::invalid_argument("y is not between 1-8");
         }
     };
+    Square(const Square& other) : x(other.x), y(other.y) {}
     bool operator==(const Square& rhs) const
     {
         return this->x == rhs.x && this->y == rhs.y;

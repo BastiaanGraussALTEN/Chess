@@ -7,12 +7,14 @@ LegalityChecker::LegalityChecker(const Board& board) : m_board(board)
 
 bool LegalityChecker::CheckMoveLegality(const Move& move) const
 {
+    // there needs to be a piece on the start square
     auto piece = m_board.GetPieceFromCoord(move.start);
     if (piece == nullptr)
     {
         return false;
     }
-    
+
+    // rook, bishop, queen and pawn cannot jump over pieces
     std::vector<Square> possibleMoves = piece->GetPossibleMoves();
     if (std::find(possibleMoves.begin(), possibleMoves.end(), move.end) == possibleMoves.end())
     {
@@ -33,12 +35,41 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
         }
     }
 
+    // you cant capture your own piece
     auto pieceOnEnd = m_board.GetPieceFromCoord(move.end);
     if (pieceOnEnd != nullptr)
     {
         if(pieceOnEnd->color == piece->color)
         {
             return false;
+        }
+    }
+
+    // pawn stuff
+    if (piece->pieceType == PieceType::PawnType)
+    {
+        auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
+        if (IsMoveDiagonal(move))
+        {
+            if(pieceOnEnd == nullptr)
+            {
+                return false;
+            }
+            if(pieceOnEnd->color == piece->color)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(pieceOnEnd != nullptr)
+            {
+                return false;
+            }
+            if(abs(move.end.y - move.start.y) == 2 && pawn->hasMoved == true)
+            {
+                return false;
+            }
         }
     }
 

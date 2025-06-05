@@ -12,10 +12,14 @@ int main()
     //     std::cin >> move;
     //     moveDialog.SetMove(move);
     // }
+
+    // Arrange
     Board board;
-    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(3,3)));
     LegalityChecker legalityChecker(board);
-    Move knightMove = Move(Square(2,1), Square(3,3));
+    // 1. Nc3
+    Move knightMove = Move(Square(2, 1), Square(3, 3));
+
+    // Act
     bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
     return 0;
 }
