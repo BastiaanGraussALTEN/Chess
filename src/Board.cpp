@@ -41,6 +41,10 @@ void Board::MovePiece(const Move &move)
     {
         throw std::invalid_argument("there is no piece on this square");
     }
+    else
+    {
+        piece->position = move.end;
+    }
 }
 
 std::shared_ptr<Piece> Board::GetPieceFromCoord(const Square &coord) const

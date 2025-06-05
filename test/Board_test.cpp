@@ -129,4 +129,5 @@ TEST(BoardTest, PieceCanBeMoved)
     
     // Assert
     EXPECT_EQ(oldSquare, nullptr);
+    EXPECT_EQ(newSquare->pieceType, PieceType::KnightType);
 }
