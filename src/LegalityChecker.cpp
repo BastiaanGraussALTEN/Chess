@@ -32,6 +32,16 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
             return false;
         }
     }
+
+    auto pieceOnEnd = m_board.GetPieceFromCoord(move.end);
+    if (pieceOnEnd != nullptr)
+    {
+        if(pieceOnEnd->color == piece->color)
+        {
+            return false;
+        }
+    }
+
     return true;
 }
 

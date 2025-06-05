@@ -13,8 +13,9 @@ int main()
     //     moveDialog.SetMove(move);
     // }
     Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(3,3)));
     LegalityChecker legalityChecker(board);
-    Move rookMove = Move(Square(1, 1), Square(1, 4));
-    bool isLegal = legalityChecker.CheckMoveLegality(rookMove);
+    Move knightMove = Move(Square(2,1), Square(3,3));
+    bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
     return 0;
 }
