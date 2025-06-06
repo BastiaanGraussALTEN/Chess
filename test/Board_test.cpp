@@ -29,7 +29,7 @@ TEST(BoardTest, pieceCanBeRemoved)
 {
     // Arrange
     Board board;
-    board.RemovePiece(Square(1, 2));
+    board.RemovePieceFromSquare(Square(1, 2));
 
     // Act
     std::vector<std::shared_ptr<Piece>> pieces = board.GetPieces();
@@ -43,7 +43,7 @@ TEST(BoardTest, pieceWontBeRemovedWrongCoord)
     // Arrange
     Board board;
     board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(4, 4)));
-    board.RemovePiece(Square(4, 5));
+    board.RemovePieceFromSquare(Square(4, 5));
 
     // Act
     std::vector<std::shared_ptr<Piece>> pieces = board.GetPieces();
@@ -68,7 +68,7 @@ TEST(BoardTest, GetPieceFromCoordWhenNoPiecesOnBoard)
 {
     // Arrange
     Board board;
-    board.RemovePiece(Square(1, 1));
+    board.RemovePieceFromSquare(Square(1, 1));
 
     // Act
     std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(1, 1));

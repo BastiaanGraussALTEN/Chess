@@ -22,7 +22,7 @@ int main()
     {
         if (isCapture)
         {
-            board.RemovePiece(knightMove.end);
+            board.RemovePieceFromSquare(knightMove.end);
         }
         board.MovePiece(knightMove);
     }

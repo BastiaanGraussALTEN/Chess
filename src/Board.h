@@ -11,7 +11,7 @@ class Board
         Board();
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         void AddPiece(const std::shared_ptr<Piece>& piece);
-        void RemovePiece(const Square& coord);
+        void RemovePieceFromSquare(const Square& coord);
         void MovePiece(const Move& move);
         std::shared_ptr<Piece> GetPieceFromCoord(const Square& coord) const;
     private:

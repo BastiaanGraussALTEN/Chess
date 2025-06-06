@@ -23,7 +23,7 @@ void Board::AddPiece(const std::shared_ptr<Piece> &piece)
     m_pieces.push_back(piece);
 }
 
-void Board::RemovePiece(const Square &coord)
+void Board::RemovePieceFromSquare(const Square &coord)
 {
     for (int i = 0; i < m_pieces.size(); i++)
     {
