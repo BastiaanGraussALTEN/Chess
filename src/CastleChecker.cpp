@@ -9,14 +9,18 @@ bool CastleChecker::CanCastleKingSide() const
 {
     Square kingSquare = Square(5, 1);
     Square rookSquare = Square(8, 1);
+    std::vector<Square> inBetweenSquares = {Square(6, 1), Square(7 ,1)};
     if (m_color == Color::Black)
     {
         kingSquare = Square(5, 8);
         rookSquare = Square(8, 8);
+        std::vector<Square> inBetweenSquares = {Square(6, 8), Square(7, 8)};
     }
 
-    if ((m_board.GetPieceFromCoord(kingSquare)->pieceType != PieceType::KingType)
-    && (m_board.GetPieceFromCoord(rookSquare)->pieceType != PieceType::RookType))
+    if ((m_board.GetPieceFromCoord(kingSquare) == nullptr)
+    || (m_board.GetPieceFromCoord(rookSquare) == nullptr)
+    || (m_board.GetPieceFromCoord(kingSquare)->pieceType != PieceType::KingType)
+    || (m_board.GetPieceFromCoord(rookSquare)->pieceType != PieceType::RookType))
     {
         return false;
     }
