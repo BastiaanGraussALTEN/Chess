@@ -11,6 +11,7 @@ set(SRC_FILES
     Pawn.cpp
     Piece.cpp
     PieceFactory.cpp
+    PositionFunctions.cpp
     Queen.cpp
     Rook.cpp
     )
@@ -29,6 +30,7 @@ set(SRC_FILES
     Pawn.h
     Piece.h
     PieceFactory.h
+    PositionFunctions.h
     Queen.h
     Rook.h
     Square.h

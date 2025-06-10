@@ -1,4 +1,5 @@
 #include "DangerChecker.h"
+#include "PositionFunctions.h"
 
 DangerChecker::DangerChecker(const Board& board, const LegalityChecker& legalityChecker, const Color& color) 
 : m_board(board), m_legalityChecker(legalityChecker), m_color(color)
@@ -38,7 +39,7 @@ bool DangerChecker::IsSquareUnderAttack(Square Targetsquare)
                 for (auto square : possibleMoves)
                 {
                     if ((square == Targetsquare) 
-                    && (m_legalityChecker.IsMoveDiagonal(Move(piece->position, square))))
+                    && (PositionFunctions::IsMoveDiagonal(Move(piece->position, square))))
                     {
                         return true;
                     }

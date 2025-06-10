@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "LegalityChecker.h"
+#include "PositionFunctions.h"
 
 LegalityChecker::LegalityChecker(const Board& board) : m_board(board)
 {
@@ -20,14 +21,14 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
     {
         return false;
     }
-    if (IsMoveDiagonal(move))
+    if (PositionFunctions::IsMoveDiagonal(move))
     {
         if(IsPieceInDiagonal(move))
         {
             return false;
         }
     }
-    if (IsMoveOrthogonal(move))
+    if (PositionFunctions::IsMoveOrthogonal(move))
     {
         if(IsPieceInLine(move))
         {
@@ -49,7 +50,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
     if (piece->pieceType == PieceType::PawnType)
     {
         auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
-        if (IsMoveDiagonal(move))
+        if (PositionFunctions::IsMoveDiagonal(move))
         {
             if(pieceOnEnd == nullptr)
             {
@@ -87,16 +88,6 @@ bool LegalityChecker::DoesMoveCapturePiece(const Move &move) const
             return true;
         }
     }
-    return false;
-}
-
-bool LegalityChecker::IsMoveDiagonal(const Move &move) const
-{
-    if (abs(move.start.x - move.end.x) == abs(move.start.y - move.end.y))
-    {
-        return true;
-    }
-
     return false;
 }
 
@@ -170,20 +161,6 @@ std::vector<Square> LegalityChecker::GetDiagonalsInBetween(const Move &move, int
     }
 
     return inBetweenSteps;
-}
-
-bool LegalityChecker::IsMoveOrthogonal(const Move &move) const
-{
-    if (move.start.x - move.end.x == 0 && move.start.y - move.end.y != 0)
-    {
-        return true;
-    }
-    if (move.start.x - move.end.x != 0 && move.start.y - move.end.y == 0)
-    {
-        return true;
-    }
-
-    return false;
 }
 
 bool LegalityChecker::IsPieceInLine(const Move &move) const
