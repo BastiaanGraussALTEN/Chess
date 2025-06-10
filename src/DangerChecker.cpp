@@ -7,10 +7,31 @@ DangerChecker::DangerChecker(const Board& board, const LegalityChecker& legality
 
 bool DangerChecker::IsKingUnderAttack()
 {
+    Square kingSquare = GetKingPosition();
+    for (auto piece : m_board.GetPieces())
+    {
+        if (piece->color != m_color)
+        {
+            std::vector<Square> possibleMoves = piece->GetPossibleMoves();
+        }
+    }
     return false;
 }
 
 bool DangerChecker::IsSquareUnderAttack(Square squaee)
 {
     return false;
+}
+
+Square DangerChecker::GetKingPosition()
+{
+    for (auto piece : m_board.GetPieces())
+    {
+        if ((piece->color == m_color) && (piece->pieceType == PieceType::KingType))
+        {
+            return piece->position;
+        }
+    }
+
+    throw std::domain_error("No king is found");
 }

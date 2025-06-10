@@ -1,6 +1,20 @@
 #include "gtest/gtest.h"
 #include "../src/DangerChecker.h"
 
+TEST(DangerCheckerTest, ThereIsNoKingThrowsException) 
+{
+    // Arrange
+    Board board;
+    board.RemovePieceFromSquare(Square(5, 1));
+    LegalityChecker legalityChecker(board);
+    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    
+    // Act
+
+    // Assert
+    EXPECT_THROW(dangerChecker.IsKingUnderAttack(), std::domain_error);
+}
+
 TEST(DangerCheckerTest, KingIsNotUnderAttack) 
 {
     // Arrange

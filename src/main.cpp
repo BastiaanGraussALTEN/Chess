@@ -1,30 +1,23 @@
 #include <iostream>
 #include "LegalityChecker.h"
 #include "MoveDialog.h"
+#include "DangerChecker.h"
 
 int main()
 {
-    std::string move;
-    MoveDialog moveDialog;
-    while(true)
-    {
-        moveDialog.ShowDialog();
-        std::cin >> move;
-        moveDialog.SetMove(move);
-    }
+    // std::string move;
+    // MoveDialog moveDialog;
+    // while(true)
+    // {
+    //     moveDialog.ShowDialog();
+    //     std::cin >> move;
+    //     moveDialog.SetMove(move);
+    // }
 
     Board board;
+    board.RemovePieceFromSquare(Square(5, 1));
     LegalityChecker legalityChecker(board);
-    Move knightMove = Move(Square(2, 1), Square(3, 3));
-    bool isLegal = legalityChecker.CheckMoveLegality(knightMove);
-    bool isCapture = legalityChecker.DoesMoveCapturePiece(knightMove);
-    if(isLegal)
-    {
-        if (isCapture)
-        {
-            board.RemovePieceFromSquare(knightMove.end);
-        }
-        board.MovePiece(knightMove);
-    }
+    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    dangerChecker.IsKingUnderAttack();
     return 0;
 }

@@ -10,6 +10,7 @@ class DangerChecker
         bool IsKingUnderAttack();
         bool IsSquareUnderAttack(Square squaee);
     private:
+        Square GetKingPosition();
         Board m_board;
         LegalityChecker m_legalityChecker;
         Color m_color;
