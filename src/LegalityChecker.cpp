@@ -99,7 +99,7 @@ bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
         return false;
     }
 
-    std::vector<Square> inBetweenSquares = GetDiagonalsInBetween(move, amountOfInBetweenSquares);
+    std::vector<Square> inBetweenSquares = PositionFunctions::GetDiagonalsInBetween(move, amountOfInBetweenSquares);
     
     for (const Square& square : inBetweenSquares)
     {
@@ -111,56 +111,6 @@ bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
     }
 
     return false;
-}
-
-std::vector<Square> LegalityChecker::GetDiagonalsInBetween(const Move &move, int amoundtOfInBetweenSteps) const
-{
-    std::vector<Square> inBetweenSteps;
-    // move is to the right
-    if (move.end.x - move.start.x > 0)
-    {
-        // move is upwards
-        if (move.end.y - move.start.y > 0)
-        {
-            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-            {
-                inBetweenSteps.push_back(Square(move.start.x + i, move.start.y + i));
-            }
-        }
-
-        // move is downwards
-        if (move.end.y - move.start.y < 0)
-        {
-            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-            {
-                inBetweenSteps.push_back(Square(move.start.x + i, move.start.y - i));
-            }
-        }
-    }
-
-    // move is to the left
-    if (move.end.x - move.start.x < 0)
-    {
-        // move is upwards
-        if (move.end.y - move.start.y > 0)
-        {
-            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-            {
-                inBetweenSteps.push_back(Square(move.start.x - i, move.start.y + i));
-            }
-        }
-
-        // move is downwards
-        if (move.end.y - move.start.y < 0)
-        {
-            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-            {
-                inBetweenSteps.push_back(Square(move.start.x - i, move.start.y - i));
-            }
-        }
-    }
-
-    return inBetweenSteps;
 }
 
 bool LegalityChecker::IsPieceInLine(const Move &move) const
@@ -179,7 +129,7 @@ bool LegalityChecker::IsPieceInLine(const Move &move) const
         return false;
     }
 
-    std::vector<Square> inBetweenSquares = GetOrthogonalsInBetween(move, amountOfInBetweenSquares);
+    std::vector<Square> inBetweenSquares = PositionFunctions::GetOrthogonalsInBetween(move, amountOfInBetweenSquares);
     
     for (const Square& square : inBetweenSquares)
     {
@@ -191,46 +141,4 @@ bool LegalityChecker::IsPieceInLine(const Move &move) const
     }
 
     return false;
-}
-
-std::vector<Square> LegalityChecker::GetOrthogonalsInBetween(const Move &move, int amoundtOfInBetweenSteps) const
-{
-    std::vector<Square> inBetweenSteps;
-    // move is to the right
-    if (move.end.x - move.start.x > 0)
-    {
-        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-        {
-            inBetweenSteps.push_back(Square(move.start.x + i, move.start.y));
-        }
-    }
-
-    // move is to the left
-    if (move.end.x - move.start.x < 0)
-    {
-        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-        {
-            inBetweenSteps.push_back(Square(move.start.x - i, move.start.y));
-        }
-    }
-
-    // move is upwards
-    if (move.end.y - move.start.y > 0)
-    {
-        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-        {
-            inBetweenSteps.push_back(Square(move.start.x, move.start.y + i));
-        }
-    }
-
-    // move is downwards
-    if (move.end.y - move.start.y < 0)
-    {
-        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
-        {
-            inBetweenSteps.push_back(Square(move.start.x, move.start.y - i));
-        }
-    }
-
-    return inBetweenSteps;
 }

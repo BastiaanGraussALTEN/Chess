@@ -24,22 +24,94 @@ bool PositionFunctions::IsMoveOrthogonal(const Move &move)
     return false;
 }
 
-bool PositionFunctions::IsPieceInDiagonal(const Move &move)
-{
-    return false;
-}
-
-bool PositionFunctions::IsPieceInLine(const Move &move)
-{
-    return false;
-}
-
 std::vector<Square> PositionFunctions::GetDiagonalsInBetween(const Move &move, int amoundtOfInBetweenSteps)
 {
-    return std::vector<Square>();
+    std::vector<Square> inBetweenSteps;
+    // move is to the right
+    if (move.end.x - move.start.x > 0)
+    {
+        // move is upwards
+        if (move.end.y - move.start.y > 0)
+        {
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+            {
+                inBetweenSteps.push_back(Square(move.start.x + i, move.start.y + i));
+            }
+        }
+
+        // move is downwards
+        if (move.end.y - move.start.y < 0)
+        {
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+            {
+                inBetweenSteps.push_back(Square(move.start.x + i, move.start.y - i));
+            }
+        }
+    }
+
+    // move is to the left
+    if (move.end.x - move.start.x < 0)
+    {
+        // move is upwards
+        if (move.end.y - move.start.y > 0)
+        {
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+            {
+                inBetweenSteps.push_back(Square(move.start.x - i, move.start.y + i));
+            }
+        }
+
+        // move is downwards
+        if (move.end.y - move.start.y < 0)
+        {
+            for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+            {
+                inBetweenSteps.push_back(Square(move.start.x - i, move.start.y - i));
+            }
+        }
+    }
+
+    return inBetweenSteps;
 }
 
 std::vector<Square> PositionFunctions::GetOrthogonalsInBetween(const Move &move, int amoundtOfInBetweenSteps)
 {
-    return std::vector<Square>();
+    std::vector<Square> inBetweenSteps;
+    // move is to the right
+    if (move.end.x - move.start.x > 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x + i, move.start.y));
+        }
+    }
+
+    // move is to the left
+    if (move.end.x - move.start.x < 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x - i, move.start.y));
+        }
+    }
+
+    // move is upwards
+    if (move.end.y - move.start.y > 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x, move.start.y + i));
+        }
+    }
+
+    // move is downwards
+    if (move.end.y - move.start.y < 0)
+    {
+        for (int i = 1; i < amoundtOfInBetweenSteps + 1; i++)
+        {
+            inBetweenSteps.push_back(Square(move.start.x, move.start.y - i));
+        }
+    }
+
+    return inBetweenSteps;
 }
