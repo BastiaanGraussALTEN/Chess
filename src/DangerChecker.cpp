@@ -15,7 +15,8 @@ bool DangerChecker::IsKingUnderAttack()
             std::vector<Square> possibleMoves = piece->GetPossibleMoves();
             for (auto square : possibleMoves)
             {
-                if (square == kingSquare)
+                if ((square == kingSquare) 
+                && (m_legalityChecker.CheckMoveLegality(Move(piece->position, square))))
                 {
                     return true;
                 }
@@ -25,8 +26,38 @@ bool DangerChecker::IsKingUnderAttack()
     return false;
 }
 
-bool DangerChecker::IsSquareUnderAttack(Square squaee)
+bool DangerChecker::IsSquareUnderAttack(Square Targetsquare)
 {
+    for (auto piece : m_board.GetPieces())
+    {
+        if (piece->color != m_color)
+        {
+            std::vector<Square> possibleMoves = piece->GetPossibleMoves();
+            if (piece->pieceType == PieceType::PawnType)
+            {
+                for (auto square : possibleMoves)
+                {
+                    if ((square == Targetsquare) 
+                    && (m_legalityChecker.IsMoveDiagonal(Move(piece->position, square))))
+                    {
+                        return true;
+                    }
+                }
+            }
+            
+            else
+            {
+                for (auto square : possibleMoves)
+                {
+                    if ((square == Targetsquare) 
+                    && (m_legalityChecker.CheckMoveLegality(Move(piece->position, square))))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
     return false;
 }
 

@@ -8,7 +8,7 @@ class DangerChecker
     public:
         DangerChecker(const Board& board, const LegalityChecker& legalityChecker, const Color& color);
         bool IsKingUnderAttack();
-        bool IsSquareUnderAttack(Square squaee);
+        bool IsSquareUnderAttack(Square targetSquare);
     private:
         Square GetKingPosition();
         Board m_board;
