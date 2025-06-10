@@ -13,6 +13,13 @@ bool DangerChecker::IsKingUnderAttack()
         if (piece->color != m_color)
         {
             std::vector<Square> possibleMoves = piece->GetPossibleMoves();
+            for (auto square : possibleMoves)
+            {
+                if (square == kingSquare)
+                {
+                    return true;
+                }
+            }
         }
     }
     return false;

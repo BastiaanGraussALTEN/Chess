@@ -33,10 +33,10 @@ TEST(DangerCheckerTest, KingIsUnderAttack)
 {
     // Arrange
     Board board;
+    // Nd3
+    board.AddPiece(PieceFactory::CreateKnight(Color::Black, Square(4, 3)));
     LegalityChecker legalityChecker(board);
     DangerChecker dangerChecker(board, legalityChecker, Color::White);
-    // Nd6
-    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(4, 6)));
 
     // Act
     bool isUnderAttack = dangerChecker.IsKingUnderAttack();

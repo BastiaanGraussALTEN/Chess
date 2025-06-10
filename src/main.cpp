@@ -15,9 +15,9 @@ int main()
     // }
 
     Board board;
-    board.RemovePieceFromSquare(Square(5, 1));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(4, 6)));
     LegalityChecker legalityChecker(board);
     DangerChecker dangerChecker(board, legalityChecker, Color::White);
-    dangerChecker.IsKingUnderAttack();
+    bool isUnderAttack = dangerChecker.IsKingUnderAttack();
     return 0;
 }
