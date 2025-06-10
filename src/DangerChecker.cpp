@@ -6,7 +6,7 @@ DangerChecker::DangerChecker(const Board& board, const LegalityChecker& legality
 {
 }
 
-bool DangerChecker::IsKingUnderAttack()
+bool DangerChecker::IsKingUnderAttack() const
 {
     Square kingSquare = GetKingPosition();
     for (auto piece : m_board.GetPieces())
@@ -27,7 +27,7 @@ bool DangerChecker::IsKingUnderAttack()
     return false;
 }
 
-bool DangerChecker::IsSquareUnderAttack(Square Targetsquare)
+bool DangerChecker::IsSquareUnderAttack(Square Targetsquare) const
 {
     for (auto piece : m_board.GetPieces())
     {
@@ -62,7 +62,7 @@ bool DangerChecker::IsSquareUnderAttack(Square Targetsquare)
     return false;
 }
 
-Square DangerChecker::GetKingPosition()
+Square DangerChecker::GetKingPosition() const
 {
     for (auto piece : m_board.GetPieces())
     {
