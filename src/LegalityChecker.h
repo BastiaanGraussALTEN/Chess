@@ -9,7 +9,7 @@ class LegalityChecker
         LegalityChecker(const Board& board);
         bool CheckMoveLegality(const Move& move) const;
         bool DoesMoveCapturePiece(const Move& move) const;
-        private:
+    private:
         bool IsPieceInDiagonal(const Move& move) const;
         bool IsPieceInLine(const Move& move) const;
         Board m_board;

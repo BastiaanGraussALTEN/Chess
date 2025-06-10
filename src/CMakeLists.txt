@@ -3,6 +3,7 @@ set(SRC_FILES
     main.cpp
     Bishop.cpp
     Board.cpp
+    CastleChecker.cpp
     DangerChecker.cpp
     MoveDialog.cpp
     King.cpp
@@ -20,6 +21,7 @@ set(SRC_FILES
     set(HEADER_FILES
     Bishop.h
     Board.h
+    CastleChecker.h
     Color.h
     DangerChecker.h
     Move.h

@@ -2,6 +2,7 @@
 
 Rook::Rook(Color color, Square position) : Piece(color, PieceType::RookType, position)
 {
+    hasMoved = false;
 }
 
 Rook::~Rook()
