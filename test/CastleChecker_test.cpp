@@ -152,9 +152,8 @@ TEST(CastleCheckerTest, WhenWhiteKingHasMovedNoCastle)
 {
     // Arrange 
     Board board = CreateEmptyBoard();
-    auto king = PieceFactory::CreateKing(Color::White, Square(5, 1));
-    king->hasMoved = true;
-    board.AddPiece(king);
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
+    board.GetPieceFromSquare(Square(5, 1))->hasMoved = true;
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, legalityChecker, Color::White);
@@ -171,9 +170,8 @@ TEST(CastleCheckerTest, WhenBlackKingHasMovedNoCastle)
 {
     // Arrange 
     Board board = CreateEmptyBoard();
-    auto king = PieceFactory::CreateKing(Color::Black, Square(5, 8));
-    king->hasMoved = true;
-    board.AddPiece(king);
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(5, 8)));
+    board.GetPieceFromSquare(Square(5, 8))->hasMoved = true;
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, legalityChecker, Color::Black);
@@ -190,9 +188,8 @@ TEST(CastleCheckerTest, WhenWhiteRookHasMovedNoCastle)
 {
     // Arrange 
     Board board = CreateEmptyBoard();
-    auto rook = PieceFactory::CreateRook(Color::White, Square(8, 1));
-    rook->hasMoved = true;
-    board.AddPiece(rook);
+    board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
+    board.GetPieceFromSquare(Square(8, 1))->hasMoved = true;
     board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, legalityChecker, Color::White);
@@ -209,9 +206,8 @@ TEST(CastleCheckerTest, WhenBlackRookHasMovedNoCastle)
 {
     // Arrange 
     Board board = CreateEmptyBoard();
-    auto rook = PieceFactory::CreateRook(Color::Black, Square(8, 8));
-    rook->hasMoved = true;
-    board.AddPiece(rook);
+    board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
+    board.GetPieceFromSquare(Square(8, 8))->hasMoved = true;
     board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(5, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, legalityChecker, Color::Black);

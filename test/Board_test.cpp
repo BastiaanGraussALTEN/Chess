@@ -77,6 +77,21 @@ TEST(BoardTest, pieceHasMovedCanBeSet)
     EXPECT_TRUE(board.GetPieceFromSquare(Square(1, 1))->hasMoved);
 }
 
+TEST(BoardTest, movedPieceCanBeAdded)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    auto rook = PieceFactory::CreateRook(Color::White, Square(4, 4));
+    board.AddPiece(rook);
+    board.GetPieceFromSquare(Square(4, 4))->hasMoved = true;
+
+
+    // Assert
+    EXPECT_TRUE(board.GetPieceFromSquare(Square(4, 4))->hasMoved);
+}
+
 TEST(BoardTest, GetPieceFromCoordWhenNoPiecesOnBoard)
 {
     // Arrange
