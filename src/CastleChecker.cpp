@@ -49,11 +49,12 @@ bool CastleChecker::CanCastleKingSide() const
         {
             return false;
         }
+        
         // no square the king goes to is attacked
-        // if (m_dangerChecker.IsSquareUnderAttack(kingSquares[i]))
-        // {
-        //     return false;
-        // }
+        if (m_dangerChecker.IsSquareUnderAttack(kingSquares[i]))
+        {
+            return false;
+        }
     }
 
 
