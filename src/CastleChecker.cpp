@@ -17,51 +17,81 @@ bool CastleChecker::CanCastleKingSide() const
         kingSquare = Square(5, 8);
         rookSquare = Square(8, 8);
     }
-
-    // king and rook on the right squares
-    if ((m_board.GetPieceFromSquare(kingSquare) == nullptr)
-    || (m_board.GetPieceFromSquare(rookSquare) == nullptr)
-    || (m_board.GetPieceFromSquare(kingSquare)->pieceType != PieceType::KingType)
-    || (m_board.GetPieceFromSquare(rookSquare)->pieceType != PieceType::RookType))
-    {
-        return false;
-    }
-
-    // king and rook have not moved
-    if ((m_board.GetPieceFromSquare(kingSquare)->hasMoved == true)
-    || (m_board.GetPieceFromSquare(rookSquare)->hasMoved == true))
-    {
-        return false;
-    }
-    
-    // the king is not attacked
-    if (m_dangerChecker.IsKingUnderAttack() == true)
-    {
-        return false;
-    }
-
-
     std::vector<Square> kingSquares = PositionFunctions::GetOrthogonalsInBetween(Move(kingSquare, rookSquare), amountInBetween);
-    for (int i = 0; i < kingSquares.size(); i++)
+    
+    if ((KingAndRookAreNotCorrectSquare(kingSquare, rookSquare)) 
+    || (KingOrRookHasMoved(kingSquare, rookSquare))
+    || (KingIsUnderAttack())
+    || (PieceBetweenKingAndRook(kingSquares))
+    || (KingMovesOverAttackSquare(kingSquares)))
     {
-        // there are no pieces in between them
-        if (m_board.GetPieceFromSquare(kingSquares[i]) != nullptr)
-        {
-            return false;
-        }
-        
-        // no square the king goes to is attacked
-        if (m_dangerChecker.IsSquareUnderAttack(kingSquares[i]))
-        {
-            return false;
-        }
+        return false;
     }
-
 
     return true;
 }
 
 bool CastleChecker::CanCastleQueenSide() const
 {
+    return false;
+}
+
+bool CastleChecker::KingAndRookAreNotCorrectSquare(Square kingSquare, Square rookSquare) const
+{
+    if ((m_board.GetPieceFromSquare(kingSquare) == nullptr)
+    || (m_board.GetPieceFromSquare(rookSquare) == nullptr)
+    || (m_board.GetPieceFromSquare(kingSquare)->pieceType != PieceType::KingType)
+    || (m_board.GetPieceFromSquare(rookSquare)->pieceType != PieceType::RookType))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool CastleChecker::KingOrRookHasMoved(Square kingSquare, Square rookSquare) const
+{
+    if ((m_board.GetPieceFromSquare(kingSquare)->hasMoved == true)
+    || (m_board.GetPieceFromSquare(rookSquare)->hasMoved == true))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool CastleChecker::KingIsUnderAttack() const
+{
+    if (m_dangerChecker.IsKingUnderAttack() == true)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool CastleChecker::PieceBetweenKingAndRook(std::vector<Square> kingSquares) const
+{
+    for (int i = 0; i < kingSquares.size(); i++)
+    {
+        if (m_board.GetPieceFromSquare(kingSquares[i]) != nullptr)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool CastleChecker::KingMovesOverAttackSquare(std::vector<Square> kingSquares) const
+{
+    for (int i = 0; i < kingSquares.size(); i++)
+    {
+        if (m_dangerChecker.IsSquareUnderAttack(kingSquares[i]))
+        {
+            return true;
+        }
+    }
+
     return false;
 }

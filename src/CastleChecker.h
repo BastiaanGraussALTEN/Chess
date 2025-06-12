@@ -14,6 +14,11 @@ class CastleChecker
         Board m_board;
         LegalityChecker m_legalityChecker;
         DangerChecker m_dangerChecker;
+        bool KingAndRookAreNotCorrectSquare(Square kingSquare, Square rookSquare) const;
+        bool KingOrRookHasMoved(Square kingSquare, Square rookSquare) const;
+        bool KingIsUnderAttack() const;
+        bool PieceBetweenKingAndRook(std::vector<Square> kingSquares) const;
+        bool KingMovesOverAttackSquare(std::vector<Square> kingSquares) const;
 };
 
 #endif

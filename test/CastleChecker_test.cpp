@@ -332,8 +332,8 @@ TEST(CastleCheckerTest, WhenRookIsAttackedCanCastleWhite)
 {
     // Arrange 
     Board board = CreateEmptyBoard();
-    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, legalityChecker, Color::White);
