@@ -35,6 +35,10 @@ bool CastleChecker::CanCastleKingSide() const
     }
     
     // the king is not attacked
+    if (m_dangerChecker.IsKingUnderAttack() == true)
+    {
+        return false;
+    }
 
 
     std::vector<Square> kingSquares = PositionFunctions::GetOrthogonalsInBetween(Move(kingSquare, rookSquare), amountInBetween);
