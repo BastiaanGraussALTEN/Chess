@@ -17,7 +17,7 @@ class CastleChecker
         bool KingAndRookAreNotCorrectSquare(Square kingSquare, Square rookSquare) const;
         bool KingOrRookHasMoved(Square kingSquare, Square rookSquare) const;
         bool KingIsUnderAttack() const;
-        bool PieceBetweenKingAndRook(std::vector<Square> kingSquares) const;
+        bool IsAPieceBetweenKingAndRook(std::vector<Square> kingSquares) const;
         bool KingMovesOverAttackSquare(std::vector<Square> kingSquares) const;
 };
 

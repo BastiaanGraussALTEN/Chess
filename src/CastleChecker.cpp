@@ -22,7 +22,7 @@ bool CastleChecker::CanCastleKingSide() const
     if ((KingAndRookAreNotCorrectSquare(kingSquare, rookSquare)) 
     || (KingOrRookHasMoved(kingSquare, rookSquare))
     || (KingIsUnderAttack())
-    || (PieceBetweenKingAndRook(kingSquares))
+    || (IsAPieceBetweenKingAndRook(kingSquares))
     || (KingMovesOverAttackSquare(kingSquares)))
     {
         return false;
@@ -70,7 +70,7 @@ bool CastleChecker::KingIsUnderAttack() const
     return false;
 }
 
-bool CastleChecker::PieceBetweenKingAndRook(std::vector<Square> kingSquares) const
+bool CastleChecker::IsAPieceBetweenKingAndRook(std::vector<Square> kingSquares) const
 {
     for (int i = 0; i < kingSquares.size(); i++)
     {
