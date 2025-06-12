@@ -95,7 +95,7 @@ TEST(CastleCheckerTest, WhenNoWhiteRookNoCastle)
     bool canCastle = castleChecker.CanCastleKingSide();
 
     // Assert
-    ASSERT_TRUE(canCastle);
+    ASSERT_FALSE(canCastle);
 }
 
 TEST(CastleCheckerTest, WhenNoBlackRookNoCastle)
@@ -111,7 +111,7 @@ TEST(CastleCheckerTest, WhenNoBlackRookNoCastle)
     bool canCastle = castleChecker.CanCastleKingSide();
 
     // Assert
-    ASSERT_TRUE(canCastle);
+    ASSERT_FALSE(canCastle);
 }
 
 TEST(CastleCheckerTest, WhenWhiteRookIsOnWrongSquareNoCastle)
@@ -128,7 +128,7 @@ TEST(CastleCheckerTest, WhenWhiteRookIsOnWrongSquareNoCastle)
     bool canCastle = castleChecker.CanCastleKingSide();
 
     // Assert
-    ASSERT_TRUE(canCastle);
+    ASSERT_FALSE(canCastle);
 }
 
 TEST(CastleCheckerTest, WhenBlackRookIsOnWrongSquareNoCastle)
@@ -145,7 +145,7 @@ TEST(CastleCheckerTest, WhenBlackRookIsOnWrongSquareNoCastle)
     bool canCastle = castleChecker.CanCastleKingSide();
 
     // Assert
-    ASSERT_TRUE(canCastle);
+    ASSERT_FALSE(canCastle);
 }
 
 // TEST(DangerCheckerTest, WhenKingHasMovedNoCastle){}
