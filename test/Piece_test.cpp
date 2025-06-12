@@ -244,6 +244,19 @@ TEST(PieceTest, rookGivesCorrectPossibleMoves)
     EXPECT_EQ(possibleMoves.size(),  14);
 }
 
+TEST(PieceTest, rookHasMovedCanBeSet) 
+{
+    // Arrange
+    Square coord = Square(1,2);
+    auto rook = PieceFactory::CreateRook(Color::White, coord);
+
+    // Act
+    rook->hasMoved = true;
+
+    // Assert
+    EXPECT_TRUE(rook->hasMoved);
+}
+
 TEST(PieceTest, queenCanBeMade) 
 {
     // Arrange

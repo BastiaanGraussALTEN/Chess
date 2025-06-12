@@ -260,7 +260,7 @@ TEST(LegalityCheckerTest, PawnCanNotMove2ForwardsIfItHasAlreadyMoved)
 {
     // Arrange
     Board board;
-    auto piece = board.GetPieceFromCoord(Square(2,2));
+    auto piece = board.GetPieceFromSquare(Square(2,2));
     auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
     pawn->hasMoved = true;
     LegalityChecker legalityChecker(board);

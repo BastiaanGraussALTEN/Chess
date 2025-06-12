@@ -36,7 +36,7 @@ void Board::RemovePieceFromSquare(const Square &coord)
 
 void Board::MovePiece(const Move &move)
 {
-    auto piece = GetPieceFromCoord(move.start);
+    auto piece = GetPieceFromSquare(move.start);
     if (piece == nullptr)
     {
         throw std::invalid_argument("there is no piece on this square");
@@ -47,7 +47,7 @@ void Board::MovePiece(const Move &move)
     }
 }
 
-std::shared_ptr<Piece> Board::GetPieceFromCoord(const Square &coord) const
+std::shared_ptr<Piece> Board::GetPieceFromSquare(const Square &coord) const
 {
     for (const auto& piece : m_pieces)
     {

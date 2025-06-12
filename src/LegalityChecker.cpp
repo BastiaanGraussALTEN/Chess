@@ -9,7 +9,7 @@ LegalityChecker::LegalityChecker(const Board& board) : m_board(board)
 bool LegalityChecker::CheckMoveLegality(const Move& move) const
 {
     // there needs to be a piece on the start square
-    auto piece = m_board.GetPieceFromCoord(move.start);
+    auto piece = m_board.GetPieceFromSquare(move.start);
     if (piece == nullptr)
     {
         return false;
@@ -37,7 +37,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
     }
 
     // you cant capture your own piece
-    auto pieceOnEnd = m_board.GetPieceFromCoord(move.end);
+    auto pieceOnEnd = m_board.GetPieceFromSquare(move.end);
     if (pieceOnEnd != nullptr)
     {
         if(pieceOnEnd->color == piece->color)
@@ -79,8 +79,8 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
 
 bool LegalityChecker::DoesMoveCapturePiece(const Move &move) const
 {
-    auto piece = m_board.GetPieceFromCoord(move.start);
-    auto pieceOnEnd = m_board.GetPieceFromCoord(move.end);
+    auto piece = m_board.GetPieceFromSquare(move.start);
+    auto pieceOnEnd = m_board.GetPieceFromSquare(move.end);
     if (pieceOnEnd != nullptr)
     {
         if(pieceOnEnd->color != piece->color)
@@ -103,7 +103,7 @@ bool LegalityChecker::IsPieceInDiagonal(const Move &move) const
     
     for (const Square& square : inBetweenSquares)
     {
-        auto pieceOnSquare = m_board.GetPieceFromCoord(square);
+        auto pieceOnSquare = m_board.GetPieceFromSquare(square);
         if (pieceOnSquare != nullptr)
         {
             return true;
@@ -133,7 +133,7 @@ bool LegalityChecker::IsPieceInLine(const Move &move) const
     
     for (const Square& square : inBetweenSquares)
     {
-        auto pieceOnSquare = m_board.GetPieceFromCoord(square);
+        auto pieceOnSquare = m_board.GetPieceFromSquare(square);
         if (pieceOnSquare != nullptr)
         {
             return true;

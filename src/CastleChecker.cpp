@@ -7,6 +7,7 @@ CastleChecker::CastleChecker(const Board &board, const LegalityChecker &legality
 
 bool CastleChecker::CanCastleKingSide() const
 {
+    // creating the right squares
     Square kingSquare = Square(5, 1);
     Square rookSquare = Square(8, 1);
     std::vector<Square> inBetweenSquares = {Square(6, 1), Square(7 ,1)};
@@ -17,14 +18,21 @@ bool CastleChecker::CanCastleKingSide() const
         std::vector<Square> inBetweenSquares = {Square(6, 8), Square(7, 8)};
     }
 
-    if ((m_board.GetPieceFromCoord(kingSquare) == nullptr)
-    || (m_board.GetPieceFromCoord(rookSquare) == nullptr)
-    || (m_board.GetPieceFromCoord(kingSquare)->pieceType != PieceType::KingType)
-    || (m_board.GetPieceFromCoord(rookSquare)->pieceType != PieceType::RookType))
+    // king and rook on the right squares
+    if ((m_board.GetPieceFromSquare(kingSquare) == nullptr)
+    || (m_board.GetPieceFromSquare(rookSquare) == nullptr)
+    || (m_board.GetPieceFromSquare(kingSquare)->pieceType != PieceType::KingType)
+    || (m_board.GetPieceFromSquare(rookSquare)->pieceType != PieceType::RookType))
     {
         return false;
     }
-    // king and rook on their place and have not moved
+
+    // king and rook have not moved
+    if ((m_board.GetPieceFromSquare(kingSquare)->hasMoved == true)
+    || (m_board.GetPieceFromSquare(rookSquare)->hasMoved == true))
+    {
+        return false;
+    }
 
     // there are no pieces in between them
 

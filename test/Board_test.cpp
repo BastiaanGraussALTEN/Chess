@@ -64,6 +64,19 @@ TEST(BoardTest, boardIsInitializedCorrectly)
     EXPECT_EQ(pieces.size(), 32);
 }
 
+TEST(BoardTest, pieceHasMovedCanBeSet)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    auto rook = board.GetPieceFromSquare(Square(1, 1));
+    rook->hasMoved = true;
+
+    // Assert
+    EXPECT_TRUE(board.GetPieceFromSquare(Square(1, 1))->hasMoved);
+}
+
 TEST(BoardTest, GetPieceFromCoordWhenNoPiecesOnBoard)
 {
     // Arrange
@@ -71,7 +84,7 @@ TEST(BoardTest, GetPieceFromCoordWhenNoPiecesOnBoard)
     board.RemovePieceFromSquare(Square(1, 1));
 
     // Act
-    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(1, 1));
+    std::shared_ptr<Piece> ptr = board.GetPieceFromSquare(Square(1, 1));
 
     // Assert
     EXPECT_TRUE(ptr == nullptr);
@@ -83,7 +96,7 @@ TEST(BoardTest, GetPieceFromCoordWrongCoord)
     Board board;
 
     // Act
-    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(4, 4));
+    std::shared_ptr<Piece> ptr = board.GetPieceFromSquare(Square(4, 4));
 
     // Assert
     EXPECT_TRUE(ptr == nullptr);
@@ -95,7 +108,7 @@ TEST(BoardTest, GetPieceFromCoord)
     Board board;
 
     // Act
-    std::shared_ptr<Piece> ptr = board.GetPieceFromCoord(Square(1, 1));
+    std::shared_ptr<Piece> ptr = board.GetPieceFromSquare(Square(1, 1));
 
     // Assert
     EXPECT_EQ(ptr->color, Color::White);
@@ -124,8 +137,8 @@ TEST(BoardTest, PieceCanBeMoved)
     
     // Act
     board.MovePiece(move);
-    auto oldSquare = board.GetPieceFromCoord(Square(2,1));
-    auto newSquare = board.GetPieceFromCoord(Square(3,3));
+    auto oldSquare = board.GetPieceFromSquare(Square(2,1));
+    auto newSquare = board.GetPieceFromSquare(Square(3,3));
     
     // Assert
     EXPECT_EQ(oldSquare, nullptr);
