@@ -60,11 +60,10 @@ TEST(PieceTest, pawnGivesCorrectPossibleMovesAfterMove)
     // Arrange
     Square coord = Square(6, 2);
     auto piece = PieceFactory::CreatePawn(Color::White, coord);
-    auto pawnPtr = std::dynamic_pointer_cast<Pawn>(piece);
-    pawnPtr->hasMoved = true;
+    piece->hasMoved = true;
 
     // Act
-    std::vector<Square> possibleMoves = pawnPtr->GetPossibleMoves();
+    std::vector<Square> possibleMoves = piece->GetPossibleMoves();
 
     // Assert
     EXPECT_EQ(possibleMoves.size(),  3);

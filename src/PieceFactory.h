@@ -13,12 +13,12 @@
 class PieceFactory
 {
     public:
-        static std::shared_ptr<Piece> CreatePawn(Color color, Square position);
-        static std::shared_ptr<Piece> CreateBishop(Color color, Square position);
-        static std::shared_ptr<Piece> CreateKnight(Color color, Square position);
-        static std::shared_ptr<Piece> CreateRook(Color color, Square position);
-        static std::shared_ptr<Piece> CreateQueen(Color color, Square position);
-        static std::shared_ptr<Piece> CreateKing(Color color, Square position);
+        static std::shared_ptr<Pawn> CreatePawn(Color color, Square position);
+        static std::shared_ptr<Bishop> CreateBishop(Color color, Square position);
+        static std::shared_ptr<Knight> CreateKnight(Color color, Square position);
+        static std::shared_ptr<Rook> CreateRook(Color color, Square position);
+        static std::shared_ptr<Queen> CreateQueen(Color color, Square position);
+        static std::shared_ptr<King> CreateKing(Color color, Square position);
 };
 
 #endif
