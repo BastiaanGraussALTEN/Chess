@@ -17,8 +17,8 @@ bool CastleChecker::CanCastleKingSide() const
         kingSquare = Square(5, 8);
         rookSquare = Square(8, 8);
     }
-    std::vector<Square> kingSquares = PositionFunctions::GetOrthogonalsInBetween(Move(kingSquare, rookSquare), amountInBetween);
     
+    std::vector<Square> kingSquares = PositionFunctions::GetOrthogonalsInBetween(Move(kingSquare, rookSquare), amountInBetween);
     if ((KingAndRookAreNotCorrectSquare(kingSquare, rookSquare)) 
     || (KingOrRookHasMoved(kingSquare, rookSquare))
     || (KingIsUnderAttack())
@@ -33,7 +33,30 @@ bool CastleChecker::CanCastleKingSide() const
 
 bool CastleChecker::CanCastleQueenSide() const
 {
-    return false;
+    // creating the right squares
+    Square kingSquare = Square(5, 1);
+    Square rookSquare = Square(1, 1);
+    int amountKingMoves = 2;
+    int amountInBetween = 3;
+    if (m_color == Color::Black)
+    {
+        kingSquare = Square(5, 8);
+        rookSquare = Square(1, 8);
+    }
+
+    std::vector<Square> kingSquares = PositionFunctions::GetOrthogonalsInBetween(Move(kingSquare, rookSquare), amountKingMoves);
+    std::vector<Square> inBetweenSquares = PositionFunctions::GetOrthogonalsInBetween(Move(kingSquare, rookSquare), amountInBetween);
+
+    if ((KingAndRookAreNotCorrectSquare(kingSquare, rookSquare)) 
+    || (KingOrRookHasMoved(kingSquare, rookSquare))
+    || (KingIsUnderAttack())
+    || (IsAPieceBetweenKingAndRook(inBetweenSquares))
+    || (KingMovesOverAttackSquare(kingSquares)))
+    {
+        return false;
+    }
+
+    return true;
 }
 
 bool CastleChecker::KingAndRookAreNotCorrectSquare(Square kingSquare, Square rookSquare) const
