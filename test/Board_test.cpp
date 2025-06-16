@@ -159,3 +159,16 @@ TEST(BoardTest, PieceCanBeMoved)
     EXPECT_EQ(oldSquare, nullptr);
     EXPECT_EQ(newSquare->pieceType, PieceType::KnightType);
 }
+
+TEST(BoardTest, LastMoveWhenFirstMove)
+{
+    // Arrange
+    Board board;
+    Move expectedMove = Move(Square(1, 1), Square(1, 1));
+
+    // Act
+    Move lastMove = board.GetLastMove();
+
+    // Assert
+    EXPECT_EQ(lastMove, expectedMove);
+}

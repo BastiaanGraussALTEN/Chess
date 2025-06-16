@@ -1,6 +1,7 @@
 #include "Board.h"
 
 Board::Board()
+: m_lastMove(Square(1, 1), Square(1, 1))
 {
     CreateInitialBoardState();
 }
@@ -58,6 +59,11 @@ std::shared_ptr<Piece> Board::GetPieceFromSquare(const Square &coord) const
     }
 
     return nullptr;
+}
+
+Move Board::GetLastMove() const
+{
+    return m_lastMove;
 }
 
 void Board::CreateInitialBoardState()

@@ -14,7 +14,9 @@ class Board
         void RemovePieceFromSquare(const Square& coord);
         void MovePiece(const Move& move);
         std::shared_ptr<Piece> GetPieceFromSquare(const Square& coord) const;
+        Move GetLastMove() const;
     private:
+        Move m_lastMove;
         std::vector<std::shared_ptr<Piece>> m_pieces;
         void CreateInitialBoardState();
 };
