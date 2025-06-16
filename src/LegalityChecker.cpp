@@ -61,7 +61,12 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
                 return true;
             }
             // en pessant for black
-            
+            if ((piece->color == Color::Black) 
+            && (piece->position.y == 4) 
+            && ((m_board.GetLastMove() == Move(Square(move.end.x, move.end.y - 1), Square(move.end.x, move.end.y + 1)))))
+            {
+                return true;
+            }
 
             // has to capture
             if(pieceOnEnd == nullptr)
