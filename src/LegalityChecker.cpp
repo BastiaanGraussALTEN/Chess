@@ -8,19 +8,18 @@ LegalityChecker::LegalityChecker(const Board& board) : m_board(board)
 
 bool LegalityChecker::CheckMoveLegality(const Move& move) const
 {
-    // there needs to be a piece on the start square
     auto piece = m_board.GetPieceFromSquare(move.start);
     if (piece == nullptr)
     {
         return false;
     }
 
-    // rook, bishop, queen and pawn cannot jump over pieces
     std::vector<Square> possibleMoves = piece->GetPossibleMoves();
     if (std::find(possibleMoves.begin(), possibleMoves.end(), move.end) == possibleMoves.end())
     {
         return false;
     }
+
     if (PositionFunctions::IsMoveDiagonal(move))
     {
         if(IsPieceInDiagonal(move))
@@ -28,6 +27,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
             return false;
         }
     }
+
     if (PositionFunctions::IsMoveOrthogonal(move))
     {
         if(IsPieceInLine(move))
@@ -36,7 +36,6 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
         }
     }
 
-    // you cant capture your own piece
     auto pieceOnEnd = m_board.GetPieceFromSquare(move.end);
     if (pieceOnEnd != nullptr)
     {
@@ -46,34 +45,21 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
         }
     }
 
-    // pawn stuff
     if (piece->pieceType == PieceType::PawnType)
     {
-        // if diagonal
         auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
         if (PositionFunctions::IsMoveDiagonal(move))
         {
-            // en pessant for white
-            if ((piece->color == Color::White) 
-            && (piece->position.y == 5) 
-            && ((m_board.GetLastMove() == Move(Square(move.end.x, move.end.y + 1), Square(move.end.x, move.end.y - 1)))))
-            {
-                return true;
-            }
-            // en pessant for black
-            if ((piece->color == Color::Black) 
-            && (piece->position.y == 4) 
-            && ((m_board.GetLastMove() == Move(Square(move.end.x, move.end.y - 1), Square(move.end.x, move.end.y + 1)))))
+            if (IsEnPassant(move, pawn))
             {
                 return true;
             }
 
-            // has to capture
             if(pieceOnEnd == nullptr)
             {
                 return false;
             }
-            // cant capture own piece
+
             if(pieceOnEnd->color == piece->color)
             {
                 return false;
@@ -81,12 +67,11 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
         }
         else
         {
-            // cant capture piece in front
             if(pieceOnEnd != nullptr)
             {
                 return false;
             }
-            // can only walk twice if it is pawns first move
+            
             if(abs(move.end.y - move.start.y) == 2 && pawn->hasMoved == true)
             {
                 return false;
@@ -159,6 +144,25 @@ bool LegalityChecker::IsPieceInLine(const Move &move) const
             return true;
         }
     }
+
+    return false;
+}
+
+bool LegalityChecker::IsEnPassant(const Move &move, std::shared_ptr<Pawn> pawn) const
+{
+    if ((pawn->color == Color::White) 
+    && (pawn->position.y == 5) 
+    && ((m_board.GetLastMove() == Move(Square(move.end.x, move.end.y + 1), Square(move.end.x, move.end.y - 1)))))
+    {
+        return true;
+    }
+
+    if ((pawn->color == Color::Black) 
+    && (pawn->position.y == 4) 
+    && ((m_board.GetLastMove() == Move(Square(move.end.x, move.end.y - 1), Square(move.end.x, move.end.y + 1)))))
+    {
+        return true;
+    } 
 
     return false;
 }
