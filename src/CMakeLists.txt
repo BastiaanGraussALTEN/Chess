@@ -4,6 +4,7 @@ set(SRC_FILES
     Bishop.cpp
     Board.cpp
     CastleChecker.cpp
+    CheckChecker.cpp
     DangerChecker.cpp
     MoveDialog.cpp
     King.cpp
@@ -22,6 +23,7 @@ set(SRC_FILES
     Bishop.h
     Board.h
     CastleChecker.h
+    CheckChecker.h
     Color.h
     DangerChecker.h
     Move.h
