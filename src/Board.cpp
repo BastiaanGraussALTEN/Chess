@@ -45,6 +45,7 @@ void Board::MovePiece(const Move &move)
     else
     {
         piece->position = move.end;
+        m_lastMove = move;
     }
 }
 

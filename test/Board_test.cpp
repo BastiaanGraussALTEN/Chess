@@ -160,11 +160,40 @@ TEST(BoardTest, PieceCanBeMoved)
     EXPECT_EQ(newSquare->pieceType, PieceType::KnightType);
 }
 
-TEST(BoardTest, LastMoveWhenFirstMove)
+TEST(BoardTest, LastMoveBeforeFirstMove)
 {
     // Arrange
     Board board;
     Move expectedMove = Move(Square(1, 1), Square(1, 1));
+
+    // Act
+    Move lastMove = board.GetLastMove();
+
+    // Assert
+    EXPECT_EQ(lastMove, expectedMove);
+}
+
+TEST(BoardTest, LastMoveAfterFirstMove)
+{
+    // Arrange
+    Board board;
+    Move expectedMove = Move(Square(2, 1), Square(3, 3));
+    board.MovePiece(expectedMove);
+
+    // Act
+    Move lastMove = board.GetLastMove();
+
+    // Assert
+    EXPECT_EQ(lastMove, expectedMove);
+}
+
+TEST(BoardTest, LastMoveAfterTwoMoves)
+{
+    // Arrange
+    Board board;
+    Move expectedMove = Move(Square(2, 1), Square(3, 3));
+    board.MovePiece(Move(Square(7, 1), Square(6, 3)));
+    board.MovePiece(expectedMove);
 
     // Act
     Move lastMove = board.GetLastMove();
