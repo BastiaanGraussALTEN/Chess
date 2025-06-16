@@ -60,6 +60,8 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
             {
                 return true;
             }
+            // en pessant for black
+            
 
             // has to capture
             if(pieceOnEnd == nullptr)
