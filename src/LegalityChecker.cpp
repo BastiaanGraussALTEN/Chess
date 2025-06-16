@@ -49,13 +49,24 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
     // pawn stuff
     if (piece->pieceType == PieceType::PawnType)
     {
+        // if diagonal
         auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
         if (PositionFunctions::IsMoveDiagonal(move))
         {
+            // en pessant for white
+            if ((piece->color == Color::White) 
+            && (piece->position.y == 5) 
+            && ((m_board.GetLastMove() == Move(Square(move.end.x, move.end.y + 1), Square(move.end.x, move.end.y - 1)))))
+            {
+                return true;
+            }
+
+            // has to capture
             if(pieceOnEnd == nullptr)
             {
                 return false;
             }
+            // cant capture own piece
             if(pieceOnEnd->color == piece->color)
             {
                 return false;
@@ -63,10 +74,12 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
         }
         else
         {
+            // cant capture piece in front
             if(pieceOnEnd != nullptr)
             {
                 return false;
             }
+            // can only walk twice if it is pawns first move
             if(abs(move.end.y - move.start.y) == 2 && pawn->hasMoved == true)
             {
                 return false;

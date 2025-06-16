@@ -346,3 +346,33 @@ TEST(LegalityCheckerTest, KnightNotCapturingPieceIsRecognized)
     // Assert
     ASSERT_FALSE(doesCapture);
 }
+
+TEST(LegalityCheckerTest, WhiteCanCaptureEnPessantToTheRight)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(3, 5)));
+    board.MovePiece(Move(Square(4, 7), Square(4, 5)));
+    LegalityChecker legalityChecker(board);
+    
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(Move(Square(3, 5), Square(4, 6)));
+
+    // Assert
+    ASSERT_TRUE(isLegal);
+}
+
+TEST(LegalityCheckerTest, WhiteCanCaptureEnPessantToTheLeft)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(3, 5)));
+    board.MovePiece(Move(Square(2, 7), Square(2, 5)));
+    LegalityChecker legalityChecker(board);
+    
+    // Act
+    bool isLegal = legalityChecker.CheckMoveLegality(Move(Square(3, 5), Square(2, 6)));
+
+    // Assert
+    ASSERT_TRUE(isLegal);
+}
