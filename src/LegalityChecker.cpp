@@ -60,7 +60,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
                 return false;
             }
 
-            if(pieceOnEnd->color == piece->color)
+            if(pieceOnEnd->color == pawn->color)
             {
                 return false;
             }
@@ -94,6 +94,26 @@ bool LegalityChecker::DoesMoveCapturePiece(const Move &move) const
         }
     }
     return false;
+}
+
+std::vector<Move> LegalityChecker::GetAllPossibleMoves() const
+{
+    std::vector<Move> possibleMoves;
+    std::vector<std::shared_ptr<Piece>> pieces = m_board.GetPieces();
+    for (const auto& piece : pieces)
+    {
+        Square beginPosition = piece->position;
+        std::vector<Square> allPossibleEndSquares =  piece->GetPossibleMoves();
+        for (const Square& endPosition : allPossibleEndSquares)
+        {
+            if (CheckMoveLegality(Move(beginPosition, endPosition)))
+            {
+                possibleMoves.push_back(Move(beginPosition, endPosition));
+            }
+        }
+    }
+
+    return possibleMoves;
 }
 
 bool LegalityChecker::IsPieceInDiagonal(const Move &move) const

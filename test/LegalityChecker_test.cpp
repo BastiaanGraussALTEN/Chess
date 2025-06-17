@@ -436,3 +436,30 @@ TEST(LegalityCheckerTest, BlackCanCaptureEnPessantToTheLeft)
     // Assert
     ASSERT_TRUE(isLegal);
 }
+
+TEST(LegalityCheckerTest, GetAllPossibleMoves)
+{
+    // Arrange
+    Board board;
+    LegalityChecker legalityChecker(board);
+    
+    // Act
+    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(); 
+
+    // Assert
+    ASSERT_EQ(possibleMoves.size(), 40);
+}
+
+TEST(LegalityCheckerTest, GetAllPossibleMovesAfterMove)
+{
+    // Arrange
+    Board board;
+    board.MovePiece(Move(Square(5, 2), Square(5, 4)));
+    LegalityChecker legalityChecker(board);
+    
+    // Act
+    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(); 
+
+    // Assert
+    ASSERT_EQ(possibleMoves.size(), 50);
+}

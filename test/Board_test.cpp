@@ -160,6 +160,19 @@ TEST(BoardTest, PieceCanBeMoved)
     EXPECT_EQ(newSquare->pieceType, PieceType::KnightType);
 }
 
+TEST(BoardTest, PawnRemembersThatItHasMoved)
+{
+    // Arrange
+    Board board;
+    board.MovePiece(Move(Square(5, 2), Square(5, 4)));
+
+    // Act
+    auto pawn = board.GetPieceFromSquare(Square(5, 4));
+
+    // Assert
+    ASSERT_TRUE(pawn->hasMoved);
+}
+
 TEST(BoardTest, LastMoveBeforeFirstMove)
 {
     // Arrange
