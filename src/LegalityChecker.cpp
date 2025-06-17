@@ -95,10 +95,10 @@ bool LegalityChecker::DoesMoveCapturePiece(const Move &move) const
     return false;
 }
 
-std::vector<Move> LegalityChecker::GetAllPossibleMoves() const
+std::vector<Move> LegalityChecker::GetAllPossibleMoves(const Color& color) const
 {
     std::vector<Move> possibleMoves;
-    std::vector<std::shared_ptr<Piece>> pieces = m_board.GetPieces();
+    std::vector<std::shared_ptr<Piece>> pieces = m_board.GetColorPieces(color);
     for (const auto& piece : pieces)
     {
         Square beginPosition = piece->position;

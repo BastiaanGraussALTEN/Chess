@@ -5,11 +5,30 @@ CheckChecker::CheckChecker(const Board &board, const Color &color)
 {
 }
 
-bool CheckChecker::DoesMovePreventCheck(const Move &move)
+bool CheckChecker::DoesMovePreventCheck(const Move &move) const
 {
     Board boardCopy = m_board;
+    if (boardCopy.GetPieceFromSquare(move.end) != nullptr)
+    {
+        boardCopy.RemovePieceFromSquare(move.end);
+    }
     boardCopy.MovePiece(move);
     LegalityChecker legalityChecker(boardCopy);
     DangerChecker dangerChecker(boardCopy, legalityChecker, m_color);
-    return dangerChecker.IsKingUnderAttack();
+    return !dangerChecker.IsKingUnderAttack();
+}
+
+bool CheckChecker::IsCheckMate() const
+{
+    LegalityChecker legalityChecker = LegalityChecker(m_board);
+    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(m_color);
+    for (const Move& move : possibleMoves)
+    {
+        if (DoesMovePreventCheck(move))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }

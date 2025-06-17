@@ -437,17 +437,30 @@ TEST(LegalityCheckerTest, BlackCanCaptureEnPessantToTheLeft)
     ASSERT_TRUE(isLegal);
 }
 
-TEST(LegalityCheckerTest, GetAllPossibleMoves)
+TEST(LegalityCheckerTest, GetAllPossibleMovesWhite)
 {
     // Arrange
     Board board;
     LegalityChecker legalityChecker(board);
     
     // Act
-    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(); 
+    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(Color::White); 
 
     // Assert
-    ASSERT_EQ(possibleMoves.size(), 40);
+    ASSERT_EQ(possibleMoves.size(), 20);
+}
+
+TEST(LegalityCheckerTest, GetAllPossibleMovesBlack)
+{
+    // Arrange
+    Board board;
+    LegalityChecker legalityChecker(board);
+    
+    // Act
+    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(Color::Black); 
+
+    // Assert
+    ASSERT_EQ(possibleMoves.size(), 20);
 }
 
 TEST(LegalityCheckerTest, GetAllPossibleMovesAfterMove)
@@ -458,8 +471,8 @@ TEST(LegalityCheckerTest, GetAllPossibleMovesAfterMove)
     LegalityChecker legalityChecker(board);
     
     // Act
-    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(); 
+    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(Color::White); 
 
     // Assert
-    ASSERT_EQ(possibleMoves.size(), 50);
+    ASSERT_EQ(possibleMoves.size(), 30);
 }

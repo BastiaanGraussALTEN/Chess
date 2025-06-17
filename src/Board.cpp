@@ -6,9 +6,23 @@ Board::Board()
     CreateInitialBoardState();
 }
 
-const std::vector<std::shared_ptr<Piece>> &Board::GetPieces() const
+const std::vector<std::shared_ptr<Piece>>& Board::GetPieces() const
 {
     return m_pieces;
+}
+
+const std::vector<std::shared_ptr<Piece>> Board::GetColorPieces(const Color &pieceColor) const
+{
+    std::vector<std::shared_ptr<Piece>> colorPieces; 
+    for (auto piece : m_pieces)
+    {
+        if (piece->color == pieceColor)
+        {
+            colorPieces.push_back(piece);
+        }
+    }
+
+    return colorPieces;
 }
 
 void Board::AddPiece(const std::shared_ptr<Piece> &piece)

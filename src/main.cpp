@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MoveDialog.h"
 #include "CastleChecker.h"
+#include "CheckChecker.h"
 
 int main()
 {
@@ -13,11 +14,12 @@ int main()
     //     moveDialog.SetMove(move);
     // }
 
-    // Arrange
+
     Board board;
-    board.MovePiece(Move(Square(5, 2), Square(5, 4)));
-    LegalityChecker legalityChecker(board);
-    std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(); 
-    int a = 4;
+    board.AddPiece(PieceFactory::CreateKnight(Color::Black, Square(6, 3)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::Black, Square(4, 3)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+    bool isCheckMate = checkChecker.IsCheckMate();
+
     return 0;
 }
