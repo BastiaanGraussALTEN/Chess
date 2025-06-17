@@ -6,10 +6,11 @@ set(SRC_FILES
     CastleChecker.cpp
     CheckChecker.cpp
     DangerChecker.cpp
-    MoveDialog.cpp
     King.cpp
     Knight.cpp
     LegalityChecker.cpp
+    MoveDialog.cpp
+    MoveParser.cpp
     Pawn.cpp
     Piece.cpp
     PieceFactory.cpp
@@ -26,11 +27,12 @@ set(SRC_FILES
     CheckChecker.h
     Color.h
     DangerChecker.h
-    Move.h
-    MoveDialog.h
     King.h
     Knight.h
     LegalityChecker.h
+    Move.h
+    MoveDialog.h
+    MoveParser.h
     Pawn.h
     Piece.h
     PieceFactory.h
