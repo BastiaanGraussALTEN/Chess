@@ -47,10 +47,9 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
 
     if (piece->pieceType == PieceType::PawnType)
     {
-        auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
         if (PositionFunctions::IsMoveDiagonal(move))
         {
-            if (IsEnPassant(move, pawn))
+            if (IsEnPassant(move, piece))
             {
                 return true;
             }
@@ -60,7 +59,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
                 return false;
             }
 
-            if(pieceOnEnd->color == pawn->color)
+            if(pieceOnEnd->color == piece->color)
             {
                 return false;
             }
@@ -72,7 +71,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
                 return false;
             }
             
-            if(abs(move.end.y - move.start.y) == 2 && pawn->hasMoved == true)
+            if(abs(move.end.y - move.start.y) == 2 && piece->hasMoved == true)
             {
                 return false;
             }
@@ -168,7 +167,7 @@ bool LegalityChecker::IsPieceInLine(const Move &move) const
     return false;
 }
 
-bool LegalityChecker::IsEnPassant(const Move &move, std::shared_ptr<Pawn> pawn) const
+bool LegalityChecker::IsEnPassant(const Move &move, std::shared_ptr<Piece> pawn) const
 {
     if ((pawn->color == Color::White) 
     && (pawn->position.y == 5) 

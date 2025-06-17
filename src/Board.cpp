@@ -45,12 +45,8 @@ void Board::MovePiece(const Move &move)
     else
     {
         piece->position = move.end;
+        piece->hasMoved = true;
         m_lastMove = move;
-        if (piece->pieceType == PieceType::PawnType)
-        {
-            auto pawn = std::dynamic_pointer_cast<Pawn>(piece);
-            pawn->hasMoved = true;
-        }
     }
 }
 

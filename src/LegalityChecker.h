@@ -13,7 +13,7 @@ class LegalityChecker
     private:
         bool IsPieceInDiagonal(const Move& move) const;
         bool IsPieceInLine(const Move& move) const;
-        bool IsEnPassant(const Move& move, std::shared_ptr<Pawn> pawn) const;
+        bool IsEnPassant(const Move& move, std::shared_ptr<Piece> pawn) const;
         Board m_board;
 };
 

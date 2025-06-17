@@ -9,7 +9,6 @@ class King : public Piece
         explicit King(Color color, Square position);
         ~King() override;
         std::vector<Square> GetPossibleMoves() const override;
-        bool hasMoved;
 };
 
 #endif

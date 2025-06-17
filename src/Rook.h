@@ -9,7 +9,6 @@ class Rook : public Piece
         explicit Rook(Color color, Square position);
         ~Rook() override;
         std::vector<Square> GetPossibleMoves() const override;
-        bool hasMoved;
 };
 
 #endif

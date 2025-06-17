@@ -9,7 +9,6 @@ class Pawn : public Piece
     explicit Pawn(Color color, Square position);
     ~Pawn() override;
     std::vector<Square> GetPossibleMoves() const;
-    bool hasMoved;
 };
     
 #endif
