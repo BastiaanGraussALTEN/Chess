@@ -9,21 +9,7 @@ class Board
 {
     public:
         Board();
-        Board(const Board& other) : m_lastMove(other.m_lastMove)
-        {
-            m_pieces.reserve(other.m_pieces.size());
-            for (const auto& piecePtr : other.m_pieces) 
-            {
-                if (piecePtr) 
-                {
-                    m_pieces.push_back(piecePtr->clone());
-                } 
-                else 
-                {
-                    m_pieces.push_back(nullptr);
-                }
-            }
-        }
+        Board(const Board& other);
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         const std::vector<std::shared_ptr<Piece>> GetColorPieces(const Color& pieceColor) const;
         void AddPiece(const std::shared_ptr<Piece>& piece);

@@ -6,6 +6,22 @@ Board::Board()
     CreateInitialBoardState();
 }
 
+Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
+{
+    m_pieces.reserve(other.m_pieces.size());
+    for (const auto& piecePtr : other.m_pieces) 
+    {
+        if (piecePtr) 
+        {
+            m_pieces.push_back(piecePtr->clone());
+        } 
+        else 
+        {
+            m_pieces.push_back(nullptr);
+        }
+    }
+}
+
 const std::vector<std::shared_ptr<Piece>>& Board::GetPieces() const
 {
     return m_pieces;
