@@ -12,11 +12,24 @@ int main()
     Board board;
     while(true)
     {
-        moveDialog.ShowDialog();
-        std::cin >> moveString;
-        Move move = moveParser.ParseString(moveString);
-        board.MovePiece(move);
-        moveDialog.SetMove(moveString);
+        bool validMoveIsGiven = false;
+        while(!validMoveIsGiven)
+        {
+
+            moveDialog.ShowDialog();
+            std::cin >> moveString;
+            if (moveParser.IsStringValid(moveString))
+            {
+                Move move = moveParser.ParseString(moveString);
+                board.MovePiece(move);
+                moveDialog.SetMove(moveString);
+                validMoveIsGiven = true;
+            }
+            else if(!moveParser.IsStringValid(moveString))
+            {
+                moveDialog.ShowErrorText();
+            }
+        }
     }
 
     return 0;

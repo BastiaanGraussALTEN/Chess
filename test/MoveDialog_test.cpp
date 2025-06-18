@@ -55,3 +55,20 @@ TEST(MoveDialogTest, dialogAfterTwoMoves)
     // Assert
     EXPECT_EQ(output,  "\nMove history:\n1. White1 Black1\n2. White2\n\nBlack to move, insert your Move: ");
 }
+
+TEST(MoveDialogTest, errorDialog) 
+{
+    // Arrange
+    MoveDialog moveDialog;
+    std::stringstream buffer;
+    std::streambuf* oldCoutStreamBuf = std::cout.rdbuf();
+    std::cout.rdbuf(buffer.rdbuf());
+
+    // Act
+    moveDialog.ShowErrorText();
+    std::cout.rdbuf(oldCoutStreamBuf);
+    std::string output = buffer.str();
+
+    // Assert
+    EXPECT_EQ(output,  "No valid move is given! Please try again\n");
+}

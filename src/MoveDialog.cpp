@@ -19,6 +19,11 @@ void MoveDialog::ShowDialog()
     std::cout << moveHistory << dialog;
 }
 
+void MoveDialog::ShowErrorText()
+{
+    std::cout << "No valid move is given! Please try again\n";
+}
+
 std::string MoveDialog::GetSingleLineDialog()
 {
     if (m_moveNumber % 2 == 0)

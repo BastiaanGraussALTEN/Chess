@@ -15,6 +15,7 @@ class MoveDialog
         MoveDialog();
         void SetMove(std::string move);
         void ShowDialog();
+        void ShowErrorText();
 };
 
 #endif
