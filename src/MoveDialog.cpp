@@ -24,6 +24,18 @@ void MoveDialog::ShowErrorText()
     std::cout << "No valid move is given! Please try again\n";
 }
 
+Color MoveDialog::GetCurrentTurn()
+{
+    if (m_moveNumber % 2 == 0)
+    {
+        return Color::White;
+    }
+    else
+    {
+        return Color::Black;
+    }
+}
+
 std::string MoveDialog::GetSingleLineDialog()
 {
     if (m_moveNumber % 2 == 0)

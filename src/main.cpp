@@ -6,29 +6,31 @@
 
 int main()
 {
-    std::string moveString;
     MoveDialog moveDialog;
     MoveParser moveParser;
     Board board;
     while(true)
     {
+        std::string moveString;
         bool validMoveIsGiven = false;
+        LegalityChecker legalityChecker = LegalityChecker(board);
         while(!validMoveIsGiven)
         {
-
             moveDialog.ShowDialog();
             std::cin >> moveString;
             if (moveParser.IsStringValid(moveString))
             {
                 Move move = moveParser.ParseString(moveString);
-                board.MovePiece(move);
-                moveDialog.SetMove(moveString);
-                validMoveIsGiven = true;
+                if (legalityChecker.CheckMoveLegality(move))
+                {
+                    board.MovePiece(move);
+                    moveDialog.SetMove(moveString);
+                    validMoveIsGiven = true;
+                    continue;
+                }
             }
-            else if(!moveParser.IsStringValid(moveString))
-            {
-                moveDialog.ShowErrorText();
-            }
+
+            moveDialog.ShowErrorText();
         }
     }
 

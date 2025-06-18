@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Color.h"
 
 class MoveDialog
 {
@@ -16,6 +17,7 @@ class MoveDialog
         void SetMove(std::string move);
         void ShowDialog();
         void ShowErrorText();
+        Color GetCurrentTurn();
 };
 
 #endif

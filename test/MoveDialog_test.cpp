@@ -16,6 +16,7 @@ TEST(MoveDialogTest, firstDialog)
 
     // Assert
     EXPECT_EQ(output,  "White to move, insert your Move: ");
+    EXPECT_EQ(moveDialog.GetCurrentTurn(), Color::White);
 }
 
 TEST(MoveDialogTest, dialogAfterMove) 
@@ -34,9 +35,10 @@ TEST(MoveDialogTest, dialogAfterMove)
 
     // Assert
     EXPECT_EQ(output,  "\nMove history:\n1. White1\n\nBlack to move, insert your Move: ");
+    EXPECT_EQ(moveDialog.GetCurrentTurn(), Color::Black);
 }
 
-TEST(MoveDialogTest, dialogAfterTwoMoves) 
+TEST(MoveDialogTest, dialogAfterThreeMoves) 
 {
     // Arrange
     MoveDialog moveDialog;
