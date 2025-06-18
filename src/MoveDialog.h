@@ -11,10 +11,13 @@ class MoveDialog
         MoveDialog();
         void SetMove(std::string move);
         void ShowDialog();
+        void ShowMoveHistory();
         void ShowErrorText();
         void ShowStringNotValid();
         void ShowMoveNotLegal();
         void ShowPieceWrongColor();
+        void ShowIsCheckMate();
+        void ShowDoesNotPreventCheck();
         Color GetCurrentTurn();
     private:
         int m_moveNumber;

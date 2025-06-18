@@ -9,11 +9,19 @@ int main()
     MoveDialog moveDialog;
     MoveParser moveParser;
     Board board;
-    while(true)
+    bool isCheckMate = false;
+    while(!isCheckMate)
     {
         std::string moveString;
         bool validMoveIsGiven = false;
         Color colorToMove = moveDialog.GetCurrentTurn();
+        CheckChecker checkChecker = CheckChecker(board, colorToMove);
+        if (checkChecker.IsCheckMate())
+        {
+            isCheckMate = true;
+            continue;
+        }
+
         while(!validMoveIsGiven)
         {
             LegalityChecker legalityChecker = LegalityChecker(board);
@@ -38,11 +46,22 @@ int main()
                 moveDialog.ShowPieceWrongColor();
                 continue;
             }
+
+            DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
+            if (dangerChecker.IsKingUnderAttack())
+            {
+                if (!checkChecker.DoesMovePreventCheck(move))
+                {
+                    moveDialog.ShowDoesNotPreventCheck();
+                    continue;
+                }
+            }
                 
             if (legalityChecker.DoesMoveCapturePiece(move))
             {
                 board.RemovePieceFromSquare(move.end);
             }
+
             board.MovePiece(move);
             moveDialog.SetMove(moveString);
             validMoveIsGiven = true;
@@ -50,5 +69,7 @@ int main()
         }
     }
 
+    moveDialog.ShowMoveHistory();
+    moveDialog.ShowIsCheckMate();
     return 0;
 }

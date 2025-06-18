@@ -19,6 +19,12 @@ void MoveDialog::ShowDialog()
     std::cout << moveHistory << dialog << std::endl;
 }
 
+void MoveDialog::ShowMoveHistory()
+{
+    std::string moveHistory = GetMoveHistory();
+    std::cout << moveHistory << std::endl;
+}
+
 void MoveDialog::ShowErrorText()
 {
     std::cout << "Dikke error\n";
@@ -37,6 +43,16 @@ void MoveDialog::ShowMoveNotLegal()
 void MoveDialog::ShowPieceWrongColor()
 {
     std::cout << "You are trying to move a piece of the wrong color! Please try again\n" << std::endl;
+}
+
+void MoveDialog::ShowIsCheckMate()
+{
+    std::cout << "Checkmate!\n" << std::endl;
+}
+
+void MoveDialog::ShowDoesNotPreventCheck()
+{
+    std::cout << "Your move does not prevent being checked! Please try again\n" << std::endl;
 }
 
 Color MoveDialog::GetCurrentTurn()
