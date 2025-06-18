@@ -25,11 +25,6 @@ void MoveDialog::ShowMoveHistory()
     std::cout << moveHistory << std::endl;
 }
 
-void MoveDialog::ShowErrorText()
-{
-    std::cout << "Dikke error\n";
-}
-
 void MoveDialog::ShowStringNotValid()
 {
     std::cout << "The move string is not valid! Please try again\n" << std::endl;

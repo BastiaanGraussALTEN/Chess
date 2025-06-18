@@ -12,7 +12,6 @@ class MoveDialog
         void SetMove(std::string move);
         void ShowDialog();
         void ShowMoveHistory();
-        void ShowErrorText();
         void ShowStringNotValid();
         void ShowMoveNotLegal();
         void ShowPieceWrongColor();
