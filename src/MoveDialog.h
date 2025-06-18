@@ -7,17 +7,20 @@
 
 class MoveDialog
 {
-    private:
-        int m_moveNumber;
-        std::vector<std::string> m_moveHistory;
-        std::string GetMoveHistory();
-        std::string GetSingleLineDialog();
     public:
         MoveDialog();
         void SetMove(std::string move);
         void ShowDialog();
         void ShowErrorText();
+        void ShowStringNotValid();
+        void ShowMoveNotLegal();
+        void ShowPieceWrongColor();
         Color GetCurrentTurn();
+    private:
+        int m_moveNumber;
+        std::vector<std::string> m_moveHistory;
+        std::string GetMoveHistory();
+        std::string GetSingleLineDialog();
 };
 
 #endif

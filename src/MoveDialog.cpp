@@ -16,12 +16,27 @@ void MoveDialog::ShowDialog()
 {
     std::string moveHistory = GetMoveHistory();
     std::string dialog = GetSingleLineDialog();
-    std::cout << moveHistory << dialog;
+    std::cout << moveHistory << dialog << std::endl;
 }
 
 void MoveDialog::ShowErrorText()
 {
-    std::cout << "No valid move is given! Please try again\n";
+    std::cout << "Dikke error\n";
+}
+
+void MoveDialog::ShowStringNotValid()
+{
+    std::cout << "The move string is not valid! Please try again\n" << std::endl;
+}
+
+void MoveDialog::ShowMoveNotLegal()
+{
+    std::cout << "The move you are trying to play is not legal! Please try again\n" << std::endl;
+}
+
+void MoveDialog::ShowPieceWrongColor()
+{
+    std::cout << "You are trying to move a piece of the wrong color! Please try again\n" << std::endl;
 }
 
 Color MoveDialog::GetCurrentTurn()

@@ -19,23 +19,34 @@ int main()
             LegalityChecker legalityChecker = LegalityChecker(board);
             moveDialog.ShowDialog();
             std::cin >> moveString;
-            if (moveParser.IsStringValid(moveString))
+            if (!moveParser.IsStringValid(moveString))
             {
-                Move move = moveParser.ParseString(moveString);
-                if (legalityChecker.CheckMoveLegality(move))
-                {
-                    if (legalityChecker.DoesMoveCapturePiece(move))
-                    {
-                        board.RemovePieceFromSquare(move.end);
-                    }
-                    board.MovePiece(move);
-                    moveDialog.SetMove(moveString);
-                    validMoveIsGiven = true;
-                    continue;
-                }
+                moveDialog.ShowStringNotValid();
+                continue;
             }
 
-            moveDialog.ShowErrorText();
+            Move move = moveParser.ParseString(moveString);
+            if (!legalityChecker.CheckMoveLegality(move))
+            {
+                moveDialog.ShowMoveNotLegal();
+                continue;
+            }
+
+            if ((!board.IsThereAPieceOfThisColorHere(colorToMove, move.start))
+                && (board.GetPieceFromSquare(move.start) != nullptr))
+            {
+                moveDialog.ShowPieceWrongColor();
+                continue;
+            }
+                
+            if (legalityChecker.DoesMoveCapturePiece(move))
+            {
+                board.RemovePieceFromSquare(move.end);
+            }
+            board.MovePiece(move);
+            moveDialog.SetMove(moveString);
+            validMoveIsGiven = true;
+            continue;
         }
     }
 
