@@ -13,9 +13,10 @@ int main()
     {
         std::string moveString;
         bool validMoveIsGiven = false;
-        LegalityChecker legalityChecker = LegalityChecker(board);
+        Color colorToMove = moveDialog.GetCurrentTurn();
         while(!validMoveIsGiven)
         {
+            LegalityChecker legalityChecker = LegalityChecker(board);
             moveDialog.ShowDialog();
             std::cin >> moveString;
             if (moveParser.IsStringValid(moveString))
@@ -23,6 +24,10 @@ int main()
                 Move move = moveParser.ParseString(moveString);
                 if (legalityChecker.CheckMoveLegality(move))
                 {
+                    if (legalityChecker.DoesMoveCapturePiece(move))
+                    {
+                        board.RemovePieceFromSquare(move.end);
+                    }
                     board.MovePiece(move);
                     moveDialog.SetMove(moveString);
                     validMoveIsGiven = true;

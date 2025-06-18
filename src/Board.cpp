@@ -41,6 +41,20 @@ const std::vector<std::shared_ptr<Piece>> Board::GetColorPieces(const Color &pie
     return colorPieces;
 }
 
+bool Board::IsThereAPieceOfThisColorHere(const Color &pieceColor, const Square &square) const
+{
+    for (auto piece : m_pieces)
+    {
+        if ((piece->color == pieceColor)
+        && (piece->position == square))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Board::AddPiece(const std::shared_ptr<Piece> &piece)
 {
     for (const auto& boardPiece : m_pieces)

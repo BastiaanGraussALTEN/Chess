@@ -214,3 +214,31 @@ TEST(BoardTest, LastMoveAfterTwoMoves)
     // Assert
     EXPECT_EQ(lastMove, expectedMove);
 }
+
+TEST(BoardTest, ThereIsAWhitePawnHere)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    bool isThere = board.IsThereAPieceOfThisColorHere(Color::White, Square(2, 2));
+    bool isNotThere = board.IsThereAPieceOfThisColorHere(Color::White, Square(2, 3));
+
+    // Assert
+    ASSERT_TRUE(isThere);
+    ASSERT_FALSE(isNotThere);
+}
+
+TEST(BoardTest, ThereIsABlackPawnHere)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    bool isThere = board.IsThereAPieceOfThisColorHere(Color::Black, Square(2, 7));
+    bool isNotThere = board.IsThereAPieceOfThisColorHere(Color::Black, Square(2, 2));
+
+    // Assert
+    ASSERT_TRUE(isThere);
+    ASSERT_FALSE(isNotThere);
+}
