@@ -3,7 +3,7 @@
 
 bool MoveParser::IsStringValid(const std::string& moveString) const
 {
-    if ((moveString == "0-0") ||moveString == "0-0-0")
+    if ((moveString == "0-0") || moveString == "0-0-0")
     {
         return true;
     }
@@ -26,6 +26,16 @@ bool MoveParser::IsStringValid(const std::string& moveString) const
 Move MoveParser::ParseString(const std::string& moveString) const
 {
     Move move = Move(Square(1, 1),Square(1, 1));
+    if (moveString == "0-0")
+    {
+        move.promotionOrCastleside = PieceType::KingType;
+        return move;
+    }
+    if (moveString == "0-0-0")
+    {
+        move.promotionOrCastleside = PieceType::PawnType;
+        return move;
+    }
     if (moveString.size() == 4)
     {
         move.start.x = moveString[0] - 'a' + 1;

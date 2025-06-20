@@ -67,15 +67,32 @@ TEST(MoveParserTest, TooLongIsNotValid)
     EXPECT_FALSE(isValid);
 }
 
-TEST(MoveParserTest, castleKingSideIsValid)
+TEST(MoveParserTest, castleSideIsValid)
 {
     // Arrange
     MoveParser moveParser;
-    std::string moveString = "0-0";
 
     // Act
-    bool isValid = moveParser.IsStringValid(moveString);
+    bool isValidKingSide = moveParser.IsStringValid("0-0");
+    bool isValidQueenSide = moveParser.IsStringValid("0-0-0");
 
     // Assert
-    EXPECT_TRUE(isValid);
+    EXPECT_TRUE(isValidKingSide);
+    EXPECT_TRUE(isValidQueenSide);
+}
+
+TEST(MoveParserTest, castlingIsPossible)
+{
+    // Arrange
+    MoveParser moveParser;
+    std::string moveCastleKingside = "0-0";
+    std::string moveCastleQueenside = "0-0-0";
+
+    // Act
+    Move castleKingside = moveParser.ParseString(moveCastleKingside);
+    Move castleQueenside = moveParser.ParseString(moveCastleQueenside);
+
+    // Assert
+    EXPECT_EQ(castleKingside.promotionOrCastleside, PieceType::KingType);
+    EXPECT_EQ(castleQueenside.promotionOrCastleside, PieceType::PawnType);
 }

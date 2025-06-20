@@ -2,6 +2,7 @@
 #define MOVE_H
 
 #include "Square.h"
+#include "PieceType.h"
 
 struct Move
 {
@@ -12,6 +13,8 @@ struct Move
     }
     Square start;
     Square end;
+    // king for kingside, pawn for queenside, rest for promotion
+    PieceType promotionOrCastleside;
 };
 
 #endif
