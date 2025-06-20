@@ -66,3 +66,16 @@ TEST(MoveParserTest, TooLongIsNotValid)
     // Assert
     EXPECT_FALSE(isValid);
 }
+
+TEST(MoveParserTest, castleKingSideIsValid)
+{
+    // Arrange
+    MoveParser moveParser;
+    std::string moveString = "0-0";
+
+    // Act
+    bool isValid = moveParser.IsStringValid(moveString);
+
+    // Assert
+    EXPECT_TRUE(isValid);
+}

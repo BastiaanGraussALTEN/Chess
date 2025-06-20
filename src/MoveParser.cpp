@@ -3,6 +3,10 @@
 
 bool MoveParser::IsStringValid(const std::string& moveString) const
 {
+    if ((moveString == "0-0") ||moveString == "0-0-0")
+    {
+        return true;
+    }
     if ((moveString.size() == 4)
     && (moveString[0] - 'a' + 1 > 0)
     && (moveString[0] - 'a' + 1 < 9)
