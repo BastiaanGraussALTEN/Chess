@@ -14,7 +14,7 @@ struct Move
     Square start;
     Square end;
     // king for kingside, pawn for queenside, rest for promotion
-    PieceType promotionOrCastleside;
+    PieceType promotionOrCastleside = PieceType::QueenType;
 };
 
 #endif

@@ -45,6 +45,9 @@ int main()
                 }
 
                 board.CastleKingside(colorToMove);
+                moveDialog.SetMove(moveString);
+                validMoveIsGiven = true;
+                continue;
             }
             if (move.promotionOrCastleside == PieceType::PawnType) 
             {
@@ -57,6 +60,9 @@ int main()
                 }
                 
                 board.CastleQueenside(colorToMove);
+                moveDialog.SetMove(moveString);
+                validMoveIsGiven = true;
+                continue;
             }
 
             if (!legalityChecker.CheckMoveLegality(move))
