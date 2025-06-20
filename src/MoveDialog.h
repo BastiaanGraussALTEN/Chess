@@ -17,6 +17,7 @@ class MoveDialog
         void ShowPieceWrongColor();
         void ShowIsCheckMate();
         void ShowDoesNotPreventCheck();
+        void ShowIllegalCastling();
         Color GetCurrentTurn();
     private:
         int m_moveNumber;

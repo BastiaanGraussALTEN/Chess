@@ -50,6 +50,11 @@ void MoveDialog::ShowDoesNotPreventCheck()
     std::cout << "Your move does not prevent being checked! Please try again\n" << std::endl;
 }
 
+void MoveDialog::ShowIllegalCastling()
+{
+    std::cout << "Attempted castle move is illegal! Please try again\n" << std::endl;
+}
+
 Color MoveDialog::GetCurrentTurn()
 {
     if (m_moveNumber % 2 == 0)

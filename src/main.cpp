@@ -34,6 +34,31 @@ int main()
             }
 
             Move move = moveParser.ParseString(moveString);
+            if (move.promotionOrCastleside == PieceType::KingType) 
+            {
+                DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
+                CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
+                if (!castleChecker.CanCastleKingSide())
+                {
+                    moveDialog.ShowIllegalCastling();
+                    continue;
+                }
+
+                board.CastleKingside(colorToMove);
+            }
+            if (move.promotionOrCastleside == PieceType::PawnType) 
+            {
+                DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
+                CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
+                if (!castleChecker.CanCastleQueenSide())
+                {
+                    moveDialog.ShowIllegalCastling();
+                    continue;
+                }
+                
+                board.CastleQueenside(colorToMove);
+            }
+
             if (!legalityChecker.CheckMoveLegality(move))
             {
                 moveDialog.ShowMoveNotLegal();
