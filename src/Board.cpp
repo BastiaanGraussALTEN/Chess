@@ -94,6 +94,30 @@ void Board::MovePiece(const Move &move)
     }
 }
 
+void Board::CastleKingside(const Color &color)
+{
+    int file = 1;
+    if (color == Color::Black)
+    {
+        file = 8;
+    }
+
+    MovePiece(Move(Square(5, file), Square(7, file)));
+    MovePiece(Move(Square(8, file), Square(6, file)));
+}
+
+void Board::CastleQueenside(const Color &color)
+{
+    int file = 1;
+    if (color == Color::Black)
+    {
+        file = 8;
+    }
+
+    MovePiece(Move(Square(5, file), Square(3, file)));
+    MovePiece(Move(Square(1, file), Square(4, file)));
+}
+
 std::shared_ptr<Piece> Board::GetPieceFromSquare(const Square &coord) const
 {
     for (const auto& piece : m_pieces)

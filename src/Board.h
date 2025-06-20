@@ -16,6 +16,8 @@ class Board
         void AddPiece(const std::shared_ptr<Piece>& piece);
         void RemovePieceFromSquare(const Square& coord);
         void MovePiece(const Move& move);
+        void CastleKingside(const Color& color);
+        void CastleQueenside(const Color& color);
         std::shared_ptr<Piece> GetPieceFromSquare(const Square& coord) const;
         Move GetLastMove() const;
     private:

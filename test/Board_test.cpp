@@ -242,3 +242,65 @@ TEST(BoardTest, ThereIsABlackPawnHere)
     ASSERT_TRUE(isThere);
     ASSERT_FALSE(isNotThere);
 }
+
+TEST(BoardTest, WhiteCastleKingside)
+{
+    // Arrange
+    Board board;
+    board.RemovePieceFromSquare(Square(6,1));
+    board.RemovePieceFromSquare(Square(7,1));
+    
+    // Act
+    board.CastleKingside(Color::White);
+    
+    // Assert
+    ASSERT_EQ(board.GetPieceFromSquare(Square(7,1))->pieceType, PieceType::KingType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(6,1))->pieceType, PieceType::RookType);
+}
+
+TEST(BoardTest, WhiteCastleQueenide)
+{
+    // Arrange
+    Board board;
+    board.RemovePieceFromSquare(Square(2,1));
+    board.RemovePieceFromSquare(Square(3,1));
+    board.RemovePieceFromSquare(Square(4,1));
+    
+    // Act
+    board.CastleQueenside(Color::White);
+    
+    // Assert
+    ASSERT_EQ(board.GetPieceFromSquare(Square(3,1))->pieceType, PieceType::KingType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(4,1))->pieceType, PieceType::RookType);
+}
+
+TEST(BoardTest, BlackCastleKingside)
+{
+    // Arrange
+    Board board;
+    board.RemovePieceFromSquare(Square(6,8));
+    board.RemovePieceFromSquare(Square(7,8));
+    
+    // Act
+    board.CastleKingside(Color::Black);
+    
+    // Assert
+    ASSERT_EQ(board.GetPieceFromSquare(Square(7,8))->pieceType, PieceType::KingType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(6,8))->pieceType, PieceType::RookType);
+}
+
+TEST(BoardTest, BlackCastleQueenide)
+{
+    // Arrange
+    Board board;
+    board.RemovePieceFromSquare(Square(2,8));
+    board.RemovePieceFromSquare(Square(3,8));
+    board.RemovePieceFromSquare(Square(4,8));
+    
+    // Act
+    board.CastleQueenside(Color::Black);
+    
+    // Assert
+    ASSERT_EQ(board.GetPieceFromSquare(Square(3,8))->pieceType, PieceType::KingType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(4,8))->pieceType, PieceType::RookType);
+}
