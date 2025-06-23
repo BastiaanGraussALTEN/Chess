@@ -3,23 +3,43 @@
 
 bool MoveParser::IsStringValid(const std::string& moveString) const
 {
-    if ((moveString == "0-0") || moveString == "0-0-0")
+    if (IsStringCastle(moveString))
     {
         return true;
     }
     if ((moveString.size() == 4)
-    && (moveString[0] - 'a' + 1 > 0)
-    && (moveString[0] - 'a' + 1 < 9)
-    && (moveString[1] - '0' > 0)
-    && (moveString[1] - '0' < 9)
-    && (moveString[2] - 'a' + 1 > 0)
-    && (moveString[2] - 'a' + 1 < 9)
-    && (moveString[3] - '0' > 0)
-    && (moveString[3] - '0' < 9))
+        && IsStringTwoSquares(moveString))
     {
         return true;
     }
     if (IsStringPromotion(moveString))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool MoveParser::IsStringCastle(const std::string &moveString) const
+{
+    if ((moveString == "0-0") || moveString == "0-0-0")
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool MoveParser::IsStringTwoSquares(const std::string &moveString) const
+{
+    if ((moveString[0] - 'a' + 1 > 0)
+        && (moveString[0] - 'a' + 1 < 9)
+        && (moveString[1] - '0' > 0)
+        && (moveString[1] - '0' < 9)
+        && (moveString[2] - 'a' + 1 > 0)
+        && (moveString[2] - 'a' + 1 < 9)
+        && (moveString[3] - '0' > 0)
+        && (moveString[3] - '0' < 9))
     {
         return true;
     }
