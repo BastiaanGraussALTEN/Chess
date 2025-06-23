@@ -6,7 +6,7 @@ class CheckChecker
 {
     public:
         CheckChecker(const Board& board, const Color& color);
-        bool DoesMovePreventCheck(const Move& move) const;
+        bool IsKingSafeAfterMove(const Move& move) const;
         bool IsCheckMate() const;
     private:
         Board m_board;

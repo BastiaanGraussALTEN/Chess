@@ -12,8 +12,6 @@ int main()
     bool isCheckMate = false;
     while(!isCheckMate)
     {
-        std::string moveString;
-        bool validMoveIsGiven = false;
         Color colorToMove = moveDialog.GetCurrentTurn();
         CheckChecker checkChecker = CheckChecker(board, colorToMove);
         if (checkChecker.IsCheckMate())
@@ -21,10 +19,11 @@ int main()
             isCheckMate = true;
             continue;
         }
-
+        
+        std::string moveString;
+        bool validMoveIsGiven = false;
         while(!validMoveIsGiven)
         {
-            LegalityChecker legalityChecker = LegalityChecker(board);
             moveDialog.ShowDialog();
             std::cin >> moveString;
             if (!moveParser.IsStringValid(moveString))
@@ -32,8 +31,9 @@ int main()
                 moveDialog.ShowStringNotValid();
                 continue;
             }
-
+            
             Move move = moveParser.ParseString(moveString);
+            LegalityChecker legalityChecker = LegalityChecker(board);
             if (move.promotionOrCastleside == PieceType::KingType) 
             {
                 DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
@@ -78,14 +78,22 @@ int main()
                 continue;
             }
 
+            // dit deel kan weg?
             DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
             if (dangerChecker.IsKingUnderAttack())
             {
-                if (!checkChecker.DoesMovePreventCheck(move))
+                if (!checkChecker.IsKingSafeAfterMove(move))
                 {
-                    moveDialog.ShowDoesNotPreventCheck();
+                    moveDialog.ShowMovePutsKingInCheck();
                     continue;
                 }
+            }
+            // tot hier
+
+            if (!checkChecker.IsKingSafeAfterMove(move))
+            {
+                moveDialog.ShowMovePutsKingInCheck();
+                continue;
             }
                 
             if (legalityChecker.DoesMoveCapturePiece(move))

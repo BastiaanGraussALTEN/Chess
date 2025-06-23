@@ -40,6 +40,7 @@ set(SRC_FILES
     Queen.h
     Rook.h
     Square.h
+    TestFunctions.h
 )
 
 # Add the executable or library

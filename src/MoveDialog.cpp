@@ -45,9 +45,9 @@ void MoveDialog::ShowIsCheckMate()
     std::cout << "Checkmate!\n" << std::endl;
 }
 
-void MoveDialog::ShowDoesNotPreventCheck()
+void MoveDialog::ShowMovePutsKingInCheck()
 {
-    std::cout << "Your move does not prevent being checked! Please try again\n" << std::endl;
+    std::cout << "Your king will be in check after move! Please try again\n" << std::endl;
 }
 
 void MoveDialog::ShowIllegalCastling()

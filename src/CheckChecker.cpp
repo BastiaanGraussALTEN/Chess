@@ -5,7 +5,7 @@ CheckChecker::CheckChecker(const Board &board, const Color &color)
 {
 }
 
-bool CheckChecker::DoesMovePreventCheck(const Move &move) const
+bool CheckChecker::IsKingSafeAfterMove(const Move &move) const
 {
     Board boardCopy = m_board;
     if (boardCopy.GetPieceFromSquare(move.end) != nullptr)
@@ -24,7 +24,7 @@ bool CheckChecker::IsCheckMate() const
     std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(m_color);
     for (const Move& move : possibleMoves)
     {
-        if (DoesMovePreventCheck(move))
+        if (IsKingSafeAfterMove(move))
         {
             return false;
         }
