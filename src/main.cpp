@@ -96,7 +96,22 @@ int main()
             || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White))))
             {
                 board.RemovePieceFromSquare(move.end);
-                board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
+                if (move.promotionOrCastleside == PieceType::KnightType)
+                {
+                    board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
+                }
+                if (move.promotionOrCastleside == PieceType::BishopType)
+                {
+                    board.AddPiece(PieceFactory::CreateBishop(colorToMove, move.end));
+                }
+                if (move.promotionOrCastleside == PieceType::RookType)
+                {
+                    board.AddPiece(PieceFactory::CreateRook(colorToMove, move.end));
+                }
+                if (move.promotionOrCastleside == PieceType::QueenType)
+                {
+                    board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
+                }
             }
             moveDialog.SetMove(moveString);
             validMoveIsGiven = true;
