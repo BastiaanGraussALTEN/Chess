@@ -48,6 +48,36 @@ TEST(CheckCheckerTest, MovePutsKingInCheck)
     ASSERT_FALSE(isSafe);
 }
 
+TEST(CheckCheckerTest, KingMovePutsKingInCheck)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1, 1)));
+    board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(2, 2)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool isSafe = checkChecker.IsKingSafeAfterMove(Move(Square(1,1), Square(1,2)));
+
+    // Assert
+    ASSERT_FALSE(isSafe);
+}
+
+TEST(CheckCheckerTest, KingMovePutsKingInCheckByPawn)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1, 1)));
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(2, 3)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool isSafe = checkChecker.IsKingSafeAfterMove(Move(Square(1,1), Square(1,2)));
+
+    // Assert
+    ASSERT_FALSE(isSafe);
+}
+
 TEST(CheckCheckerTest, IsNotCheckMate)
 {
     // Arrange

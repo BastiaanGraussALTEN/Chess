@@ -78,18 +78,6 @@ int main()
                 continue;
             }
 
-            // dit deel kan weg?
-            DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
-            if (dangerChecker.IsKingUnderAttack())
-            {
-                if (!checkChecker.IsKingSafeAfterMove(move))
-                {
-                    moveDialog.ShowMovePutsKingInCheck();
-                    continue;
-                }
-            }
-            // tot hier
-
             if (!checkChecker.IsKingSafeAfterMove(move))
             {
                 moveDialog.ShowMovePutsKingInCheck();
