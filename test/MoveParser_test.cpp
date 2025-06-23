@@ -96,3 +96,42 @@ TEST(MoveParserTest, castlingIsPossible)
     EXPECT_EQ(castleKingside.promotionOrCastleside, PieceType::KingType);
     EXPECT_EQ(castleQueenside.promotionOrCastleside, PieceType::PawnType);
 }
+
+TEST(MoveParserTest, promotionIsValid)
+{
+    // Arrange
+    MoveParser moveParser;
+
+    // Act
+    bool isValid = moveParser.IsStringValid("e7e8=R");
+
+    // Assert
+    EXPECT_TRUE(isValid);
+}
+
+TEST(MoveParserTest, promotionIsCorrect)
+{
+    // Arrange
+    MoveParser moveParser;
+    Move expectedMove = Move(Square(5,7), Square(5,8));
+    expectedMove.promotionOrCastleside == PieceType::RookType;
+
+    // Act
+    Move promotion = moveParser.ParseString("e7e8=R");
+
+    // Assert
+    EXPECT_EQ(promotion.promotionOrCastleside, PieceType::RookType);
+    EXPECT_EQ(promotion, expectedMove);
+}
+
+TEST(MoveParserTest, promotionToKingNotAllowed)
+{
+    // Arrange
+    MoveParser moveParser;
+
+    // Act
+    bool isValid = moveParser.IsStringValid("e7e8=K");
+
+    // Assert
+    EXPECT_FALSE(isValid);
+}

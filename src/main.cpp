@@ -83,13 +83,14 @@ int main()
                 moveDialog.ShowMovePutsKingInCheck();
                 continue;
             }
-                
+
             if (legalityChecker.DoesMoveCapturePiece(move))
             {
                 board.RemovePieceFromSquare(move.end);
             }
 
             board.MovePiece(move);
+            // if board.ispromotion, remove pawn, create new piece
             moveDialog.SetMove(moveString);
             validMoveIsGiven = true;
             continue;
