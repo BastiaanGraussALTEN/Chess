@@ -78,15 +78,15 @@ bool MoveParser::IsStringPromotion(const std::string &moveString) const
 {
     std::string lastTwoChars = moveString.substr(moveString.length() - 2);
     return ((moveString.size() == 6) 
-            &&(lastTwoChars[0] == '=')
-            &&(CharIsValidPromotionPiece(lastTwoChars[1]))
-            &&(moveString[0] - 'a' + 1 > 0)
-            &&(moveString[0] - 'a' + 1 < 9)
-            &&(moveString[1] - '0' > 0)
-            &&(moveString[1] - '0' < 9)
-            &&(moveString[2] - 'a' + 1 > 0)
-            &&(moveString[2] - 'a' + 1 < 9)
-            &&((moveString[3] - '0' == 1) ||(moveString[3] - '0' == 8)));
+        &&(lastTwoChars[0] == '=')
+        &&(CharIsValidPromotionPiece(lastTwoChars[1]))
+        &&(moveString[0] - 'a' + 1 > 0)
+        &&(moveString[0] - 'a' + 1 < 9)
+        &&(moveString[1] - '0' > 0)
+        &&(moveString[1] - '0' < 9)
+        &&(moveString[2] - 'a' + 1 > 0)
+        &&(moveString[2] - 'a' + 1 < 9)
+        &&((moveString[3] - '0' == 1) ||(moveString[3] - '0' == 8)));
 }
 
 void MoveParser::SetMoveSquaresFromString(Move& move, const std::string& moveString) const
