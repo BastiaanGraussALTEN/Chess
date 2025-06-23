@@ -3,8 +3,8 @@
 class MoveParser
 {
     public: 
-        bool IsStringValid(const std::string& moveString) const;
         Move ParseString(const std::string& moveString) const;
+        bool IsStringValid(const std::string& moveString) const;
     private:
         bool IsStringCastle(const std::string& moveString) const;
         bool IsStringTwoSquares(const std::string& moveString) const;

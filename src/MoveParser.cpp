@@ -1,6 +1,33 @@
 #include "MoveParser.h"
 #include <map>
 
+Move MoveParser::ParseString(const std::string& moveString) const
+{
+    Move move = Move(Square(1, 1),Square(1, 1));
+    if (moveString == "0-0")
+    {
+        move.promotionOrCastleside = PieceType::KingType;
+        return move;
+    }
+    if (moveString == "0-0-0")
+    {
+        move.promotionOrCastleside = PieceType::PawnType;
+        return move;
+    }
+    if (moveString.size() == 4)
+    {
+        SetMoveSquaresFromString(move, moveString);
+    }
+    if (IsStringPromotion(moveString))
+    {
+        SetMoveSquaresFromString(move, moveString);
+        char piece = moveString.substr(moveString.length() - 2 )[1];
+        move.promotionOrCastleside = CharToPieceType(piece);
+    }
+
+    return move;
+}
+
 bool MoveParser::IsStringValid(const std::string& moveString) const
 {
     if (IsStringCastle(moveString))
@@ -8,7 +35,7 @@ bool MoveParser::IsStringValid(const std::string& moveString) const
         return true;
     }
     if ((moveString.size() == 4)
-        && IsStringTwoSquares(moveString))
+    && IsStringTwoSquares(moveString))
     {
         return true;
     }
@@ -101,31 +128,4 @@ PieceType MoveParser::CharToPieceType(const char &piece) const
         return PieceType::QueenType;
     }
     return PieceType::PawnType;
-}
-
-Move MoveParser::ParseString(const std::string& moveString) const
-{
-    Move move = Move(Square(1, 1),Square(1, 1));
-    if (moveString == "0-0")
-    {
-        move.promotionOrCastleside = PieceType::KingType;
-        return move;
-    }
-    if (moveString == "0-0-0")
-    {
-        move.promotionOrCastleside = PieceType::PawnType;
-        return move;
-    }
-    if (moveString.size() == 4)
-    {
-        SetMoveSquaresFromString(move, moveString);
-    }
-    if (IsStringPromotion(moveString))
-    {
-        SetMoveSquaresFromString(move, moveString);
-        char piece = moveString.substr(moveString.length() - 2 )[1];
-        move.promotionOrCastleside = CharToPieceType(piece);
-    }
-
-    return move;
 }

@@ -90,7 +90,14 @@ int main()
             }
 
             board.MovePiece(move);
-            // if board.ispromotion, remove pawn, create new piece
+
+            if ((board.GetPieceFromSquare(move.end)->pieceType == PieceType::PawnType) 
+            && (((move.end.y == 1) && (board.GetPieceFromSquare(move.end)->color == Color::Black)) 
+            || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White))))
+            {
+                board.RemovePieceFromSquare(move.end);
+                board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
+            }
             moveDialog.SetMove(moveString);
             validMoveIsGiven = true;
             continue;
