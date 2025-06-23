@@ -106,6 +106,7 @@ bool MoveParser::CharIsValidPromotionPiece(const char &piece) const
     {
         return true;
     }
+
     return false;
 }
 
@@ -127,5 +128,6 @@ PieceType MoveParser::CharToPieceType(const char &piece) const
     {
         return PieceType::QueenType;
     }
+
     return PieceType::PawnType;
 }
