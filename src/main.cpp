@@ -9,14 +9,26 @@ int main()
     MoveDialog moveDialog;
     MoveParser moveParser;
     Board board;
-    bool isCheckMate = false;
-    while(!isCheckMate)
+    bool isGameEnded = false;
+    while(!isGameEnded)
     {
         Color colorToMove = moveDialog.GetCurrentTurn();
         CheckChecker checkChecker = CheckChecker(board, colorToMove);
-        if (checkChecker.IsCheckMate())
+        LegalityChecker legalityChecker = LegalityChecker(board);
+        DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
+        CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
+        if (checkChecker.EveryMoveChecksSelf())
         {
-            isCheckMate = true;
+            isGameEnded = true;
+            moveDialog.ShowMoveHistory();
+            if (dangerChecker.IsKingUnderAttack())
+            {
+                moveDialog.ShowIsCheckMate();
+            }
+            else
+            {
+                moveDialog.ShowIsStaleMate();
+            }
             continue;
         }
         
@@ -33,11 +45,8 @@ int main()
             }
             
             Move move = moveParser.ParseString(moveString);
-            LegalityChecker legalityChecker = LegalityChecker(board);
             if (move.promotionOrCastleside == PieceType::KingType) 
             {
-                DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
-                CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
                 if (!castleChecker.CanCastleKingSide())
                 {
                     moveDialog.ShowIllegalCastling();
@@ -51,8 +60,6 @@ int main()
             }
             if (move.promotionOrCastleside == PieceType::PawnType) 
             {
-                DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
-                CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
                 if (!castleChecker.CanCastleQueenSide())
                 {
                     moveDialog.ShowIllegalCastling();
@@ -119,7 +126,5 @@ int main()
         }
     }
 
-    moveDialog.ShowMoveHistory();
-    moveDialog.ShowIsCheckMate();
     return 0;
 }

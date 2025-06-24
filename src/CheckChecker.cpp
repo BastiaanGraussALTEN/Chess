@@ -18,7 +18,7 @@ bool CheckChecker::IsKingSafeAfterMove(const Move &move) const
     return !dangerChecker.IsKingUnderAttack();
 }
 
-bool CheckChecker::IsCheckMate() const
+bool CheckChecker::EveryMoveChecksSelf() const
 {
     LegalityChecker legalityChecker = LegalityChecker(m_board);
     std::vector<Move> possibleMoves = legalityChecker.GetAllPossibleMoves(m_color);

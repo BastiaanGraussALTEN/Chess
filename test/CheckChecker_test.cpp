@@ -86,10 +86,10 @@ TEST(CheckCheckerTest, IsNotCheckMate)
     CheckChecker checkChecker = CheckChecker(board, Color::White);
 
     // Act
-    bool isCheckMate = checkChecker.IsCheckMate();
+    bool everyMoveChecksSelf = checkChecker.EveryMoveChecksSelf();
 
     // Assert
-    ASSERT_FALSE(isCheckMate);
+    ASSERT_FALSE(everyMoveChecksSelf);
 }
 
 TEST(CheckCheckerTest, IsCheckMate)
@@ -101,8 +101,38 @@ TEST(CheckCheckerTest, IsCheckMate)
     CheckChecker checkChecker = CheckChecker(board, Color::White);
 
     // Act
-    bool isCheckMate = checkChecker.IsCheckMate();
+    bool everyMoveChecksSelf = checkChecker.EveryMoveChecksSelf();
 
     // Assert
-    ASSERT_TRUE(isCheckMate);
+    ASSERT_TRUE(everyMoveChecksSelf);
+}
+
+TEST(CheckCheckerTest, IsNotStaleMate)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1, 1)));
+    board.AddPiece(PieceFactory::CreateQueen(Color::Black, Square(3, 3)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool everyMoveChecksSelf = checkChecker.EveryMoveChecksSelf();
+
+    // Assert
+    ASSERT_FALSE(everyMoveChecksSelf);
+}
+
+TEST(CheckCheckerTest, IsStaleMate)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1, 1)));
+    board.AddPiece(PieceFactory::CreateQueen(Color::Black, Square(3, 2)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool everyMoveChecksSelf = checkChecker.EveryMoveChecksSelf();
+
+    // Assert
+    ASSERT_TRUE(everyMoveChecksSelf);
 }

@@ -16,6 +16,7 @@ class MoveDialog
         void ShowMoveNotLegal();
         void ShowPieceWrongColor();
         void ShowIsCheckMate();
+        void ShowIsStaleMate();
         void ShowMovePutsKingInCheck();
         void ShowIllegalCastling();
         Color GetCurrentTurn();

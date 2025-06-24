@@ -45,6 +45,11 @@ void MoveDialog::ShowIsCheckMate()
     std::cout << "Checkmate!\n" << std::endl;
 }
 
+void MoveDialog::ShowIsStaleMate()
+{
+    std::cout << "Stalemate!\n" << std::endl;
+}
+
 void MoveDialog::ShowMovePutsKingInCheck()
 {
     std::cout << "This move will put your king in check! Please try again\n" << std::endl;
