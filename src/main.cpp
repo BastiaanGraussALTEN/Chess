@@ -4,6 +4,18 @@
 #include "CastleChecker.h"
 #include "CheckChecker.h"
 
+bool IsPromotion(const Board& board, const Move& move)
+{
+    if ((board.GetPieceFromSquare(move.end)->pieceType == PieceType::PawnType) 
+    && (((move.end.y == 1) && (board.GetPieceFromSquare(move.end)->color == Color::Black)) 
+    || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White))))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 int main()
 {
     MoveDialog moveDialog;
@@ -13,10 +25,11 @@ int main()
     while(!isGameEnded)
     {
         Color colorToMove = moveDialog.GetCurrentTurn();
-        CheckChecker checkChecker = CheckChecker(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
+        CheckChecker checkChecker = CheckChecker(board, colorToMove);
         DangerChecker dangerChecker = DangerChecker(board, legalityChecker, colorToMove);
         CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
+
         if (checkChecker.EveryMoveChecksSelf())
         {
             isGameEnded = true;
@@ -34,6 +47,7 @@ int main()
         
         std::string moveString;
         bool validMoveIsGiven = false;
+
         while(!validMoveIsGiven)
         {
             moveDialog.ShowDialog();
@@ -98,26 +112,23 @@ int main()
 
             board.MovePiece(move);
 
-            if ((board.GetPieceFromSquare(move.end)->pieceType == PieceType::PawnType) 
-            && (((move.end.y == 1) && (board.GetPieceFromSquare(move.end)->color == Color::Black)) 
-            || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White))))
+            if (IsPromotion(board, move))
             {
                 board.RemovePieceFromSquare(move.end);
-                if (move.promotionOrCastleside == PieceType::KnightType)
+                switch (move.promotionOrCastleside)
                 {
-                    board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
-                }
-                if (move.promotionOrCastleside == PieceType::BishopType)
-                {
-                    board.AddPiece(PieceFactory::CreateBishop(colorToMove, move.end));
-                }
-                if (move.promotionOrCastleside == PieceType::RookType)
-                {
-                    board.AddPiece(PieceFactory::CreateRook(colorToMove, move.end));
-                }
-                if (move.promotionOrCastleside == PieceType::QueenType)
-                {
-                    board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
+                    case PieceType::KnightType:
+                        board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
+                        break;
+                    case PieceType::BishopType:
+                        board.AddPiece(PieceFactory::CreateBishop(colorToMove, move.end));
+                        break;
+                    case PieceType::RookType:
+                        board.AddPiece(PieceFactory::CreateRook(colorToMove, move.end));
+                        break;
+                    case PieceType::QueenType:
+                        board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
+                        break;
                 }
             }
             moveDialog.SetMove(moveString);
