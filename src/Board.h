@@ -13,6 +13,7 @@ class Board
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         const std::vector<std::shared_ptr<Piece>> GetColorPieces(const Color& pieceColor) const;
         bool IsThereAPieceOfThisColorHere(const Color& pieceColor, const Square& square) const;
+        bool Is50MoveRule();
         void AddPiece(const std::shared_ptr<Piece>& piece);
         void RemovePieceFromSquare(const Square& coord);
         void MovePiece(const Move& move);
@@ -22,6 +23,8 @@ class Board
         Move GetLastMove() const;
     private:
         Move m_lastMove;
+        int m_consecutiveNonPawnMoves;
+        int m_consecutiveNonCaptures;
         std::vector<std::shared_ptr<Piece>> m_pieces;
         void CreateInitialBoardState();
 };

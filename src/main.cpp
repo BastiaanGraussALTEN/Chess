@@ -36,12 +36,20 @@ int main()
             moveDialog.ShowMoveHistory();
             if (dangerChecker.IsKingUnderAttack())
             {
-                moveDialog.ShowIsCheckMate();
+                moveDialog.ShowCheckMate();
             }
             else
             {
-                moveDialog.ShowIsStaleMate();
+                moveDialog.ShowStaleMate();
             }
+            continue;
+        }
+
+        if (board.Is50MoveRule())
+        {
+            isGameEnded = true;
+            moveDialog.ShowMoveHistory();
+            moveDialog.Show50MoveDraw();
             continue;
         }
         

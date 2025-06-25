@@ -40,14 +40,19 @@ void MoveDialog::ShowPieceWrongColor()
     std::cout << "You are trying to move a piece of the wrong color! Please try again\n" << std::endl;
 }
 
-void MoveDialog::ShowIsCheckMate()
+void MoveDialog::ShowCheckMate()
 {
     std::cout << "Checkmate!\n" << std::endl;
 }
 
-void MoveDialog::ShowIsStaleMate()
+void MoveDialog::ShowStaleMate()
 {
     std::cout << "Stalemate!\n" << std::endl;
+}
+
+void MoveDialog::Show50MoveDraw()
+{
+    std::cout << "Draw caused by fifty-move rule!\n" << std::endl;
 }
 
 void MoveDialog::ShowMovePutsKingInCheck()

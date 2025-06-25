@@ -15,8 +15,9 @@ class MoveDialog
         void ShowStringNotValid();
         void ShowMoveNotLegal();
         void ShowPieceWrongColor();
-        void ShowIsCheckMate();
-        void ShowIsStaleMate();
+        void ShowCheckMate();
+        void ShowStaleMate();
+        void Show50MoveDraw();
         void ShowMovePutsKingInCheck();
         void ShowIllegalCastling();
         Color GetCurrentTurn();

@@ -4,6 +4,8 @@ Board::Board()
 : m_lastMove(Square(1, 1), Square(1, 1))
 {
     CreateInitialBoardState();
+    m_consecutiveNonCaptures = 0;
+    m_consecutiveNonPawnMoves = 0;
 }
 
 Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
@@ -55,6 +57,17 @@ bool Board::IsThereAPieceOfThisColorHere(const Color &pieceColor, const Square &
     return false;
 }
 
+bool Board::Is50MoveRule()
+{
+    if ((m_consecutiveNonCaptures > 99) 
+    && (m_consecutiveNonPawnMoves > 99))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void Board::AddPiece(const std::shared_ptr<Piece> &piece)
 {
     for (const auto& boardPiece : m_pieces)
@@ -72,11 +85,13 @@ void Board::RemovePieceFromSquare(const Square &coord)
 {
     for (int i = 0; i < m_pieces.size(); i++)
     {
-        if ( m_pieces[i]->position == coord)
+        if (m_pieces[i]->position == coord)
         {
             m_pieces.erase( m_pieces.begin() + i );
         }
     }
+
+    m_consecutiveNonCaptures = -1;
 }
 
 void Board::MovePiece(const Move &move)
@@ -92,6 +107,17 @@ void Board::MovePiece(const Move &move)
         piece->hasMoved = true;
         m_lastMove = move;
     }
+
+    if (piece->pieceType == PieceType::PawnType)
+    {
+        m_consecutiveNonPawnMoves = 0;
+    }
+    else
+    {
+        m_consecutiveNonPawnMoves += 1;
+    }
+
+    m_consecutiveNonCaptures += 1;
 }
 
 void Board::CastleKingside(const Color &color)
