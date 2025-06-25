@@ -45,7 +45,7 @@ int main()
             continue;
         }
 
-        if (board.Is50MoveRule())
+        if (board.IsFiftyMoveRule())
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();

@@ -304,3 +304,40 @@ TEST(BoardTest, BlackCastleQueenide)
     ASSERT_EQ(board.GetPieceFromSquare(Square(3,8))->pieceType, PieceType::KingType);
     ASSERT_EQ(board.GetPieceFromSquare(Square(4,8))->pieceType, PieceType::RookType);
 }
+
+TEST(BoardTest, DefaultHasNoEnpessant)
+{
+    // Arrange
+    Board board;
+
+    // Act - no act
+
+    // Assert
+    ASSERT_FALSE(board.HasEnPessantSquare);  
+}
+
+TEST(BoardTest, HasEnpessant)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    board.MovePiece(Move(Square(2, 2), Square(2, 4)));
+
+    // Assert
+    ASSERT_TRUE(board.HasEnPessantSquare); 
+    ASSERT_EQ(board.EnPessantSquare, Square(2,3)); 
+}
+
+TEST(BoardTest, EnpessantDisappears)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    board.MovePiece(Move(Square(2, 2), Square(2, 4)));
+    board.MovePiece(Move(Square(2, 4), Square(2, 5)));
+
+    // Assert
+    ASSERT_FALSE(board.HasEnPessantSquare);  
+}

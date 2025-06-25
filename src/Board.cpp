@@ -6,6 +6,7 @@ Board::Board()
     CreateInitialBoardState();
     m_consecutiveNonCaptures = 0;
     m_consecutiveNonPawnMoves = 0;
+    HasEnPessantSquare = false;
 }
 
 Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
@@ -57,7 +58,7 @@ bool Board::IsThereAPieceOfThisColorHere(const Color &pieceColor, const Square &
     return false;
 }
 
-bool Board::Is50MoveRule()
+bool Board::IsFiftyMoveRule()
 {
     if ((m_consecutiveNonCaptures > 99) 
     && (m_consecutiveNonPawnMoves > 99))
@@ -111,10 +112,29 @@ void Board::MovePiece(const Move &move)
     if (piece->pieceType == PieceType::PawnType)
     {
         m_consecutiveNonPawnMoves = 0;
+        if (abs(move.end.y - move.start.y) == 2)
+        {
+            HasEnPessantSquare = true;
+            if (piece->color == Color::White)
+            {
+                EnPessantSquare = Square(move.end.x, move.end.y - 1);
+            }
+            if (piece->color == Color::Black)
+            {
+                EnPessantSquare = Square(move.end.x, move.end.y + 1);
+            }
+        }
+        else
+        {
+            HasEnPessantSquare = false;
+            EnPessantSquare = Square(1,1);
+        }
     }
     else
     {
         m_consecutiveNonPawnMoves += 1;
+        HasEnPessantSquare = false;
+        EnPessantSquare = Square(1,1);
     }
 
     m_consecutiveNonCaptures += 1;
