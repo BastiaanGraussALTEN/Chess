@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/DangerChecker.h"
+#include "../src/headerfiles/DangerChecker.h"
 
 TEST(DangerCheckerTest, ThereIsNoKingThrowsException) 
 {

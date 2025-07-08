@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include "Board.h"
+#include "../headerfiles/Board.h"
 
 Board::Board()
 : m_lastMove(Square(1, 1), Square(1, 1))

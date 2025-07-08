@@ -1,4 +1,4 @@
-#include "King.h"
+#include "../headerfiles/King.h"
 
 King::King(Color color, Square position) : Piece(color, PieceType::King, position)
 {

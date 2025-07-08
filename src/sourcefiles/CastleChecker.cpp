@@ -1,5 +1,5 @@
-#include "CastleChecker.h"
-#include "PositionFunctions.h"
+#include "../headerfiles/CastleChecker.h"
+#include "../headerfiles/PositionFunctions.h"
 
 CastleChecker::CastleChecker(const Board &board, const LegalityChecker &legalityChecker, const DangerChecker &dangerChecker, const Color& color)
 : m_board(board), m_legalityChecker(legalityChecker), m_dangerChecker(dangerChecker), m_color(color)

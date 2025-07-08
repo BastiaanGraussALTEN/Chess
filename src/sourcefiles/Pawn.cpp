@@ -1,4 +1,4 @@
-#include "Pawn.h"
+#include "../headerfiles/Pawn.h"
 
 Pawn::Pawn(Color color, Square position) : Piece(color, PieceType::Pawn, position)
 {

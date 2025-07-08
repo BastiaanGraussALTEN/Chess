@@ -1,10 +1,10 @@
-#include "Bishop.h"
+#include "../headerfiles/Queen.h"
 
-Bishop::Bishop(Color color, Square position) : Piece(color, PieceType::Bishop, position)
+Queen::Queen(Color color, Square position) : Piece(color, PieceType::Queen, position)
 {
 }
 
-std::vector<Square> Bishop::GetPossibleMoves() const
+std::vector<Square> Queen::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;
     for (int i = 1; i < 8; i++)
@@ -30,6 +30,17 @@ std::vector<Square> Bishop::GetPossibleMoves() const
             {
                 possibleMoves.push_back(Square(position.x - i, position.y - i));
             }
+        }
+    }
+    for (int i = 1; i < 9; i++)
+    {
+        if (i != position.y)
+        {
+            possibleMoves.push_back(Square(position.x, i));
+        }
+        if (i != position.x)
+        {
+            possibleMoves.push_back(Square(i, position.y));
         }
     }
 

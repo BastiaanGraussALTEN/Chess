@@ -1,6 +1,6 @@
 #include <algorithm>
-#include "LegalityChecker.h"
-#include "PositionFunctions.h"
+#include "../headerfiles/LegalityChecker.h"
+#include "../headerfiles/PositionFunctions.h"
 
 LegalityChecker::LegalityChecker(const Board& board) : m_board(board)
 {

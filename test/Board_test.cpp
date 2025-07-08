@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Board.h"
+#include "../src/headerfiles/Board.h"
 
 TEST(BoardTest, pieceCanBeAdded)
 {

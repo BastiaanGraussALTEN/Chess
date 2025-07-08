@@ -1,4 +1,4 @@
-#include "PieceFactory.h"
+#include "../headerfiles/PieceFactory.h"
 
 std::shared_ptr<Pawn> PieceFactory::CreatePawn(Color color, Square position)
 {

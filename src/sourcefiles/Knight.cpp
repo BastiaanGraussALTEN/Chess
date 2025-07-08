@@ -1,4 +1,4 @@
-#include "Knight.h"
+#include "../headerfiles/Knight.h"
 
 Knight::Knight(Color color, Square position) : Piece(color, PieceType::Knight, position)
 {

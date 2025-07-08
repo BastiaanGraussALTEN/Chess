@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/MoveParser.h"
+#include "../src/headerfiles/MoveParser.h"
 
 TEST(MoveParserTest, validStringIsValid)
 {

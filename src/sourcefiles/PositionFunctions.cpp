@@ -1,4 +1,4 @@
-#include "PositionFunctions.h"
+#include "../headerfiles/PositionFunctions.h"
 
 bool PositionFunctions::IsMoveDiagonal(const Move &move)
 {
