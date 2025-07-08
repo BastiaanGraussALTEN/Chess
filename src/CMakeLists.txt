@@ -26,6 +26,7 @@ set(HEADER_FILES
     headerfiles/CastleChecker.h
     headerfiles/CheckChecker.h
     headerfiles/Color.h
+    headerfiles/Constants.h
     headerfiles/DangerChecker.h
     headerfiles/King.h
     headerfiles/Knight.h

@@ -1,4 +1,5 @@
 #include "../headerfiles/Rook.h"
+#include "../headerfiles/Constants.h"
 
 Rook::Rook(Color color, Square position) : Piece(color, PieceType::Rook, position)
 {
@@ -8,7 +9,7 @@ Rook::Rook(Color color, Square position) : Piece(color, PieceType::Rook, positio
 std::vector<Square> Rook::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;
-    for (int i = 1; i < 9; i++)
+    for (int i = Constants::boardBegin; i < Constants::boardEnd + 1; i++)
     {
         if (i != position.y)
         {

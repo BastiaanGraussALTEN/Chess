@@ -1,4 +1,5 @@
 #include "../headerfiles/King.h"
+#include "../headerfiles/Constants.h"
 
 King::King(Color color, Square position) : Piece(color, PieceType::King, position)
 {
@@ -8,13 +9,13 @@ King::King(Color color, Square position) : Piece(color, PieceType::King, positio
 std::vector<Square> King::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;
-    if (position.x + 1 < 9)
+    if (position.x < Constants::boardEnd)
     {
-        if (position.y + 1 < 9)
+        if (position.y < Constants::boardEnd)
         {
             possibleMoves.push_back(Square(position.x + 1, position.y + 1));
         }
-        if (position.y - 1 > 0)
+        if (position.y > Constants::boardBegin)
         {
             possibleMoves.push_back(Square(position.x + 1, position.y - 1));
         }
@@ -22,13 +23,13 @@ std::vector<Square> King::GetPossibleMoves() const
         possibleMoves.push_back(Square(position.x + 1, position.y));
     }
 
-    if (position.x - 1 > 0)
+    if (position.x > Constants::boardBegin)
     {
-        if (position.y + 1 < 9)
+        if (position.y < Constants::boardEnd)
         {
             possibleMoves.push_back(Square(position.x - 1, position.y + 1));
         }
-        if (position.y - 1 > 0)
+        if (position.y > Constants::boardBegin)
         {
             possibleMoves.push_back(Square(position.x - 1, position.y - 1));
         }
@@ -36,12 +37,12 @@ std::vector<Square> King::GetPossibleMoves() const
         possibleMoves.push_back(Square(position.x - 1, position.y));
     }
 
-    if (position.y + 1 < 9)
+    if (position.y < Constants::boardEnd)
     {
         possibleMoves.push_back(Square(position.x, position.y + 1));
     }
 
-    if (position.y - 1 > 0)
+    if (position.y > Constants::boardBegin)
     {
         possibleMoves.push_back(Square(position.x , position.y - 1));
     }

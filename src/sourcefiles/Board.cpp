@@ -1,6 +1,7 @@
 #include <algorithm>
 
 #include "../headerfiles/Board.h"
+#include "../headerfiles/Constants.h"
 
 Board::Board()
 : m_lastMove(Square(1, 1), Square(1, 1))
@@ -175,7 +176,7 @@ Move Board::GetLastMove() const
 void Board::CreateInitialBoardState()
 {
     // Create pawns
-    for (int i = 1; i < 9; i++)
+    for (int i = Constants::boardBegin; i < Constants::boardEnd + 1; i++)
     {
         AddPiece(PieceFactory::CreatePawn(Color::White, Square(i, 2)));
         AddPiece(PieceFactory::CreatePawn(Color::Black, Square(i, 7)));

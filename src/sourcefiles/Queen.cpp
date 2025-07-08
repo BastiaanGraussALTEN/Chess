@@ -1,4 +1,5 @@
 #include "../headerfiles/Queen.h"
+#include "../headerfiles/Constants.h"
 
 Queen::Queen(Color color, Square position) : Piece(color, PieceType::Queen, position)
 {
@@ -7,32 +8,32 @@ Queen::Queen(Color color, Square position) : Piece(color, PieceType::Queen, posi
 std::vector<Square> Queen::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;
-    for (int i = 1; i < 8; i++)
+    for (int i = 1; i < Constants::boardEnd; i++)
     {
-        if (position.x + i < 9)
+        if (position.x + i < Constants::boardEnd + 1)
         {
-            if (position.y + i < 9)
+            if (position.y + i < Constants::boardEnd + 1)
             {
                 possibleMoves.push_back(Square(position.x + i, position.y + i));
             }
-            if (position.y - i > 0)
+            if (position.y - i > Constants::boardBegin - 1)
             {
                 possibleMoves.push_back(Square(position.x + i, position.y - i));
             }
         }
-        if (position.x - i > 0)
+        if (position.x - i > Constants::boardBegin - 1)
         {
-            if (position.y + i < 9)
+            if (position.y + i < Constants::boardEnd + 1)
             {
                 possibleMoves.push_back(Square(position.x - i, position.y + i));
             }
-            if (position.y - i > 0)
+            if (position.y - i > Constants::boardBegin - 1)
             {
                 possibleMoves.push_back(Square(position.x - i, position.y - i));
             }
         }
     }
-    for (int i = 1; i < 9; i++)
+    for (int i = 1; i < Constants::boardEnd + 1; i++)
     {
         if (i != position.y)
         {
