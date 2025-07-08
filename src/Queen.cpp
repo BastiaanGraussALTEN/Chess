@@ -4,10 +4,6 @@ Queen::Queen(Color color, Square position) : Piece(color, PieceType::Queen, posi
 {
 }
 
-Queen::~Queen()
-{
-}
-
 std::vector<Square> Queen::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;

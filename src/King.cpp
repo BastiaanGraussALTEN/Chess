@@ -5,10 +5,6 @@ King::King(Color color, Square position) : Piece(color, PieceType::King, positio
     hasMoved = false;
 }
 
-King::~King()
-{
-}
-
 std::vector<Square> King::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;

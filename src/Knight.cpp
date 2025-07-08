@@ -4,10 +4,6 @@ Knight::Knight(Color color, Square position) : Piece(color, PieceType::Knight, p
 {
 }
 
-Knight::~Knight()
-{
-}
-
 std::vector<Square> Knight::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;

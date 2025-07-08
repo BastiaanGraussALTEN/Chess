@@ -5,10 +5,6 @@ Pawn::Pawn(Color color, Square position) : Piece(color, PieceType::Pawn, positio
     hasMoved = false;
 }
 
-Pawn::~Pawn()
-{
-}
-
 std::vector<Square> Pawn::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;

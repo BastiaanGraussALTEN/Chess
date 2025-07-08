@@ -4,10 +4,6 @@ Bishop::Bishop(Color color, Square position) : Piece(color, PieceType::Bishop, p
 {
 }
 
-Bishop::~Bishop()
-{
-}
-
 std::vector<Square> Bishop::GetPossibleMoves() const
 {
     std::vector<Square> possibleMoves;
