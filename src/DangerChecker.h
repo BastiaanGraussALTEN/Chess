@@ -1,5 +1,4 @@
-#ifndef ATTACKCHECKER_H
-#define ATTACKCHECKER_H
+#pragma once
 
 #include "LegalityChecker.h"
 
@@ -15,5 +14,3 @@ class DangerChecker
         LegalityChecker m_legalityChecker;
         Color m_color;
 };
-
-#endif

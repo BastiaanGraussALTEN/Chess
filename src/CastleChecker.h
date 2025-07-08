@@ -1,5 +1,4 @@
-#ifndef CASTLECHECKER_H
-#define CASTLECHECKER_H
+#pragma once
 
 #include "DangerChecker.h"
 
@@ -19,5 +18,3 @@ class CastleChecker
         bool IsAPieceBetweenKingAndRook(std::vector<Square> kingSquares) const;
         bool KingMovesOverAttackSquare(std::vector<Square> kingSquares) const;
 };
-
-#endif

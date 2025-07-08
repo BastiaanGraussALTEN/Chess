@@ -1,5 +1,4 @@
-#ifndef LEGALITYCHECKER_H
-#define LEGALITYCHECKER_H
+#pragma once
 
 #include "Board.h"
 
@@ -16,5 +15,3 @@ class LegalityChecker
         bool IsEnPassant(const Move& move, std::shared_ptr<Piece> pawn) const;
         Board m_board;
 };
-
-#endif

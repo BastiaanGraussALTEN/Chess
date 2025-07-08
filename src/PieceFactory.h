@@ -1,5 +1,4 @@
-#ifndef PIECEFACTORY_H
-#define PIECEFACTORY_H
+#pragma once
 
 #include <memory>
 #include "Piece.h"
@@ -20,5 +19,3 @@ class PieceFactory
         static std::shared_ptr<Queen> CreateQueen(Color color, Square position);
         static std::shared_ptr<King> CreateKing(Color color, Square position);
 };
-
-#endif

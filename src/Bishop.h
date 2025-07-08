@@ -1,5 +1,4 @@
-#ifndef BISHOP_H
-#define BISHOP_H
+#pragma once
 
 #include "Piece.h"
 
@@ -10,5 +9,3 @@ class Bishop : public Piece
         std::shared_ptr<Piece> clone() const override {return std::make_shared<Bishop>(*this);}
         std::vector<Square> GetPossibleMoves() const override;
 };
-
-#endif

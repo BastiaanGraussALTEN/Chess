@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../src/Board.h"
+#include "Board.h"
 
 class TestFunctions
 {

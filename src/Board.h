@@ -1,5 +1,4 @@
-#ifndef BOARD_H
-#define BOARD_H
+#pragma once
 
 #include <vector>
 #include "PieceFactory.h"
@@ -31,5 +30,3 @@ class Board
         void CreateInitialBoardState();
         void UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece);
 };
-
-#endif

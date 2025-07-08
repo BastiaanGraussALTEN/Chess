@@ -1,5 +1,4 @@
-#ifndef MOVEDIALOG_H
-#define MOVEDIALOG_H
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -27,5 +26,3 @@ class MoveDialog
         std::string GetMoveHistory();
         std::string GetSingleLineDialog();
 };
-
-#endif

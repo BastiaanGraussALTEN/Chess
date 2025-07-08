@@ -1,5 +1,4 @@
-#ifndef MOVE_H
-#define MOVE_H
+#pragma once
 
 #include "Square.h"
 #include "PieceType.h"
@@ -16,5 +15,3 @@ struct Move
     // king for kingside, pawn for queenside, rest for promotion
     PieceType promotionOrCastleside = PieceType::Queen;
 };
-
-#endif

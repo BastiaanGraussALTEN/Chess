@@ -1,5 +1,4 @@
-#ifndef POSITIONFUNCTIONS_H
-#define POSITIONFUNCTIONS_H
+#pragma once
 
 #include "board.h"
 
@@ -11,5 +10,3 @@ class PositionFunctions
         static std::vector<Square> GetDiagonalsInBetween(const Move &move, int amoundtOfInBetweenSteps);
         static std::vector<Square> GetOrthogonalsInBetween(const Move &move, int amoundtOfInBetweenSteps);
 };
-
-#endif

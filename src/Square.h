@@ -1,5 +1,4 @@
-#ifndef SQUARE_H
-#define SQUARE_H
+#pragma once
 
 #include <stdexcept>
 
@@ -24,6 +23,3 @@ struct Square
     int x;
     int y;
 };
-
-
-#endif

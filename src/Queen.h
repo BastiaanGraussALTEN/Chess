@@ -1,5 +1,4 @@
-#ifndef QUEEN_H
-#define QUEEN_H
+#pragma once
 
 #include "Piece.h"
 
@@ -10,5 +9,3 @@ class Queen : public Piece
         std::shared_ptr<Piece> clone() const override {return std::make_shared<Queen>(*this);}
         std::vector<Square> GetPossibleMoves() const override;
 };
-
-#endif

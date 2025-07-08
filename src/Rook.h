@@ -1,5 +1,4 @@
-#ifndef ROOK_H
-#define ROOK_H
+#pragma once
 
 #include "Piece.h"
 
@@ -10,5 +9,3 @@ class Rook : public Piece
         std::shared_ptr<Piece> clone() const override {return std::make_shared<Rook>(*this);}
         std::vector<Square> GetPossibleMoves() const override;
 };
-
-#endif

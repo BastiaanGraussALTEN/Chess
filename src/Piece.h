@@ -1,5 +1,4 @@
-#ifndef PIECE_H
-#define PIECE_H
+#pragma once
 
 #include <vector>
 #include <memory>
@@ -19,5 +18,3 @@ class Piece
         PieceType pieceType;
         Square position;
 };
-
-#endif
