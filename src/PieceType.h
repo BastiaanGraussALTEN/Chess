@@ -1,14 +1,11 @@
-#ifndef PIECETYPE_H
-#define PIECETYPE_H
+#pragma once
 
-enum PieceType
+enum class PieceType
 {
-    PawnType,
-    KnightType,
-    BishopType,
-    RookType,
-    QueenType,
-    KingType
+    Pawn,
+    Knight,
+    Bishop,
+    Rook,
+    Queen,
+    King
 };
-
-#endif

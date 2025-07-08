@@ -34,7 +34,7 @@ bool DangerChecker::IsSquareUnderAttack(Square Targetsquare) const
         if (piece->color != m_color)
         {
             std::vector<Square> possibleMoves = piece->GetPossibleMoves();
-            if (piece->pieceType == PieceType::PawnType)
+            if (piece->pieceType == PieceType::Pawn)
             {
                 for (auto square : possibleMoves)
                 {
@@ -66,7 +66,7 @@ Square DangerChecker::GetKingPosition() const
 {
     for (auto piece : m_board.GetPieces())
     {
-        if ((piece->color == m_color) && (piece->pieceType == PieceType::KingType))
+        if ((piece->color == m_color) && (piece->pieceType == PieceType::King))
         {
             return piece->position;
         }

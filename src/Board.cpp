@@ -99,7 +99,7 @@ void Board::MovePiece(const Move &move)
         m_lastMove = move;
     }
 
-    if (piece->pieceType == PieceType::PawnType)
+    if (piece->pieceType == PieceType::Pawn)
     {
         m_consecutiveNonPawnMoves = 0;
         if (abs(move.end.y - move.start.y) == 2)

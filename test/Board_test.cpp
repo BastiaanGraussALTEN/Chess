@@ -157,7 +157,7 @@ TEST(BoardTest, PieceCanBeMoved)
     
     // Assert
     EXPECT_EQ(oldSquare, nullptr);
-    EXPECT_EQ(newSquare->pieceType, PieceType::KnightType);
+    EXPECT_EQ(newSquare->pieceType, PieceType::Knight);
 }
 
 TEST(BoardTest, PawnRemembersThatItHasMoved)
@@ -254,8 +254,8 @@ TEST(BoardTest, WhiteCastleKingside)
     board.CastleKingside(Color::White);
     
     // Assert
-    ASSERT_EQ(board.GetPieceFromSquare(Square(7,1))->pieceType, PieceType::KingType);
-    ASSERT_EQ(board.GetPieceFromSquare(Square(6,1))->pieceType, PieceType::RookType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(7,1))->pieceType, PieceType::King);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(6,1))->pieceType, PieceType::Rook);
 }
 
 TEST(BoardTest, WhiteCastleQueenide)
@@ -270,8 +270,8 @@ TEST(BoardTest, WhiteCastleQueenide)
     board.CastleQueenside(Color::White);
     
     // Assert
-    ASSERT_EQ(board.GetPieceFromSquare(Square(3,1))->pieceType, PieceType::KingType);
-    ASSERT_EQ(board.GetPieceFromSquare(Square(4,1))->pieceType, PieceType::RookType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(3,1))->pieceType, PieceType::King);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(4,1))->pieceType, PieceType::Rook);
 }
 
 TEST(BoardTest, BlackCastleKingside)
@@ -285,8 +285,8 @@ TEST(BoardTest, BlackCastleKingside)
     board.CastleKingside(Color::Black);
     
     // Assert
-    ASSERT_EQ(board.GetPieceFromSquare(Square(7,8))->pieceType, PieceType::KingType);
-    ASSERT_EQ(board.GetPieceFromSquare(Square(6,8))->pieceType, PieceType::RookType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(7,8))->pieceType, PieceType::King);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(6,8))->pieceType, PieceType::Rook);
 }
 
 TEST(BoardTest, BlackCastleQueenide)
@@ -301,8 +301,8 @@ TEST(BoardTest, BlackCastleQueenide)
     board.CastleQueenside(Color::Black);
     
     // Assert
-    ASSERT_EQ(board.GetPieceFromSquare(Square(3,8))->pieceType, PieceType::KingType);
-    ASSERT_EQ(board.GetPieceFromSquare(Square(4,8))->pieceType, PieceType::RookType);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(3,8))->pieceType, PieceType::King);
+    ASSERT_EQ(board.GetPieceFromSquare(Square(4,8))->pieceType, PieceType::Rook);
 }
 
 TEST(BoardTest, DefaultHasNoEnpessant)

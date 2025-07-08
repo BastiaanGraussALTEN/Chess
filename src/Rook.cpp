@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-Rook::Rook(Color color, Square position) : Piece(color, PieceType::RookType, position)
+Rook::Rook(Color color, Square position) : Piece(color, PieceType::Rook, position)
 {
     hasMoved = false;
 }

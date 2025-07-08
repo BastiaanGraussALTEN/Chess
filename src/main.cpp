@@ -5,7 +5,7 @@
 
 bool IsPromotion(const Board& board, const Move& move)
 {
-    return (board.GetPieceFromSquare(move.end)->pieceType == PieceType::PawnType) 
+    return (board.GetPieceFromSquare(move.end)->pieceType == PieceType::Pawn) 
     && (((move.end.y == 1) && (board.GetPieceFromSquare(move.end)->color == Color::Black)) 
     || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White)));
 }
@@ -61,7 +61,7 @@ int main()
             }
             
             Move move = moveParser.ParseString(moveString);
-            if (move.promotionOrCastleside == PieceType::KingType) 
+            if (move.promotionOrCastleside == PieceType::King) 
             {
                 if (!castleChecker.CanCastleKingSide())
                 {
@@ -74,7 +74,7 @@ int main()
                 validMoveIsGiven = true;
                 continue;
             }
-            if (move.promotionOrCastleside == PieceType::PawnType) 
+            if (move.promotionOrCastleside == PieceType::Pawn) 
             {
                 if (!castleChecker.CanCastleQueenSide())
                 {
@@ -119,16 +119,16 @@ int main()
                 board.RemovePieceFromSquare(move.end);
                 switch (move.promotionOrCastleside)
                 {
-                    case PieceType::KnightType:
+                    case PieceType::Knight:
                         board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
                         break;
-                    case PieceType::BishopType:
+                    case PieceType::Bishop:
                         board.AddPiece(PieceFactory::CreateBishop(colorToMove, move.end));
                         break;
-                    case PieceType::RookType:
+                    case PieceType::Rook:
                         board.AddPiece(PieceFactory::CreateRook(colorToMove, move.end));
                         break;
-                    case PieceType::QueenType:
+                    case PieceType::Queen:
                         board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
                         break;
                 }

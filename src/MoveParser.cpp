@@ -6,12 +6,12 @@ Move MoveParser::ParseString(const std::string& moveString) const
     Move move = Move(Square(1, 1),Square(1, 1));
     if (moveString == "0-0")
     {
-        move.promotionOrCastleside = PieceType::KingType;
+        move.promotionOrCastleside = PieceType::King;
         return move;
     }
     if (moveString == "0-0-0")
     {
-        move.promotionOrCastleside = PieceType::PawnType;
+        move.promotionOrCastleside = PieceType::Pawn;
         return move;
     }
     if (moveString.size() == 4)
@@ -114,20 +114,20 @@ PieceType MoveParser::CharToPieceType(const char &piece) const
 {
     if (piece == 'N')
     {
-        return PieceType::KnightType;
+        return PieceType::Knight;
     }
     if (piece == 'B')
     {
-        return PieceType::BishopType;
+        return PieceType::Bishop;
     }
     if (piece == 'R')
     {
-        return PieceType::RookType;
+        return PieceType::Rook;
     }
     if (piece == 'Q')
     {
-        return PieceType::QueenType;
+        return PieceType::Queen;
     }
 
-    return PieceType::PawnType;
+    return PieceType::Pawn;
 }

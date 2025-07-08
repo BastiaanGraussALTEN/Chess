@@ -63,8 +63,8 @@ bool CastleChecker::KingAndRookAreNotCorrectSquare(Square kingSquare, Square roo
 {
     if ((m_board.GetPieceFromSquare(kingSquare) == nullptr)
     || (m_board.GetPieceFromSquare(rookSquare) == nullptr)
-    || (m_board.GetPieceFromSquare(kingSquare)->pieceType != PieceType::KingType)
-    || (m_board.GetPieceFromSquare(rookSquare)->pieceType != PieceType::RookType))
+    || (m_board.GetPieceFromSquare(kingSquare)->pieceType != PieceType::King)
+    || (m_board.GetPieceFromSquare(rookSquare)->pieceType != PieceType::Rook))
     {
         return true;
     }

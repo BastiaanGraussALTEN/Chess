@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(Color color, Square position) : Piece(color, PieceType::PawnType, position)
+Pawn::Pawn(Color color, Square position) : Piece(color, PieceType::Pawn, position)
 {
     hasMoved = false;
 }

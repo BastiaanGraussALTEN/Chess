@@ -45,7 +45,7 @@ bool LegalityChecker::CheckMoveLegality(const Move& move) const
         }
     }
 
-    if (piece->pieceType == PieceType::PawnType)
+    if (piece->pieceType == PieceType::Pawn)
     {
         if (PositionFunctions::IsMoveDiagonal(move))
         {
