@@ -175,14 +175,22 @@ Move Board::GetLastMove() const
 
 void Board::CreateInitialBoardState()
 {
-    // Create pawns
+    CreateInitialPawns();
+    CreateInitialWhitePieces();
+    CreateInitialBlackPieces();
+}
+
+void Board::CreateInitialPawns()
+{
     for (int i = Constants::boardBegin; i < Constants::boardEnd + 1; i++)
     {
         AddPiece(PieceFactory::CreatePawn(Color::White, Square(i, 2)));
         AddPiece(PieceFactory::CreatePawn(Color::Black, Square(i, 7)));
     }
+}
 
-    // Create white pieces
+void Board::CreateInitialWhitePieces()
+{
     AddPiece(PieceFactory::CreateRook(Color::White, Square(1, 1)));
     AddPiece(PieceFactory::CreateKnight(Color::White, Square(2, 1)));
     AddPiece(PieceFactory::CreateBishop(Color::White, Square(3, 1)));
@@ -191,8 +199,10 @@ void Board::CreateInitialBoardState()
     AddPiece(PieceFactory::CreateBishop(Color::White, Square(6, 1)));
     AddPiece(PieceFactory::CreateKnight(Color::White, Square(7, 1)));
     AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
-    
-    // Create black pieces
+}
+
+void Board::CreateInitialBlackPieces()
+{
     AddPiece(PieceFactory::CreateRook(Color::Black, Square(1, 8)));
     AddPiece(PieceFactory::CreateKnight(Color::Black, Square(2, 8)));
     AddPiece(PieceFactory::CreateBishop(Color::Black, Square(3, 8)));
@@ -203,7 +213,7 @@ void Board::CreateInitialBoardState()
     AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
 }
 
-void Board::UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece)
+void Board::UpdateEnPessantState(const Move &move, const std::shared_ptr<Piece> &piece)
 {
     m_consecutiveNonPawnMoves = 0;
     if (abs(move.end.y - move.start.y) == 2)
