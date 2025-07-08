@@ -29,6 +29,7 @@ class Board
         int m_consecutiveNonCaptures;
         std::vector<std::shared_ptr<Piece>> m_pieces;
         void CreateInitialBoardState();
+        void UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece);
 };
 
 #endif

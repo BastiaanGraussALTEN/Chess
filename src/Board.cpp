@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "Board.h"
 
 Board::Board()
@@ -46,27 +48,15 @@ const std::vector<std::shared_ptr<Piece>> Board::GetColorPieces(const Color &pie
 
 bool Board::IsThereAPieceOfThisColorHere(const Color &pieceColor, const Square &square) const
 {
-    for (auto piece : m_pieces)
-    {
-        if ((piece->color == pieceColor)
-        && (piece->position == square))
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::any_of(m_pieces.begin(), m_pieces.end(),
+    [&](const auto& piece) {
+        return piece->color == pieceColor && piece->position == square;
+    });
 }
 
 bool Board::IsFiftyMoveRule()
 {
-    if ((m_consecutiveNonCaptures > 99) 
-    && (m_consecutiveNonPawnMoves > 99))
-    {
-        return true;
-    }
-
-    return false;
+    return m_consecutiveNonCaptures > 99 && m_consecutiveNonPawnMoves > 99;
 }
 
 void Board::AddPiece(const std::shared_ptr<Piece> &piece)
@@ -210,4 +200,26 @@ void Board::CreateInitialBoardState()
     AddPiece(PieceFactory::CreateBishop(Color::Black, Square(6, 8)));
     AddPiece(PieceFactory::CreateKnight(Color::Black, Square(7, 8)));
     AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
+}
+
+void Board::UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece)
+{
+    m_consecutiveNonPawnMoves = 0;
+    if (abs(move.end.y - move.start.y) == 2)
+    {
+        HasEnPessantSquare = true;
+        if (piece->color == Color::White)
+        {
+            EnPessantSquare = Square(move.end.x, move.end.y - 1);
+        }
+        if (piece->color == Color::Black)
+        {
+            EnPessantSquare = Square(move.end.x, move.end.y + 1);
+        }
+    }
+    else
+    {
+        HasEnPessantSquare = false;
+        EnPessantSquare = Square(1,1);
+    }
 }

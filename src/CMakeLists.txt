@@ -19,8 +19,8 @@ set(SRC_FILES
     Rook.cpp
     )
     
-    # Set the header files for the main project
-    set(HEADER_FILES
+# Set the header files for the main project
+set(HEADER_FILES
     Bishop.h
     Board.h
     CastleChecker.h

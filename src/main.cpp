@@ -1,4 +1,3 @@
-#include <iostream>
 #include "MoveDialog.h"
 #include "MoveParser.h"
 #include "CastleChecker.h"
@@ -6,14 +5,9 @@
 
 bool IsPromotion(const Board& board, const Move& move)
 {
-    if ((board.GetPieceFromSquare(move.end)->pieceType == PieceType::PawnType) 
+    return (board.GetPieceFromSquare(move.end)->pieceType == PieceType::PawnType) 
     && (((move.end.y == 1) && (board.GetPieceFromSquare(move.end)->color == Color::Black)) 
-    || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White))))
-    {
-        return true;
-    }
-
-    return false;
+    || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White)));
 }
 
 int main()

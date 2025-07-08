@@ -85,19 +85,14 @@ bool CastleChecker::KingOrRookHasMoved(Square kingSquare, Square rookSquare) con
 
 bool CastleChecker::KingIsUnderAttack() const
 {
-    if (m_dangerChecker.IsKingUnderAttack() == true)
-    {
-        return true;
-    }
-
-    return false;
+    return m_dangerChecker.IsKingUnderAttack();
 }
 
 bool CastleChecker::IsAPieceBetweenKingAndRook(std::vector<Square> kingSquares) const
 {
     for (int i = 0; i < kingSquares.size(); i++)
     {
-        if (m_board.GetPieceFromSquare(kingSquares[i]) != nullptr)
+        if (m_board.GetPieceFromSquare(kingSquares[i]))
         {
             return true;
         }
