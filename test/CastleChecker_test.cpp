@@ -10,7 +10,7 @@ TEST(CastleCheckerTest, WhiteCanCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -27,7 +27,7 @@ TEST(CastleCheckerTest, BlackCanCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -44,7 +44,7 @@ TEST(CastleCheckerTest, WhenWhiteKingWrongSquareNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -61,7 +61,7 @@ TEST(CastleCheckerTest, WhenBlackKingWrongSquareNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -77,7 +77,7 @@ TEST(CastleCheckerTest, WhenNoWhiteRookNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -93,7 +93,7 @@ TEST(CastleCheckerTest, WhenNoBlackRookNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(5, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -110,7 +110,7 @@ TEST(CastleCheckerTest, WhenWhiteRookIsOnWrongSquareNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(7, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -127,7 +127,7 @@ TEST(CastleCheckerTest, WhenBlackRookIsOnWrongSquareNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(7, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -145,7 +145,7 @@ TEST(CastleCheckerTest, WhenWhiteKingHasMovedNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -163,7 +163,7 @@ TEST(CastleCheckerTest, WhenBlackKingHasMovedNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -181,7 +181,7 @@ TEST(CastleCheckerTest, WhenWhiteRookHasMovedNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -199,7 +199,7 @@ TEST(CastleCheckerTest, WhenBlackRookHasMovedNoCastleKingSide)
     board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(5, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -217,7 +217,7 @@ TEST(CastleCheckerTest, WhenPieceInBetweenNoCastleKingSideForWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -235,7 +235,7 @@ TEST(CastleCheckerTest, WhenPieceInBetweenNoCastleKingSideForBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -253,7 +253,7 @@ TEST(CastleCheckerTest, WhenInCheckNoCastleKingSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(5, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -271,7 +271,7 @@ TEST(CastleCheckerTest, WhenInCheckNoCastleKingSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(5, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -289,7 +289,7 @@ TEST(CastleCheckerTest, WhenDestinationIsAttackedNoCastleKingSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(7, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -307,7 +307,7 @@ TEST(CastleCheckerTest, WhenDestinationIsAttackedNoCastleKingSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(7, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -325,7 +325,7 @@ TEST(CastleCheckerTest, WhenRookIsAttackedCanCastleKingSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(8, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -343,7 +343,7 @@ TEST(CastleCheckerTest, WhenRookIsAttackedCanCastleKingSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(8, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -361,7 +361,7 @@ TEST(CastleCheckerTest, WhenMovingOverAttackedSquareNoCastleKingSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(6, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -379,7 +379,7 @@ TEST(CastleCheckerTest, WhenMovingOverAttackedSquareNoCastleKingSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(6, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleKingSide();
@@ -396,7 +396,7 @@ TEST(CastleCheckerTest, WhiteCanCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(1, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -413,7 +413,7 @@ TEST(CastleCheckerTest, BlackCanCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(1, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -430,7 +430,7 @@ TEST(CastleCheckerTest, WhenWhiteKingWrongSquareNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(1, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -447,7 +447,7 @@ TEST(CastleCheckerTest, WhenBlackKingWrongSquareNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(1, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -463,7 +463,7 @@ TEST(CastleCheckerTest, WhenNoWhiteRookNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -479,7 +479,7 @@ TEST(CastleCheckerTest, WhenNoBlackRookNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(5, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -496,7 +496,7 @@ TEST(CastleCheckerTest, WhenWhiteRookIsOnWrongSquareNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(7, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -513,7 +513,7 @@ TEST(CastleCheckerTest, WhenBlackRookIsOnWrongSquareNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(7, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -531,7 +531,7 @@ TEST(CastleCheckerTest, WhenWhiteKingHasMovedNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(1, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -549,7 +549,7 @@ TEST(CastleCheckerTest, WhenBlackKingHasMovedNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(1, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -567,7 +567,7 @@ TEST(CastleCheckerTest, WhenWhiteRookHasMovedNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateKing(Color::White, Square(5, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -585,7 +585,7 @@ TEST(CastleCheckerTest, WhenBlackRookHasMovedNoCastleQueenSide)
     board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(5, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -603,7 +603,7 @@ TEST(CastleCheckerTest, WhenPieceInBetweenNoCastleQueenSideForWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(1, 1)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -621,7 +621,7 @@ TEST(CastleCheckerTest, WhenPieceInBetweenNoCastleQueenSideForBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(1, 8)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -639,7 +639,7 @@ TEST(CastleCheckerTest, WhenInCheckNoCastleQueenSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(5, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -657,7 +657,7 @@ TEST(CastleCheckerTest, WhenInCheckNoCastleQueenSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(5, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -675,7 +675,7 @@ TEST(CastleCheckerTest, WhenDestinationIsAttackedNoCastleQueenSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(3, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -693,7 +693,7 @@ TEST(CastleCheckerTest, WhenDestinationIsAttackedNoCastleQueenSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(3, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -711,7 +711,7 @@ TEST(CastleCheckerTest, WhenRookIsAttackedCanCastleQueenSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(1, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -729,7 +729,7 @@ TEST(CastleCheckerTest, WhenRookIsAttackedCanCastleQueenSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(1, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -747,7 +747,7 @@ TEST(CastleCheckerTest, WhenMovingOverAttackedSquareNoCastleQueenSideWhite)
     board.AddPiece(PieceFactory::CreateRook(Color::Black, Square(4, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::White);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::White);
+    CastleChecker castleChecker = CastleChecker(board, Color::White);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();
@@ -765,7 +765,7 @@ TEST(CastleCheckerTest, WhenMovingOverAttackedSquareNoCastleQueenSideBlack)
     board.AddPiece(PieceFactory::CreateRook(Color::White, Square(4, 4)));
     LegalityChecker legalityChecker = LegalityChecker(board);
     DangerChecker dangerChecker = DangerChecker(board, Color::Black);
-    CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, Color::Black);
+    CastleChecker castleChecker = CastleChecker(board, Color::Black);
 
     // Act
     bool canCastle = castleChecker.CanCastleQueenSide();

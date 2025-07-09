@@ -22,7 +22,7 @@ int main()
         LegalityChecker legalityChecker = LegalityChecker(board);
         CheckChecker checkChecker = CheckChecker(board, colorToMove);
         DangerChecker dangerChecker = DangerChecker(board, colorToMove);
-        CastleChecker castleChecker = CastleChecker(board, legalityChecker, dangerChecker, colorToMove);
+        CastleChecker castleChecker = CastleChecker(board, colorToMove);
 
         if (checkChecker.EveryMoveChecksSelf())
         {

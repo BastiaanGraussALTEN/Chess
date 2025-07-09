@@ -5,7 +5,7 @@
 class CastleChecker
 {
     public:
-        CastleChecker(const Board& board, const LegalityChecker& legalityChecker, const DangerChecker& dangerChecker, const Color& color);
+        CastleChecker(const Board& board, const Color& color);
         bool CanCastleKingSide() const;
         bool CanCastleQueenSide() const;
     private:
