@@ -36,4 +36,5 @@ class Board
         void CreateInitialBlackPieces();
         void UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece);
         void UpdateVarsAfterNonPawnMove();
+        void UpdateCastleRights(const Move& move, const std::shared_ptr<Piece>& piece);
 };

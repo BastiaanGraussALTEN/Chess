@@ -98,17 +98,7 @@ void Board::MovePiece(const Move &move)
     }
     else
     {
-        if (piece->pieceType == PieceType::King && piece->hasMoved == false && piece->color == Color::White)
-        {   
-            WhiteHasKingsideCastleRights = false;
-            WhiteHasQueensideCastleRights = false;
-        }
-        if (piece->pieceType == PieceType::King && piece->hasMoved == false && piece->color == Color::Black)
-        {   
-            BlackHasKingsideCastleRights = false;
-            BlackHasQueensideCastleRights = false;
-        }
-        
+        UpdateCastleRights(move, piece);
         piece->position = move.end;
         piece->hasMoved = true;
         m_lastMove = move;
@@ -232,4 +222,34 @@ void Board::UpdateVarsAfterNonPawnMove()
 {
     m_consecutiveNonPawnMoves += 1;
     EnPessantSquare = Square(1,1);
+}
+
+void Board::UpdateCastleRights(const Move& move, const std::shared_ptr<Piece>& piece)
+{
+    if (piece->pieceType == PieceType::King && piece->hasMoved == false && piece->color == Color::White)
+        {   
+            WhiteHasKingsideCastleRights = false;
+            WhiteHasQueensideCastleRights = false;
+        }
+        if (piece->pieceType == PieceType::King && piece->hasMoved == false && piece->color == Color::Black)
+        {   
+            BlackHasKingsideCastleRights = false;
+            BlackHasQueensideCastleRights = false;
+        }
+        if (piece->pieceType == PieceType::Rook && piece->hasMoved == false && piece->color == Color::White && piece->position.x == 1)
+        {   
+            WhiteHasKingsideCastleRights = false;
+        }
+        if (piece->pieceType == PieceType::Rook && piece->hasMoved == false && piece->color == Color::White && piece->position.x == 8)
+        {   
+            WhiteHasQueensideCastleRights = false;
+        }
+        if (piece->pieceType == PieceType::Rook && piece->hasMoved == false && piece->color == Color::Black && piece->position.x == 1)
+        {   
+            BlackHasKingsideCastleRights = false;
+        }
+        if (piece->pieceType == PieceType::Rook && piece->hasMoved == false && piece->color == Color::Black && piece->position.x == 8)
+        {   
+            BlackHasQueensideCastleRights = false;
+        }
 }
