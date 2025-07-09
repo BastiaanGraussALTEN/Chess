@@ -9,7 +9,6 @@ Board::Board()
     CreateInitialBoardState();
     m_consecutiveNonCaptures = 0;
     m_consecutiveNonPawnMoves = 0;
-    HasEnPessantSquare = false;
 }
 
 Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
@@ -199,7 +198,6 @@ void Board::UpdateEnPessantState(const Move &move, const std::shared_ptr<Piece> 
     m_consecutiveNonPawnMoves = 0;
     if (abs(move.end.y - move.start.y) == 2)
     {
-        HasEnPessantSquare = true;
         if (piece->color == Color::White)
         {
             EnPessantSquare = Square(move.end.x, move.end.y - 1);
@@ -211,7 +209,6 @@ void Board::UpdateEnPessantState(const Move &move, const std::shared_ptr<Piece> 
     }
     else
     {
-        HasEnPessantSquare = false;
         EnPessantSquare = Square(1,1);
     }
 }
@@ -219,6 +216,5 @@ void Board::UpdateEnPessantState(const Move &move, const std::shared_ptr<Piece> 
 void Board::UpdateVarsNonPawnMove()
 {
     m_consecutiveNonPawnMoves += 1;
-    HasEnPessantSquare = false;
     EnPessantSquare = Square(1,1);
 }
