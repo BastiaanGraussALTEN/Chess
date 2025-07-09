@@ -32,4 +32,5 @@ class Board
         void CreateInitialWhitePieces();
         void CreateInitialBlackPieces();
         void UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece);
+        void UpdateVarsNonPawnMove();
 };

@@ -102,30 +102,11 @@ void Board::MovePiece(const Move &move)
 
     if (piece->pieceType == PieceType::Pawn)
     {
-        m_consecutiveNonPawnMoves = 0;
-        if (abs(move.end.y - move.start.y) == 2)
-        {
-            HasEnPessantSquare = true;
-            if (piece->color == Color::White)
-            {
-                EnPessantSquare = Square(move.end.x, move.end.y - 1);
-            }
-            if (piece->color == Color::Black)
-            {
-                EnPessantSquare = Square(move.end.x, move.end.y + 1);
-            }
-        }
-        else
-        {
-            HasEnPessantSquare = false;
-            EnPessantSquare = Square(1,1);
-        }
+        UpdateEnPessantState(move, piece);
     }
     else
     {
-        m_consecutiveNonPawnMoves += 1;
-        HasEnPessantSquare = false;
-        EnPessantSquare = Square(1,1);
+        UpdateVarsNonPawnMove();
     }
 
     m_consecutiveNonCaptures += 1;
@@ -159,7 +140,7 @@ std::shared_ptr<Piece> Board::GetPieceFromSquare(const Square &coord) const
 {
     for (const auto& piece : m_pieces)
     {
-        if ( piece->position == coord)
+        if (piece->position == coord)
         {
             return piece;
         }
@@ -233,4 +214,11 @@ void Board::UpdateEnPessantState(const Move &move, const std::shared_ptr<Piece> 
         HasEnPessantSquare = false;
         EnPessantSquare = Square(1,1);
     }
+}
+
+void Board::UpdateVarsNonPawnMove()
+{
+    m_consecutiveNonPawnMoves += 1;
+    HasEnPessantSquare = false;
+    EnPessantSquare = Square(1,1);
 }
