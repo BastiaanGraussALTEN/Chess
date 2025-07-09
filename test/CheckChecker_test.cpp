@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "../src/headerfiles/CheckChecker.h"
-#include "../src/headerfiles/TestFunctions.h"
+#include "../header/CheckChecker.h"
+#include "../header/TestFunctions.h"
 
 TEST(CheckCheckerTest, MovePreventsCheck)
 {

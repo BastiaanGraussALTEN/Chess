@@ -1,4 +1,4 @@
-#include "../headerfiles/MoveDialog.h"
+#include "../header/MoveDialog.h"
 #include <numeric>
 
 MoveDialog::MoveDialog()

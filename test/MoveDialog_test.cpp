@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/headerfiles/MoveDialog.h"
+#include "../header/MoveDialog.h"
 
 TEST(MoveDialogTest, firstDialog) 
 {

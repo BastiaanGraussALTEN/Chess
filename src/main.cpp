@@ -1,7 +1,7 @@
-#include "../headerfiles/MoveDialog.h"
-#include "../headerfiles/MoveParser.h"
-#include "../headerfiles/CastleChecker.h"
-#include "../headerfiles/CheckChecker.h"
+#include "../header/MoveDialog.h"
+#include "../header/MoveParser.h"
+#include "../header/CastleChecker.h"
+#include "../header/CheckChecker.h"
 
 bool IsPromotion(const Board& board, const Move& move)
 {

@@ -1,4 +1,4 @@
-#include "../headerfiles/CheckChecker.h"
+#include "../header/CheckChecker.h"
 
 CheckChecker::CheckChecker(const Board &board, const Color &color)
 : m_board(board), m_color(color)

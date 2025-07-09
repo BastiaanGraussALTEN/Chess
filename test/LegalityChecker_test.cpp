@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/headerfiles/LegalityChecker.h"
+#include "../header/LegalityChecker.h"
 
 TEST(LegalityCheckerTest, LegalityCheckerCanBeMade)
 {

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "../src/headerfiles/CastleChecker.h"
-#include "../src/headerfiles/TestFunctions.h"
+#include "../header/CastleChecker.h"
+#include "../header/TestFunctions.h"
 
 TEST(CastleCheckerTest, WhiteCanCastleKingSide)
 {

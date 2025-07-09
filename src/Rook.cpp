@@ -1,5 +1,5 @@
-#include "../headerfiles/Rook.h"
-#include "../headerfiles/Constants.h"
+#include "../header/Rook.h"
+#include "../header/Constants.h"
 
 Rook::Rook(Color color, Square position) : Piece(color, PieceType::Rook, position)
 {

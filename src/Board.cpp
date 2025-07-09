@@ -1,7 +1,7 @@
 #include <algorithm>
 
-#include "../headerfiles/Board.h"
-#include "../headerfiles/Constants.h"
+#include "../header/Board.h"
+#include "../header/Constants.h"
 
 Board::Board()
 : m_lastMove(Square(1, 1), Square(1, 1))

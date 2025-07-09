@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/headerfiles/Square.h"
+#include "../header/Square.h"
 
 TEST(CoordTest, coordCanBeConstructed)
 {

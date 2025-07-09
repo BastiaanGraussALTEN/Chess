@@ -1,5 +1,5 @@
-#include "../headerfiles/King.h"
-#include "../headerfiles/Constants.h"
+#include "../header/King.h"
+#include "../header/Constants.h"
 
 King::King(Color color, Square position) : Piece(color, PieceType::King, position)
 {

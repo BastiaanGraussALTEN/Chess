@@ -1,5 +1,5 @@
-#include "../headerfiles/Knight.h"
-#include "../headerfiles/Constants.h"
+#include "../header/Knight.h"
+#include "../header/Constants.h"
 
 Knight::Knight(Color color, Square position) : Piece(color, PieceType::Knight, position)
 {

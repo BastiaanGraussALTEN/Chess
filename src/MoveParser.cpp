@@ -1,4 +1,4 @@
-#include "../headerfiles/MoveParser.h"
+#include "../header/MoveParser.h"
 #include <map>
 
 Move MoveParser::ParseString(const std::string& moveString) const

@@ -1,51 +1,51 @@
 # Set the source files for the main project
 set(SRC_FILES
-    sourcefiles/main.cpp
-    sourcefiles/Bishop.cpp
-    sourcefiles/Board.cpp
-    sourcefiles/CastleChecker.cpp
-    sourcefiles/CheckChecker.cpp
-    sourcefiles/DangerChecker.cpp
-    sourcefiles/King.cpp
-    sourcefiles/Knight.cpp
-    sourcefiles/LegalityChecker.cpp
-    sourcefiles/MoveDialog.cpp
-    sourcefiles/MoveParser.cpp
-    sourcefiles/Pawn.cpp
-    sourcefiles/Piece.cpp
-    sourcefiles/PieceFactory.cpp
-    sourcefiles/PositionFunctions.cpp
-    sourcefiles/Queen.cpp
-    sourcefiles/Rook.cpp
+    main.cpp
+    Bishop.cpp
+    Board.cpp
+    CastleChecker.cpp
+    CheckChecker.cpp
+    DangerChecker.cpp
+    King.cpp
+    Knight.cpp
+    LegalityChecker.cpp
+    MoveDialog.cpp
+    MoveParser.cpp
+    Pawn.cpp
+    Piece.cpp
+    PieceFactory.cpp
+    PositionFunctions.cpp
+    Queen.cpp
+    Rook.cpp
     )
     
 # Set the header files for the main project
 set(HEADER_FILES
-    headerfiles/Bishop.h
-    headerfiles/Board.h
-    headerfiles/CastleChecker.h
-    headerfiles/CheckChecker.h
-    headerfiles/Color.h
-    headerfiles/Constants.h
-    headerfiles/DangerChecker.h
-    headerfiles/King.h
-    headerfiles/Knight.h
-    headerfiles/LegalityChecker.h
-    headerfiles/Move.h
-    headerfiles/MoveDialog.h
-    headerfiles/MoveParser.h
-    headerfiles/Pawn.h
-    headerfiles/Piece.h
-    headerfiles/PieceFactory.h
-    headerfiles/PositionFunctions.h
-    headerfiles/Queen.h
-    headerfiles/Rook.h
-    headerfiles/Square.h
-    headerfiles/TestFunctions.h
+    ../header/Bishop.h
+    ../header/Board.h
+    ../header/CastleChecker.h
+    ../header/CheckChecker.h
+    ../header/Color.h
+    ../header/Constants.h
+    ../header/DangerChecker.h
+    ../header/King.h
+    ../header/Knight.h
+    ../header/LegalityChecker.h
+    ../header/Move.h
+    ../header/MoveDialog.h
+    ../header/MoveParser.h
+    ../header/Pawn.h
+    ../header/Piece.h
+    ../header/PieceFactory.h
+    ../header/PositionFunctions.h
+    ../header/Queen.h
+    ../header/Rook.h
+    ../header/Square.h
+    ../header/TestFunctions.h
 )
 
 # Add the executable or library
 add_library(src STATIC ${SRC_FILES} ${HEADER_FILES})
 
-add_executable(Chess sourcefiles/main.cpp)
+add_executable(Chess main.cpp)
 target_link_libraries(Chess PRIVATE src)

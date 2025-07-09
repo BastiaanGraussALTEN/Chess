@@ -1,5 +1,5 @@
-#include "../headerfiles/DangerChecker.h"
-#include "../headerfiles/PositionFunctions.h"
+#include "../header/DangerChecker.h"
+#include "../header/PositionFunctions.h"
 
 DangerChecker::DangerChecker(const Board& board, const Color& color) 
 : m_board(board), m_color(color), m_legalityChecker(LegalityChecker(board))

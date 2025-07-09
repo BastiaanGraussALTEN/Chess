@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/headerfiles/PieceFactory.h"
+#include "../header/PieceFactory.h"
 
 TEST(PieceTest, pawnCanBeMade) 
 {
