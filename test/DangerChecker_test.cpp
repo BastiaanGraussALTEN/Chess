@@ -7,7 +7,7 @@ TEST(DangerCheckerTest, ThereIsNoKingThrowsException)
     Board board;
     board.RemovePieceFromSquare(Square(5, 1));
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
     
     // Act
 
@@ -20,7 +20,7 @@ TEST(DangerCheckerTest, KingIsNotUnderAttack)
     // Arrange
     Board board;
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
 
     // Act
     bool isUnderAttack = dangerChecker.IsKingUnderAttack();
@@ -36,7 +36,7 @@ TEST(DangerCheckerTest, KingIsUnderAttack)
     // Nd3
     board.AddPiece(PieceFactory::CreateKnight(Color::Black, Square(4, 3)));
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
 
     // Act
     bool isUnderAttack = dangerChecker.IsKingUnderAttack();
@@ -52,7 +52,7 @@ TEST(DangerCheckerTest, KingIsUnderAttackByPawn)
     board.RemovePieceFromSquare(Square(4, 2));
     board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(4, 2)));
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
 
     // Act
     bool isUnderAttack = dangerChecker.IsKingUnderAttack();
@@ -68,7 +68,7 @@ TEST(DangerCheckerTest, KingIsNotUnderNotUnderAttackInFrontOfPawn)
     board.RemovePieceFromSquare(Square(5, 2));
     board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(5, 2)));
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
 
     // Act
     bool isUnderAttack = dangerChecker.IsKingUnderAttack();
@@ -82,7 +82,7 @@ TEST(DangerCheckerTets, SquareIsNotUnderAttack)
     // Arrange 
     Board board;
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
     
     // Act
     bool isUnderAttack = dangerChecker.IsSquareUnderAttack(Square(4, 1));
@@ -96,7 +96,7 @@ TEST(DangerCheckerTets, SquareIsUnderAttackByKnight)
     // Arrange 
     Board board;
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
     
     // Act
     bool isUnderAttack = dangerChecker.IsSquareUnderAttack(Square(3, 6));
@@ -110,7 +110,7 @@ TEST(DangerCheckerTets, SquareIsUnderAttackByPawn)
     // Arrange 
     Board board;
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
     
     // Act
     bool isUnderAttack = dangerChecker.IsSquareUnderAttack(Square(4, 6));
@@ -124,7 +124,7 @@ TEST(DangerCheckerTets, SquareIsNotUnderAttackWhenInFrontOfPawn)
     // Arrange 
     Board board;
     LegalityChecker legalityChecker(board);
-    DangerChecker dangerChecker(board, legalityChecker, Color::White);
+    DangerChecker dangerChecker(board, Color::White);
     
     // Act
     bool isUnderAttack = dangerChecker.IsSquareUnderAttack(Square(4, 5));

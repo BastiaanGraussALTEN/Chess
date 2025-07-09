@@ -5,7 +5,7 @@
 class DangerChecker
 {
     public:
-        DangerChecker(const Board& board, const LegalityChecker& legalityChecker, const Color& color);
+        DangerChecker(const Board& board, const Color& color);
         bool IsKingUnderAttack() const;
         bool IsSquareUnderAttack(Square targetSquare) const;
     private:

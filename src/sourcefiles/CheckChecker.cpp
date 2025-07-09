@@ -14,7 +14,7 @@ bool CheckChecker::IsKingSafeAfterMove(const Move &move) const
     }
     boardCopy.MovePiece(move);
     LegalityChecker legalityChecker(boardCopy);
-    DangerChecker dangerChecker(boardCopy, legalityChecker, m_color);
+    DangerChecker dangerChecker(boardCopy, m_color);
     return !dangerChecker.IsKingUnderAttack();
 }
 
