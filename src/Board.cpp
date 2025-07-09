@@ -9,6 +9,7 @@ Board::Board()
     CreateInitialBoardState();
     m_consecutiveNonCaptures = 0;
     m_consecutiveNonPawnMoves = 0;
+    WhiteHasKingsideCastleRights = true;
 }
 
 Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
@@ -105,7 +106,7 @@ void Board::MovePiece(const Move &move)
     }
     else
     {
-        UpdateVarsNonPawnMove();
+        UpdateVarsAfterNonPawnMove();
     }
 
     m_consecutiveNonCaptures += 1;
@@ -213,7 +214,7 @@ void Board::UpdateEnPessantState(const Move &move, const std::shared_ptr<Piece> 
     }
 }
 
-void Board::UpdateVarsNonPawnMove()
+void Board::UpdateVarsAfterNonPawnMove()
 {
     m_consecutiveNonPawnMoves += 1;
     EnPessantSquare = Square(1,1);

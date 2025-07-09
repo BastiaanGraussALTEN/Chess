@@ -20,8 +20,8 @@ class Board
         void CastleQueenside(const Color& color);
         std::shared_ptr<Piece> GetPieceFromSquare(const Square& coord) const;
         Move GetLastMove() const;
-        bool HasEnPessantSquare;
         Square EnPessantSquare = Square(1, 1);
+        bool WhiteHasKingsideCastleRights;
     private:
         Move m_lastMove;
         int m_consecutiveNonPawnMoves;
@@ -32,5 +32,5 @@ class Board
         void CreateInitialWhitePieces();
         void CreateInitialBlackPieces();
         void UpdateEnPessantState(const Move& move, const std::shared_ptr<Piece>& piece);
-        void UpdateVarsNonPawnMove();
+        void UpdateVarsAfterNonPawnMove();
 };
