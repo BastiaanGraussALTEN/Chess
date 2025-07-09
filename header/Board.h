@@ -22,6 +22,9 @@ class Board
         Move GetLastMove() const;
         Square EnPessantSquare = Square(1, 1);
         bool WhiteHasKingsideCastleRights;
+        bool WhiteHasQueensideCastleRights;
+        bool BlackHasKingsideCastleRights;
+        bool BlackHasQueensideCastleRights;
     private:
         Move m_lastMove;
         int m_consecutiveNonPawnMoves;

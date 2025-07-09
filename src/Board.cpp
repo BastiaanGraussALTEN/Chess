@@ -10,6 +10,9 @@ Board::Board()
     m_consecutiveNonCaptures = 0;
     m_consecutiveNonPawnMoves = 0;
     WhiteHasKingsideCastleRights = true;
+    WhiteHasQueensideCastleRights = true;
+    BlackHasKingsideCastleRights = true;
+    BlackHasQueensideCastleRights = true;
 }
 
 Board::Board(const Board &other) : m_lastMove(other.m_lastMove)

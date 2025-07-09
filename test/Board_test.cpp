@@ -326,4 +326,7 @@ TEST(BoardTest, WhiteAndBlackHaveCastleRights)
 
     // Assert
     ASSERT_TRUE(board.WhiteHasKingsideCastleRights);
+    ASSERT_TRUE(board.WhiteHasQueensideCastleRights);
+    ASSERT_TRUE(board.BlackHasKingsideCastleRights);
+    ASSERT_TRUE(board.BlackHasQueensideCastleRights);
 }
