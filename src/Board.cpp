@@ -98,6 +98,17 @@ void Board::MovePiece(const Move &move)
     }
     else
     {
+        if (piece->pieceType == PieceType::King && piece->hasMoved == false && piece->color == Color::White)
+        {   
+            WhiteHasKingsideCastleRights = false;
+            WhiteHasQueensideCastleRights = false;
+        }
+        if (piece->pieceType == PieceType::King && piece->hasMoved == false && piece->color == Color::Black)
+        {   
+            BlackHasKingsideCastleRights = false;
+            BlackHasQueensideCastleRights = false;
+        }
+        
         piece->position = move.end;
         piece->hasMoved = true;
         m_lastMove = move;

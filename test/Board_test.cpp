@@ -330,3 +330,21 @@ TEST(BoardTest, WhiteAndBlackHaveCastleRights)
     ASSERT_TRUE(board.BlackHasKingsideCastleRights);
     ASSERT_TRUE(board.BlackHasQueensideCastleRights);
 }
+
+TEST(BoardTest, CastleRightsAreLostAfterMovingKing)
+{
+    // Arrange
+    Board board;
+
+    // Act
+    board.MovePiece(Move(Square(5,2), Square(5,3)));
+    board.MovePiece(Move(Square(5,1), Square(5,2)));
+    board.MovePiece(Move(Square(5,7), Square(5,6)));
+    board.MovePiece(Move(Square(5,8), Square(5,7)));
+
+    // Assert
+    ASSERT_FALSE(board.WhiteHasKingsideCastleRights);
+    ASSERT_FALSE(board.WhiteHasQueensideCastleRights);
+    ASSERT_FALSE(board.BlackHasKingsideCastleRights);
+    ASSERT_FALSE(board.BlackHasQueensideCastleRights);
+}
