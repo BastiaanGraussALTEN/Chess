@@ -9,5 +9,5 @@ enable_testing()
 
 # Add src and test directories
 add_subdirectory(src)
-add_subdirectory(external/googletest-1.17.0)
+add_subdirectory(external/googletest)
 add_subdirectory(test)
