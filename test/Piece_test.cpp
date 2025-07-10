@@ -408,7 +408,7 @@ TEST(PieceTest, PiecesAreNotSamePlace)
     ASSERT_FALSE(isEqual);
 }
 
-TEST(PieceTest, PiecesAreNotSameHasMoved)
+TEST(PieceTest, PiecesAreSameHasMoved)
 {
     // Arrange
     Square coord = Square(1,1);
@@ -420,5 +420,5 @@ TEST(PieceTest, PiecesAreNotSameHasMoved)
     bool isEqual = king1 == king2;
 
     // Assert
-    ASSERT_FALSE(isEqual);
+    ASSERT_TRUE(isEqual);
 }

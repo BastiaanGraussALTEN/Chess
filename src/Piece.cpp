@@ -16,8 +16,7 @@ bool Piece::operator==(const Piece &rhs) const
 
     return position == rhs.position 
     && color == rhs.color 
-    && pieceType == rhs.pieceType 
-    && hasMoved == rhs.hasMoved;
+    && pieceType == rhs.pieceType;
 }
 
 std::string Piece::ToString() const 

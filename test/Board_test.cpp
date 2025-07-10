@@ -433,3 +433,21 @@ TEST(BoardTest, BoardIsNotSameDifferentEnPessantSquare)
     // Assert
     ASSERT_FALSE(isEqual);
 }
+
+TEST(BoardTest, BoardIsSameWhenDifferentPiecesHaveMoved)
+{
+    // Arrange
+    Board board1;
+    board1.MovePiece(Move(Square(2,1), Square(3,3)));
+    board1.MovePiece(Move(Square(3,3), Square(2,1)));
+    
+    Board board2;
+    board2.MovePiece(Move(Square(7,1), Square(6,3)));
+    board2.MovePiece(Move(Square(6,3), Square(7,1)));
+
+    // Act
+    bool isEqual = board1 == board2;
+
+    // Assert
+    ASSERT_TRUE(isEqual);
+}
