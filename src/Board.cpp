@@ -34,21 +34,6 @@ Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
 
 bool Board::operator==(const Board &rhs) const
 {
-    std::cout << "Board state:\n";
-    for (const auto& piece : m_pieces) {
-        if (piece) {
-            std::cout << piece->ToString() << "\n";
-        } else {
-            std::cout << "nullptr piece\n";
-        }
-    }
-    std::cout << "EnPessantSquare: " << EnPessantSquare.ToString() << "\n";
-    std::cout << "Castle rights: WK=" << WhiteHasKingsideCastleRights
-              << " WQ=" << WhiteHasQueensideCastleRights
-              << " BK=" << BlackHasKingsideCastleRights
-              << " BQ=" << BlackHasQueensideCastleRights << "\n";
-
-    
     if (this->m_pieces.size() != rhs.m_pieces.size()) 
     {
         return false;

@@ -9,14 +9,6 @@ Piece::Piece(Color color, PieceType pieceType, Square positionOfPiece)
 
 bool Piece::operator==(const Piece &rhs) const
 {
-     std::cout << "Comparing Pieces:\n"
-              << "Position: (" << position.x << "," << position.y << ") vs ("
-              << rhs.position.x << "," << rhs.position.y << ")\n"
-              << "Color: " << static_cast<int>(color) << " vs " << static_cast<int>(rhs.color) << "\n"
-              << "PieceType: " << static_cast<int>(pieceType) << " vs " << static_cast<int>(rhs.pieceType) << "\n"
-              << "HasMoved: " << hasMoved << " vs " << rhs.hasMoved << "\n";
-
-
     if (typeid(*this) != typeid(rhs)) 
     {
         return false;
