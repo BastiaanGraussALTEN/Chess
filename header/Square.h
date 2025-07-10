@@ -21,6 +21,14 @@ struct Square
     {
         return this->x == rhs.x && this->y == rhs.y;
     }
+    bool operator<(const Square& other) const 
+    {
+        return (y < other.y) || (y == other.y && x < other.x);
+    }
+    std::string ToString() const 
+    {
+        return "(" + std::to_string(x) + "," + std::to_string(y) + ")";
+    }
     int x;
     int y;
 };

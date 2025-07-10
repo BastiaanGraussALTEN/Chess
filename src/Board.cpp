@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 
 #include "../header/Board.h"
 #include "../header/Constants.h"
@@ -33,8 +34,52 @@ Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
 
 bool Board::operator==(const Board &rhs) const
 {
-    return true;
+    std::cout << "Board state:\n";
+    for (const auto& piece : m_pieces) {
+        if (piece) {
+            std::cout << piece->ToString() << "\n";
+        } else {
+            std::cout << "nullptr piece\n";
+        }
+    }
+    std::cout << "EnPessantSquare: " << EnPessantSquare.ToString() << "\n";
+    std::cout << "Castle rights: WK=" << WhiteHasKingsideCastleRights
+              << " WQ=" << WhiteHasQueensideCastleRights
+              << " BK=" << BlackHasKingsideCastleRights
+              << " BQ=" << BlackHasQueensideCastleRights << "\n";
+
+    
+    if (this->m_pieces.size() != rhs.m_pieces.size()) 
+    {
+        return false;
+    }
+
+    auto sorted_this = m_pieces;
+    auto sorted_rhs = rhs.m_pieces;
+
+    auto comp = [](const std::shared_ptr<Piece>& a, const std::shared_ptr<Piece>& b) 
+    {
+        return a->position < b->position;
+    };
+
+    std::sort(sorted_this.begin(), sorted_this.end(), comp);
+    std::sort(sorted_rhs.begin(), sorted_rhs.end(), comp);
+
+    for (size_t i = 0; i < sorted_this.size(); i++) 
+    {
+        if (!AreSharedPointersEqual(sorted_this[i], sorted_rhs[i]))
+        {
+            return false;
+        }
+    }
+
+    return this->EnPessantSquare == rhs.EnPessantSquare
+    && this->WhiteHasKingsideCastleRights == rhs.WhiteHasKingsideCastleRights
+    && this->WhiteHasQueensideCastleRights == rhs.WhiteHasQueensideCastleRights
+    && this->BlackHasKingsideCastleRights == rhs.BlackHasKingsideCastleRights
+    && this->BlackHasQueensideCastleRights == rhs.BlackHasQueensideCastleRights;
 }
+
 const std::vector<std::shared_ptr<Piece>>& Board::GetPieces() const
 {
     return m_pieces;
@@ -160,6 +205,20 @@ std::shared_ptr<Piece> Board::GetPieceFromSquare(const Square &coord) const
 Move Board::GetLastMove() const
 {
     return m_lastMove;
+}
+
+bool Board::AreSharedPointersEqual(const std::shared_ptr<Piece>& lhs, const std::shared_ptr<Piece>& rhs) const
+{
+    if (!lhs && !rhs)
+    {
+        return true;
+    } 
+    if (!lhs || !rhs)
+    {
+        return false;
+    }
+
+    return *lhs == *rhs;
 }
 
 void Board::CreateInitialBoardState()

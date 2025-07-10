@@ -31,6 +31,7 @@ class Board
         int m_consecutiveNonPawnMoves;
         int m_consecutiveNonCaptures;
         std::vector<std::shared_ptr<Piece>> m_pieces;
+        bool AreSharedPointersEqual(const std::shared_ptr<Piece>& lhs, const std::shared_ptr<Piece>& rhs) const;
         void CreateInitialBoardState();
         void CreateInitialPawns();
         void CreateInitialWhitePieces();
