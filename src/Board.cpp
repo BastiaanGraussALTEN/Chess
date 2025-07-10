@@ -39,20 +39,9 @@ bool Board::operator==(const Board &rhs) const
         return false;
     }
 
-    auto sorted_this = m_pieces;
-    auto sorted_rhs = rhs.m_pieces;
-
-    auto comp = [](const std::shared_ptr<Piece>& a, const std::shared_ptr<Piece>& b) 
+    for (size_t i = 0; i < m_pieces.size(); i++) 
     {
-        return a->position < b->position;
-    };
-
-    std::sort(sorted_this.begin(), sorted_this.end(), comp);
-    std::sort(sorted_rhs.begin(), sorted_rhs.end(), comp);
-
-    for (size_t i = 0; i < sorted_this.size(); i++) 
-    {
-        if (!AreSharedPointersEqual(sorted_this[i], sorted_rhs[i]))
+        if (!AreSharedPointersEqual(m_pieces[i], rhs.m_pieces[i]))
         {
             return false;
         }
