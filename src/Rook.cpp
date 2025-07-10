@@ -3,7 +3,6 @@
 
 Rook::Rook(Color color, Square position) : Piece(color, PieceType::Rook, position)
 {
-    hasMoved = false;
 }
 
 std::vector<Square> Rook::GetPossibleMoves() const
