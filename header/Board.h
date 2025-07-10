@@ -9,6 +9,7 @@ class Board
     public:
         Board();
         Board(const Board& other);
+        bool operator==(const Board& rhs) const;
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         const std::vector<std::shared_ptr<Piece>> GetColorPieces(const Color& pieceColor) const;
         bool IsThereAPieceOfThisColorHere(const Color& pieceColor, const Square& square) const;

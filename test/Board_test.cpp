@@ -380,3 +380,16 @@ TEST(BoardTest, CastleRightsAreLostAfterMovingRookQueenside)
     ASSERT_FALSE(board.WhiteHasQueensideCastleRights);
     ASSERT_FALSE(board.BlackHasQueensideCastleRights);
 }
+
+TEST(BoardTest, InitialBoardIsSame)
+{
+    // Arrange
+    Board board1;
+    Board board2;
+
+    // Act
+    bool isEqual = board1 == board2;
+
+    // Assert
+    ASSERT_TRUE(isEqual);
+}

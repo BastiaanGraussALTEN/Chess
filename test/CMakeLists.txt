@@ -8,7 +8,7 @@ add_executable(my_tests
     # LegalityChecker_test.cpp
     # MoveDialog_test.cpp
     # MoveParser_test.cpp
-    # Piece_test.cpp
+    Piece_test.cpp
     # Square_test.cpp
 )
 

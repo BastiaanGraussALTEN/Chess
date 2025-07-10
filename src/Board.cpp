@@ -31,6 +31,10 @@ Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
     }
 }
 
+bool Board::operator==(const Board &rhs) const
+{
+    return true;
+}
 const std::vector<std::shared_ptr<Piece>>& Board::GetPieces() const
 {
     return m_pieces;

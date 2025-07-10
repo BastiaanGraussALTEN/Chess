@@ -11,6 +11,7 @@ class Piece
     public:
         explicit Piece(Color color, PieceType pieceType, Square positionOfPiece);
         virtual ~Piece(){};
+        virtual bool operator==(const Piece& rhs) const;
         virtual std::shared_ptr<Piece> clone() const = 0;
         virtual std::vector<Square> GetPossibleMoves() const = 0;
         bool hasMoved;

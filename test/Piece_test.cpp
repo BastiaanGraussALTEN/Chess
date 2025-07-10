@@ -364,3 +364,61 @@ TEST(PieceTest, kingGivesCorrectPossibleMovesInCorner)
     // Assert
     EXPECT_EQ(possibleMoves.size(),  3);
 }
+
+TEST(PieceTest, PiecesAreSame)
+{
+    // Arrange
+    Square coord = Square(1,1);
+    King king1 = King(Color::White, coord);
+    King king2 = King(Color::White, coord);
+
+    // Act
+    bool isEqual = king1 == king2;
+
+    // Assert
+    ASSERT_TRUE(isEqual);
+}
+
+TEST(PieceTest, PiecesAreNotSameColor)
+{
+    // Arrange
+    Square coord = Square(1,1);
+    King king1 = King(Color::White, coord);
+    King king2 = King(Color::Black, coord);
+
+    // Act
+    bool isEqual = king1 == king2;
+
+    // Assert
+    ASSERT_FALSE(isEqual);
+}
+
+TEST(PieceTest, PiecesAreNotSamePlace)
+{
+    // Arrange
+    Square coord1 = Square(1,1);
+    Square coord2 = Square(1,2);
+    King king1 = King(Color::White, coord1);
+    King king2 = King(Color::White, coord2);
+
+    // Act
+    bool isEqual = king1 == king2;
+
+    // Assert
+    ASSERT_FALSE(isEqual);
+}
+
+TEST(PieceTest, PiecesAreNotSameHasMoved)
+{
+    // Arrange
+    Square coord = Square(1,1);
+    King king1 = King(Color::White, coord);
+    King king2 = King(Color::White, coord);
+    king2.hasMoved = true;
+
+    // Act
+    bool isEqual = king1 == king2;
+
+    // Assert
+    ASSERT_FALSE(isEqual);
+}
