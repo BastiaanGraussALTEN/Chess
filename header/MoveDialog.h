@@ -17,6 +17,7 @@ class MoveDialog
         void ShowCheckMate();
         void ShowStaleMate();
         void Show50MoveDraw();
+        void ShowThreeFoldRepetition();
         void ShowMovePutsKingInCheck();
         void ShowIllegalCastling();
         Color GetCurrentTurn();

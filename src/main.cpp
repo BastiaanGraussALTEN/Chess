@@ -16,9 +16,11 @@ int main()
     MoveDialog moveDialog;
     MoveParser moveParser;
     Board board;
+    BoardHistory boardHistory;
     bool isGameEnded = false;
     while(!isGameEnded)
     {
+        boardHistory.AddBoard(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
         LegalityChecker legalityChecker = LegalityChecker(board);
         CheckChecker checkChecker = CheckChecker(board, colorToMove);
@@ -45,6 +47,14 @@ int main()
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
             moveDialog.Show50MoveDraw();
+            continue;
+        }
+
+        if (boardHistory.IsThreeFoldRepetition())
+        {
+            isGameEnded = true;
+            moveDialog.ShowMoveHistory();
+            moveDialog.ShowThreeFoldRepetition();
             continue;
         }
         
@@ -111,6 +121,12 @@ int main()
             if (legalityChecker.DoesMoveCapturePiece(move))
             {
                 board.RemovePieceFromSquare(move.end);
+                boardHistory.ClearHistory();
+            }
+
+            if (board.GetPieceFromSquare(move.start)->pieceType == PieceType::Pawn)
+            {
+                boardHistory.ClearHistory();
             }
 
             board.MovePiece(move);

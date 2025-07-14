@@ -55,6 +55,11 @@ void MoveDialog::Show50MoveDraw()
     std::cout << "Draw caused by fifty-move rule!\n" << std::endl;
 }
 
+void MoveDialog::ShowThreeFoldRepetition()
+{
+    std::cout << "Draw caused by three-fold repetition!\n" << std::endl;
+}
+
 void MoveDialog::ShowMovePutsKingInCheck()
 {
     std::cout << "This move will put your king in check! Please try again\n" << std::endl;

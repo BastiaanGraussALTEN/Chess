@@ -30,6 +30,11 @@ bool BoardHistory::IsThreeFoldRepetition()
     return false;
 }
 
+bool BoardHistory::ClearHistory()
+{
+    m_boardHistory.clear();
+}
+
 void BoardHistory::AddBoard(Board board)
 {
     m_boardHistory.push_back(board);
