@@ -32,3 +32,7 @@ bool CheckChecker::EveryMoveChecksSelf() const
 
     return true;
 }
+bool CheckChecker::HasSufficientMaterial() const
+{
+    return false;
+}

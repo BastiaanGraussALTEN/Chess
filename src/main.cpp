@@ -23,9 +23,9 @@ int main()
         boardHistory.AddBoard(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
         LegalityChecker legalityChecker = LegalityChecker(board);
-        CheckChecker checkChecker = CheckChecker(board, colorToMove);
         DangerChecker dangerChecker = DangerChecker(board, colorToMove);
         CastleChecker castleChecker = CastleChecker(board, colorToMove);
+        CheckChecker checkChecker = CheckChecker(board, colorToMove);
 
         if (checkChecker.EveryMoveChecksSelf())
         {

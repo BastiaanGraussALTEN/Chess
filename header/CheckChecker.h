@@ -8,6 +8,7 @@ class CheckChecker
         CheckChecker(const Board& board, const Color& color);
         bool IsKingSafeAfterMove(const Move& move) const;
         bool EveryMoveChecksSelf() const;
+        bool HasSufficientMaterial() const;
     private:
         Board m_board;
         Color m_color;

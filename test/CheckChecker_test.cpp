@@ -136,3 +136,29 @@ TEST(CheckCheckerTest, IsStaleMate)
     // Assert
     ASSERT_TRUE(everyMoveChecksSelf);
 }
+
+TEST(CheckCheckerTest, SufficientMaterial)
+{
+    // Arrange
+    Board board;
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.HasSufficientMaterial();
+
+    // Assert
+    ASSERT_TRUE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, InSufficientMaterial)
+{
+    // Arrange
+    Board board;
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.HasSufficientMaterial();
+
+    // Assert
+    ASSERT_FALSE(sufficientMaterial);
+}
