@@ -5,15 +5,11 @@
 #include "../header/Constants.h"
 
 Board::Board()
-: m_lastMove(Square(1, 1), Square(1, 1))
+    : m_lastMove(Square(1, 1), Square(1, 1))
 {
     CreateInitialBoardState();
     m_consecutiveNonCaptures = 0;
     m_consecutiveNonPawnMoves = 0;
-    WhiteHasKingsideCastleRights = true;
-    WhiteHasQueensideCastleRights = true;
-    BlackHasKingsideCastleRights = true;
-    BlackHasQueensideCastleRights = true;
 }
 
 Board::Board(const Board &other) : m_lastMove(other.m_lastMove)
@@ -64,6 +60,43 @@ bool Board::operator==(const Board &rhs) const
     && this->WhiteHasQueensideCastleRights == rhs.WhiteHasQueensideCastleRights
     && this->BlackHasKingsideCastleRights == rhs.BlackHasKingsideCastleRights
     && this->BlackHasQueensideCastleRights == rhs.BlackHasQueensideCastleRights;
+}
+
+bool Board::operator<(const Board &rhs) const
+{
+    if (!(EnPessantSquare == rhs.EnPessantSquare))
+        return EnPessantSquare < rhs.EnPessantSquare;
+
+    if (WhiteHasKingsideCastleRights != rhs.WhiteHasKingsideCastleRights)
+        return WhiteHasKingsideCastleRights < rhs.WhiteHasKingsideCastleRights;
+
+    if (WhiteHasQueensideCastleRights != rhs.WhiteHasQueensideCastleRights)
+        return WhiteHasQueensideCastleRights < rhs.WhiteHasQueensideCastleRights;
+
+    if (BlackHasKingsideCastleRights != rhs.BlackHasKingsideCastleRights)
+        return BlackHasKingsideCastleRights < rhs.BlackHasKingsideCastleRights;
+
+    if (BlackHasQueensideCastleRights != rhs.BlackHasQueensideCastleRights)
+        return BlackHasQueensideCastleRights < rhs.BlackHasQueensideCastleRights;
+
+    auto sortedA = m_pieces;
+    auto sortedB = rhs.m_pieces;
+    std::sort(sortedA.begin(), sortedA.end(), [](const auto& a, const auto& b) {
+        return *a < *b;
+    });
+    std::sort(sortedB.begin(), sortedB.end(), [](const auto& a, const auto& b) {
+        return *a < *b;
+    });
+
+    if (sortedA.size() != sortedB.size())
+        return sortedA.size() < sortedB.size();
+
+    for (size_t i = 0; i < sortedA.size(); ++i) {
+        if (!(*sortedA[i] == *sortedB[i])) 
+            return *sortedA[i] < *sortedB[i];
+    }
+
+    return false; 
 }
 
 const std::vector<std::shared_ptr<Piece>>& Board::GetPieces() const

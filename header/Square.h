@@ -25,7 +25,11 @@ struct Square
     }
     bool operator<(const Square& other) const 
     {
-        return (y < other.y) || (y == other.y && x < other.x);
+        if (y != other.y)
+        {
+            return y < other.y;
+        }
+        return y == other.y && x < other.x;
     }
     std::string ToString() const 
     {
@@ -34,7 +38,6 @@ struct Square
     int x;
     int y;
 };
-
 
 namespace std 
 {

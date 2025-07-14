@@ -12,6 +12,7 @@ class Board
         Board();
         Board(const Board& other);
         bool operator==(const Board& rhs) const;
+        bool operator<(const Board& rhs) const;
         const std::vector<std::shared_ptr<Piece>>& GetPieces() const;
         const std::vector<std::shared_ptr<Piece>> GetColorPieces(const Color& pieceColor) const;
         bool IsThereAPieceOfThisColorHere(const Color& pieceColor, const Square& square) const;
@@ -24,10 +25,10 @@ class Board
         std::shared_ptr<Piece> GetPieceFromSquare(const Square& coord) const;
         Move GetLastMove() const;
         Square EnPessantSquare = Square(1, 1);
-        bool WhiteHasKingsideCastleRights;
-        bool WhiteHasQueensideCastleRights;
-        bool BlackHasKingsideCastleRights;
-        bool BlackHasQueensideCastleRights;
+        bool WhiteHasKingsideCastleRights = true;
+        bool WhiteHasQueensideCastleRights = true;
+        bool BlackHasKingsideCastleRights = true;
+        bool BlackHasQueensideCastleRights = true;
     private:
         Move m_lastMove;
         int m_consecutiveNonPawnMoves;

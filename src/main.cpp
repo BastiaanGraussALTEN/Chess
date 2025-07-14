@@ -2,6 +2,7 @@
 #include "../header/MoveParser.h"
 #include "../header/CastleChecker.h"
 #include "../header/CheckChecker.h"
+#include "../header/BoardHistory.h"
 
 bool IsPromotion(const Board& board, const Move& move)
 {

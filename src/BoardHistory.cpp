@@ -1,6 +1,6 @@
 #include "../header/BoardHistory.h"
 
-#include <unordered_map>
+#include <map>
 #include <iostream>
 
 bool BoardHistory::IsThreeFoldRepetition()
@@ -10,14 +10,21 @@ bool BoardHistory::IsThreeFoldRepetition()
         return false;
     }
 
-    std::unordered_map<Board, int> countBoards;
-    
-    for (const auto& board : m_boardHistory) 
+    for (int i = 0; i < m_boardHistory.size(); i++)
     {
-        if (++countBoards[board] == 3)
+        Board boardToCompare = m_boardHistory[i];
+        int count = 1;
+        for (int j = 0; j < m_boardHistory.size(); j++)
         {
-            return true;
-        }
+            if (i != j && boardToCompare == m_boardHistory[j])
+            {
+                count += 1;
+                if (count == 3)
+                {
+                    return true;
+                }
+            }
+        } 
     }
 
     return false;
