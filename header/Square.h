@@ -1,6 +1,8 @@
 #pragma once
 
 #include <stdexcept>
+#include <functional>
+
 #include "Constants.h"
 
 struct Square
@@ -32,3 +34,18 @@ struct Square
     int x;
     int y;
 };
+
+
+namespace std 
+{
+    template <>
+    struct hash<Square> 
+    {
+        size_t operator()(const Square& s) const noexcept 
+        {
+            size_t h1 = std::hash<int>{}(s.x);
+            size_t h2 = std::hash<int>{}(s.y);
+            return h1 ^ (h2 + 0x9e3779b9 + (h1 << 6) + (h1 >> 2));
+        }
+    };
+}

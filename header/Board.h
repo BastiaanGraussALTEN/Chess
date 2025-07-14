@@ -1,8 +1,9 @@
 #pragma once
 
-#include <vector>
 #include "PieceFactory.h"
 #include "Move.h"
+
+#include <vector>
 
 class Board
 {
@@ -40,3 +41,29 @@ class Board
         void UpdateVarsAfterNonPawnMove();
         void UpdateCastleRights(const Move& move, const std::shared_ptr<Piece>& piece);
 };
+
+namespace std 
+{
+    template <>
+    struct hash<Board> 
+    {
+        size_t operator()(const Board& b) const 
+        {
+            size_t h = 0;
+
+            h ^= std::hash<Square>()(b.EnPessantSquare) + 0x9e3779b9 + (h << 6) + (h >> 2);
+
+            h ^= std::hash<bool>()(b.WhiteHasKingsideCastleRights) + 0x9e3779b9 + (h << 6) + (h >> 2);
+            h ^= std::hash<bool>()(b.WhiteHasQueensideCastleRights) + 0x9e3779b9 + (h << 6) + (h >> 2);
+            h ^= std::hash<bool>()(b.BlackHasKingsideCastleRights) + 0x9e3779b9 + (h << 6) + (h >> 2);
+            h ^= std::hash<bool>()(b.BlackHasQueensideCastleRights) + 0x9e3779b9 + (h << 6) + (h >> 2);
+
+            for (const auto& piece_ptr : b.GetPieces()) 
+            {
+                h ^= std::hash<Piece>()(*piece_ptr) + 0x9e3779b9 + (h << 6) + (h >> 2);
+            }
+
+            return h;
+        }
+    };
+}

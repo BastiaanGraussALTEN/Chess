@@ -4,7 +4,9 @@
 TEST(BoardHistoryTest, NoThreeFoldRepetition)
 {
     // Arrange
+    Board board;
     BoardHistory boardHistory;
+    boardHistory.AddBoard(board);
 
     // Act
     bool isThreeFoldRepetition = boardHistory.IsThreeFoldRepetition();
@@ -18,6 +20,7 @@ TEST(BoardHistoryTest, OneFoldRepetition)
     // Arrange
     BoardHistory boardHistory;
     Board board;
+    boardHistory.AddBoard(board);
     board.MovePiece(Move(Square(2,1), Square(3,3)));
     boardHistory.AddBoard(board);
     board.MovePiece(Move(Square(3,3), Square(2,1)));
@@ -35,6 +38,7 @@ TEST(BoardHistoryTest, TwoFoldRepetition)
     // Arrange
     BoardHistory boardHistory;
     Board board;
+    boardHistory.AddBoard(board);
     board.MovePiece(Move(Square(2,1), Square(3,3)));
     boardHistory.AddBoard(board);
     board.MovePiece(Move(Square(3,3), Square(2,1)));
@@ -56,6 +60,7 @@ TEST(BoardHistoryTest, ThreeFoldRepetition)
     // Arrange
     BoardHistory boardHistory;
     Board board;
+    boardHistory.AddBoard(board);
     board.MovePiece(Move(Square(2,1), Square(3,3)));
     boardHistory.AddBoard(board);
     board.MovePiece(Move(Square(3,3), Square(2,1)));

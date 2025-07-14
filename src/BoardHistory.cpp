@@ -4,11 +4,21 @@
 
 bool BoardHistory::IsThreeFoldRepetition()
 {
-    if (m_boardHistory.size() > 2)
+    if (m_boardHistory.size() < 3)
     {
-        // std::unordered_map<Board, int> countBoards;
-        
+        return false;
     }
+
+    std::unordered_map<Board, int> countBoards;
+    
+    for (const auto& board : m_boardHistory) 
+    {
+        if (++countBoards[board] == 3)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
