@@ -7,7 +7,7 @@ class BoardHistory
     public:
         void AddBoard(Board board);
         bool IsThreeFoldRepetition();
-        bool ClearHistory();
+        void ClearHistory();
     private:
         std::vector<Board> m_boardHistory;
 };

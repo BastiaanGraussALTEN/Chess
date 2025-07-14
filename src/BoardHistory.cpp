@@ -30,7 +30,7 @@ bool BoardHistory::IsThreeFoldRepetition()
     return false;
 }
 
-bool BoardHistory::ClearHistory()
+void BoardHistory::ClearHistory()
 {
     m_boardHistory.clear();
 }
