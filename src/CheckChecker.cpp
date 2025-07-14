@@ -37,7 +37,6 @@ bool CheckChecker::EveryMoveChecksSelf() const
 
 bool CheckChecker::SufficientMaterialForCheckmate() const
 {
-    // there are mating pieces
     for (const auto& piece : m_board.GetPieces())
     {
         if (piece->pieceType == PieceType::Pawn || piece->pieceType == PieceType::Rook || piece->pieceType == PieceType::Queen)
@@ -46,13 +45,12 @@ bool CheckChecker::SufficientMaterialForCheckmate() const
         }
     }
 
-    // there are only kings and potentially one knight/bishop as piece
     if (m_board.GetPieces().size() < 4)
     {
         return false;
     }
     
-    // insufficient material if and only if 2 bishops of different color on the same color
+    // insufficient material at 4 pieces if and only if 2 bishops of different color on the same color
     if (m_board.GetPieces().size() == 4)
     {
         std::vector<std::shared_ptr<Piece>> bishops;
@@ -71,6 +69,7 @@ bool CheckChecker::SufficientMaterialForCheckmate() const
 
     return true;
 }
+
 bool CheckChecker::PiecesAreOnSameColor(const std::shared_ptr<Piece>& piece1, const std::shared_ptr<Piece>& piece2) const
 {
     return (piece1->position.x % 2 

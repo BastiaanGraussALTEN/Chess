@@ -57,6 +57,14 @@ int main()
             moveDialog.ShowThreeFoldRepetition();
             continue;
         }
+
+        if (!checkChecker.SufficientMaterialForCheckmate())
+        {
+            isGameEnded = true;
+            moveDialog.ShowMoveHistory();
+            moveDialog.ShowInsufficientMaterial();
+            continue;
+        }
         
         std::string moveString;
         bool validMoveIsGiven = false;
