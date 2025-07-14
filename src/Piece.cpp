@@ -19,6 +19,19 @@ bool Piece::operator==(const Piece &rhs) const
     && pieceType == rhs.pieceType;
 }
 
+bool Piece::operator<(const Piece &rhs) const
+{
+    if (pieceType != rhs.pieceType)
+    {
+        return pieceType < rhs.pieceType;
+    }
+    if (color != rhs.color)
+    {
+        return color < rhs.color;
+    }
+    return position < rhs.position; 
+}
+
 std::string Piece::ToString() const 
 {
     return "Piece: " + PieceTypeToString(pieceType) 

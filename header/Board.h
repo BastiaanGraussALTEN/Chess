@@ -4,6 +4,7 @@
 #include "Move.h"
 
 #include <vector>
+#include <algorithm>
 
 class Board
 {
@@ -47,7 +48,7 @@ namespace std
     template <>
     struct hash<Board> 
     {
-        size_t operator()(const Board& b) const 
+        size_t operator()(const Board& b) const noexcept
         {
             size_t h = 0;
 
@@ -58,7 +59,13 @@ namespace std
             h ^= std::hash<bool>()(b.BlackHasKingsideCastleRights) + 0x9e3779b9 + (h << 6) + (h >> 2);
             h ^= std::hash<bool>()(b.BlackHasQueensideCastleRights) + 0x9e3779b9 + (h << 6) + (h >> 2);
 
-            for (const auto& piece_ptr : b.GetPieces()) 
+            auto sortedPieces = std::vector<std::shared_ptr<Piece>>(b.GetPieces().begin(), b.GetPieces().end());
+            std::sort(sortedPieces.begin(), sortedPieces.end(), [](const auto& a, const auto& b) 
+            {
+                return *a < *b;
+            });
+
+            for (const auto& piece_ptr : sortedPieces) 
             {
                 h ^= std::hash<Piece>()(*piece_ptr) + 0x9e3779b9 + (h << 6) + (h >> 2);
             }
