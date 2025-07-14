@@ -62,43 +62,6 @@ bool Board::operator==(const Board &rhs) const
     && this->BlackHasQueensideCastleRights == rhs.BlackHasQueensideCastleRights;
 }
 
-bool Board::operator<(const Board &rhs) const
-{
-    if (!(EnPessantSquare == rhs.EnPessantSquare))
-        return EnPessantSquare < rhs.EnPessantSquare;
-
-    if (WhiteHasKingsideCastleRights != rhs.WhiteHasKingsideCastleRights)
-        return WhiteHasKingsideCastleRights < rhs.WhiteHasKingsideCastleRights;
-
-    if (WhiteHasQueensideCastleRights != rhs.WhiteHasQueensideCastleRights)
-        return WhiteHasQueensideCastleRights < rhs.WhiteHasQueensideCastleRights;
-
-    if (BlackHasKingsideCastleRights != rhs.BlackHasKingsideCastleRights)
-        return BlackHasKingsideCastleRights < rhs.BlackHasKingsideCastleRights;
-
-    if (BlackHasQueensideCastleRights != rhs.BlackHasQueensideCastleRights)
-        return BlackHasQueensideCastleRights < rhs.BlackHasQueensideCastleRights;
-
-    auto sortedA = m_pieces;
-    auto sortedB = rhs.m_pieces;
-    std::sort(sortedA.begin(), sortedA.end(), [](const auto& a, const auto& b) {
-        return *a < *b;
-    });
-    std::sort(sortedB.begin(), sortedB.end(), [](const auto& a, const auto& b) {
-        return *a < *b;
-    });
-
-    if (sortedA.size() != sortedB.size())
-        return sortedA.size() < sortedB.size();
-
-    for (size_t i = 0; i < sortedA.size(); ++i) {
-        if (!(*sortedA[i] == *sortedB[i])) 
-            return *sortedA[i] < *sortedB[i];
-    }
-
-    return false; 
-}
-
 const std::vector<std::shared_ptr<Piece>>& Board::GetPieces() const
 {
     return m_pieces;
