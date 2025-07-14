@@ -144,21 +144,123 @@ TEST(CheckCheckerTest, SufficientMaterial)
     CheckChecker checkChecker = CheckChecker(board, Color::White);
 
     // Act
-    bool sufficientMaterial = checkChecker.HasSufficientMaterial();
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
 
     // Assert
     ASSERT_TRUE(sufficientMaterial);
 }
 
-TEST(CheckCheckerTest, InSufficientMaterial)
+TEST(CheckCheckerTest, InSufficientMaterialTwoKings)
 {
     // Arrange
-    Board board;
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
     CheckChecker checkChecker = CheckChecker(board, Color::White);
 
     // Act
-    bool sufficientMaterial = checkChecker.HasSufficientMaterial();
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
 
     // Assert
     ASSERT_FALSE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, InSufficientMaterialOneBishop)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::White, Square(2,1)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
+
+    // Assert
+    ASSERT_FALSE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, SufficientMaterialTwoBishop)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::White, Square(2,1)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::White, Square(2,2)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
+
+    // Assert
+    ASSERT_TRUE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, SufficientMaterialTwoBishopDifferentColor)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::White, Square(2,1)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::Black, Square(2,2)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
+
+    // Assert
+    ASSERT_TRUE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, InSufficientMaterialTwoBishopsSameColor)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::White, Square(2,4)));
+    board.AddPiece(PieceFactory::CreateBishop(Color::Black, Square(4,6)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+    
+    // Act
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
+    
+    // Assert
+    ASSERT_FALSE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, InSufficientMaterialOneKnight)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,1)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
+
+    // Assert
+    ASSERT_FALSE(sufficientMaterial);
+}
+
+TEST(CheckCheckerTest, SufficientMaterialTwoKnights)
+{
+    // Arrange
+    Board board = TestFunctions::CreateEmptyBoard();
+    board.AddPiece(PieceFactory::CreateKing(Color::White, Square(1,1)));
+    board.AddPiece(PieceFactory::CreateKing(Color::Black, Square(8,8)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,1)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::Black, Square(2,2)));
+    CheckChecker checkChecker = CheckChecker(board, Color::White);
+
+    // Act
+    bool sufficientMaterial = checkChecker.SufficientMaterialForCheckmate();
+
+    // Assert
+    ASSERT_TRUE(sufficientMaterial);
 }
