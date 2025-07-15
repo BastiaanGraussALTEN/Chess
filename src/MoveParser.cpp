@@ -1,7 +1,11 @@
 #include "../header/MoveParser.h"
 #include <map>
 
-Move MoveParser::ParseString(const std::string& moveString) const
+MoveParser::MoveParser(const Board &board) : m_board(board), m_legalityChecker(LegalityChecker(board))
+{
+}
+
+Move MoveParser::ParseString(const std::string &moveString) const
 {
     Move move = Move(Square(1, 1),Square(1, 1));
     if (moveString == "0-0")

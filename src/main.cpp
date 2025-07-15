@@ -14,7 +14,6 @@ bool IsPromotion(const Board& board, const Move& move)
 int main()
 {
     MoveDialog moveDialog;
-    MoveParser moveParser;
     Board board;
     BoardHistory boardHistory;
     bool isGameEnded = false;
@@ -22,6 +21,7 @@ int main()
     {
         boardHistory.AddBoard(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
+        MoveParser moveParser(board);
         LegalityChecker legalityChecker = LegalityChecker(board);
         DangerChecker dangerChecker = DangerChecker(board, colorToMove);
         CastleChecker castleChecker = CastleChecker(board, colorToMove);
