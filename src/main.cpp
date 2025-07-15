@@ -14,7 +14,7 @@ int main()
     {
         boardHistory.AddBoard(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
-        MoveParser moveParser(board);
+        MoveParser moveParser(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
         DangerChecker dangerChecker = DangerChecker(board, colorToMove);
         CastleChecker castleChecker = CastleChecker(board, colorToMove);

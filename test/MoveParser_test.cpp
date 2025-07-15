@@ -5,7 +5,7 @@ TEST(MoveParseTest, pawnMoveIsLegal)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "e4";
 
     // Act
@@ -19,7 +19,7 @@ TEST(MoveParseTest, pawnMove)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "e4";
 
     // Act
@@ -35,7 +35,7 @@ TEST(MoveParseTest, KnightMoveIsLegal)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "Nc3";
 
     // Act
@@ -51,7 +51,7 @@ TEST(MoveParseTest, KnightMove)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "Nc3";
 
     // Act
@@ -65,7 +65,7 @@ TEST(MoveParserTest, wrongRankIsNotValid)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "e9e4";
 
     // Act
@@ -79,7 +79,7 @@ TEST(MoveParserTest, wrongFileIsNotValid)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "i2e4";
 
     // Act
@@ -93,7 +93,7 @@ TEST(MoveParserTest, castleSideIsValid)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
 
     // Act
     Move move1 = moveParser.ParseString("0-0");
@@ -108,7 +108,7 @@ TEST(MoveParserTest, castlingIsPossible)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveCastleKingside = "0-0";
     std::string moveCastleQueenside = "0-0-0";
 
@@ -125,7 +125,7 @@ TEST(MoveParserTest, promotionIsValid)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "e7e8=R";
 
     // Act
@@ -139,7 +139,7 @@ TEST(MoveParserTest, promotionIsCorrect)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     Move expectedMove = Move(Square(5,7), Square(5,8));
     expectedMove.promotionPiece == PieceType::Rook;
 
@@ -156,7 +156,7 @@ TEST(MoveParserTest, promotionToKingNotAllowed)
 {
     // Arrange
     Board board;
-    MoveParser moveParser = MoveParser(board);
+    MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "e7e8=K";
 
     // Act

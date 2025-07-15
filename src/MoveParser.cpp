@@ -1,7 +1,8 @@
 #include "../header/MoveParser.h"
 #include <map>
 
-MoveParser::MoveParser(const Board &board) : m_board(board), m_legalityChecker(LegalityChecker(board))
+MoveParser::MoveParser(const Board &board, const Color& color) 
+: m_board(board), m_legalityChecker(LegalityChecker(board)), m_color(color)
 {
 }
 
@@ -47,6 +48,31 @@ Move MoveParser::ParseString(const std::string& moveString) const
     }
 
     // check how many pieces can end at this square
+    std::vector<Move> allMoves = m_legalityChecker.GetAllPossibleMoves(m_color);
+    std::vector<Move> possibleMoves;
+    for (const auto& pontentialMove : allMoves)
+    {
+        if (pontentialMove.end == move.end 
+            && m_board.GetPieceFromSquare(pontentialMove.start)->pieceType == move.piece)
+        {
+            possibleMoves.push_back(pontentialMove);
+        }
+    }
+    if (possibleMoves.size() == 0)
+    {
+        move.isLegal = false;
+        return move;
+    }
+    if (possibleMoves.size() == 1)
+    {
+        move.start == possibleMoves[0].start;
+        move.isLegal = true;
+    }
+    // check for file or rank
+    if (possibleMoves.size() > 1)
+    {
+
+    }
 
     if (IsPromotion(move))
     {
@@ -83,23 +109,18 @@ Square MoveParser::stringToSquare(const std::string& moveString) const
 
 bool MoveParser::IsStringSquare(const std::string& moveString) const
 {
-    return ((moveString[0] - 'a' + 1 > 0)
+    return (moveString[0] - 'a' + 1 > 0)
         && (moveString[0] - 'a' + 1 < 9)
         && (moveString[1] - '0' > 0)
-        && (moveString[1] - '0' < 9));
+        && (moveString[1] - '0' < 9);
 }
 
 bool MoveParser::CharIsValidPromotionPiece(const char &piece) const
 {
-    if ((piece == 'N') 
+    return (piece == 'N') 
     || (piece == 'B')
     || (piece == 'R')
-    || (piece == 'Q'))
-    {
-        return true;
-    }
-    
-    return false;
+    || (piece == 'Q');
 }
 
 PieceType MoveParser::CharToPieceType(const char &piece) const

@@ -6,12 +6,12 @@
 class MoveParser
 {
     public:
-        MoveParser(const Board& board); 
+        MoveParser(const Board& board, const Color& color); 
         Move ParseString(const std::string& moveString) const;
     private:
         Board m_board;
+        Color m_color;
         LegalityChecker m_legalityChecker;
-        bool IsStringTwoSquares(const std::string& moveString) const;
         bool IsStringPromotion(const std::string& moveString) const;
         Square stringToSquare(const std::string& moveString) const;
         bool IsStringSquare(const std::string& moveString) const;
