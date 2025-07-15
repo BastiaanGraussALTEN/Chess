@@ -12,7 +12,10 @@ struct Move
     }
     Square start;
     Square end;
+    PieceType piece;
+    bool isPromotion = false;
     PieceType promotionPiece = PieceType::Queen;
-    bool isCastleKingside;
-    bool isCastleQueenside;
+    bool isCastleKingside = false;
+    bool isCastleQueenside = false;
+    bool isLegal = false;
 };

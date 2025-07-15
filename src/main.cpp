@@ -4,13 +4,6 @@
 #include "../header/CheckChecker.h"
 #include "../header/BoardHistory.h"
 
-bool IsPromotion(const Board& board, const Move& move)
-{
-    return (board.GetPieceFromSquare(move.end)->pieceType == PieceType::Pawn) 
-    && (((move.end.y == 1) && (board.GetPieceFromSquare(move.end)->color == Color::Black)) 
-    || ((move.end.y == 8) && (board.GetPieceFromSquare(move.end)->color == Color::White)));
-}
-
 int main()
 {
     MoveDialog moveDialog;
@@ -73,13 +66,13 @@ int main()
         {
             moveDialog.ShowDialog();
             std::cin >> moveString;
-            if (!moveParser.IsStringValid(moveString))
+            Move move = moveParser.ParseString(moveString);
+            if (!move.isLegal)
             {
                 moveDialog.ShowStringNotValid();
                 continue;
             }
             
-            Move move = moveParser.ParseString(moveString);
             if (move.isCastleKingside) 
             {
                 if (!castleChecker.CanCastleKingSide())
@@ -139,7 +132,7 @@ int main()
 
             board.MovePiece(move);
 
-            if (IsPromotion(board, move))
+            if (move.isPromotion)
             {
                 board.RemovePieceFromSquare(move.end);
                 switch (move.promotionPiece)

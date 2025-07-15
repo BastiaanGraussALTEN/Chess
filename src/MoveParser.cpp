@@ -5,84 +5,64 @@ MoveParser::MoveParser(const Board &board) : m_board(board), m_legalityChecker(L
 {
 }
 
-Move MoveParser::ParseString(const std::string &moveString) const
+Move MoveParser::ParseString(const std::string& moveString) const
 {
     Move move = Move(Square(1, 1),Square(1, 1));
+    //check if castle
     if (moveString == "0-0")
     {
         move.isCastleKingside = true;
+        move.isLegal = true;
         return move;
     }
     if (moveString == "0-0-0")
     {
         move.isCastleQueenside = true;
+        move.isLegal = true;
         return move;
     }
-    if (moveString.size() == 4)
-    {
-        SetMoveSquaresFromString(move, moveString);
-    }
+    
+    // set piece
+    move.piece = CharToPieceType(moveString[0]);
+
+    //find end square
+    std::string endSquaresString = moveString.substr(moveString.length() - 2);
     if (IsStringPromotion(moveString))
     {
-        SetMoveSquaresFromString(move, moveString);
+        endSquaresString = moveString.substr(moveString.length() - 4, moveString.length() - 2);
+    }
+    if (!IsStringSquare(endSquaresString))
+    {
+        move.isLegal = false;
+        return move;
+    }
+    move.end = stringToSquare(endSquaresString);
+
+    // check if capture is intended and possible
+    if (moveString.find('x') != std::string::npos 
+    && m_board.GetPieceFromSquare(move.end) == nullptr)
+    {
+        move.isLegal = false;
+        return move;
+    }
+
+    // check how many pieces can end at this square
+
+    if (IsPromotion(move))
+    {
+        move.isPromotion = true;
         char piece = moveString.substr(moveString.length() - 2 )[1];
         move.promotionPiece = CharToPieceType(piece);
+        move.isLegal = true;
     }
 
     return move;
 }
 
-bool MoveParser::IsStringValid(const std::string& moveString) const
-{
-    if (IsStringCastle(moveString))
-    {
-        return true;
-    }
-    if ((moveString.size() == 4)
-    && IsStringTwoSquares(moveString))
-    {
-        return true;
-    }
-    if (IsStringPromotion(moveString))
-    {
-        return true;
-    }
-
-    return false;
-}
-
-bool MoveParser::IsStringCastle(const std::string &moveString) const
-{
-    if ((moveString == "0-0") || moveString == "0-0-0")
-    {
-        return true;
-    }
-
-    return false;
-}
-
-bool MoveParser::IsStringTwoSquares(const std::string &moveString) const
-{
-    if ((moveString[0] - 'a' + 1 > 0)
-        && (moveString[0] - 'a' + 1 < 9)
-        && (moveString[1] - '0' > 0)
-        && (moveString[1] - '0' < 9)
-        && (moveString[2] - 'a' + 1 > 0)
-        && (moveString[2] - 'a' + 1 < 9)
-        && (moveString[3] - '0' > 0)
-        && (moveString[3] - '0' < 9))
-    {
-        return true;
-    }
-
-    return false;
-}
-
 bool MoveParser::IsStringPromotion(const std::string &moveString) const
 {
     std::string lastTwoChars = moveString.substr(moveString.length() - 2);
-    return ((moveString.size() == 6) 
-        &&(lastTwoChars[0] == '=')
+    return ((lastTwoChars[0] == '=')
         &&(CharIsValidPromotionPiece(lastTwoChars[1]))
         &&(moveString[0] - 'a' + 1 > 0)
         &&(moveString[0] - 'a' + 1 < 9)
@@ -93,12 +73,20 @@ bool MoveParser::IsStringPromotion(const std::string &moveString) const
         &&((moveString[3] - '0' == 1) ||(moveString[3] - '0' == 8)));
 }
 
-void MoveParser::SetMoveSquaresFromString(Move& move, const std::string& moveString) const
+Square MoveParser::stringToSquare(const std::string& moveString) const
 {
-    move.start.x = moveString[0] - 'a' + 1;
-    move.start.y = moveString[1] - '0';
-    move.end.x = moveString[2] - 'a' + 1;
-    move.end.y = moveString[3] - '0';
+    Square square = Square(1,1);
+    square.x = moveString[0] - 'a' + 1;
+    square.y = moveString[1] - '0';
+    return square;
+}
+
+bool MoveParser::IsStringSquare(const std::string& moveString) const
+{
+    return ((moveString[0] - 'a' + 1 > 0)
+        && (moveString[0] - 'a' + 1 < 9)
+        && (moveString[1] - '0' > 0)
+        && (moveString[1] - '0' < 9));
 }
 
 bool MoveParser::CharIsValidPromotionPiece(const char &piece) const
@@ -110,7 +98,7 @@ bool MoveParser::CharIsValidPromotionPiece(const char &piece) const
     {
         return true;
     }
-
+    
     return false;
 }
 
@@ -132,6 +120,17 @@ PieceType MoveParser::CharToPieceType(const char &piece) const
     {
         return PieceType::Queen;
     }
-
+    if (piece == 'K')
+    {
+        return PieceType::King;
+    }
+    
     return PieceType::Pawn;
+}
+
+bool MoveParser::IsPromotion(const Move& move) const
+{
+    return (move.piece == PieceType::Pawn) 
+    && (((move.end.y == 1) && (m_board.GetPieceFromSquare(move.end)->color == Color::Black)) 
+    || ((move.end.y == 8) && (m_board.GetPieceFromSquare(move.end)->color == Color::White)));
 }
