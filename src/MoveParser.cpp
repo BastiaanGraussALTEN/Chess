@@ -6,12 +6,12 @@ Move MoveParser::ParseString(const std::string& moveString) const
     Move move = Move(Square(1, 1),Square(1, 1));
     if (moveString == "0-0")
     {
-        move.promotionOrCastleside = PieceType::King;
+        move.isCastleKingside = true;
         return move;
     }
     if (moveString == "0-0-0")
     {
-        move.promotionOrCastleside = PieceType::Pawn;
+        move.isCastleQueenside = true;
         return move;
     }
     if (moveString.size() == 4)
@@ -22,7 +22,7 @@ Move MoveParser::ParseString(const std::string& moveString) const
     {
         SetMoveSquaresFromString(move, moveString);
         char piece = moveString.substr(moveString.length() - 2 )[1];
-        move.promotionOrCastleside = CharToPieceType(piece);
+        move.promotionPiece = CharToPieceType(piece);
     }
 
     return move;

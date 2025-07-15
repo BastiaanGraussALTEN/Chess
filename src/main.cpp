@@ -80,7 +80,7 @@ int main()
             }
             
             Move move = moveParser.ParseString(moveString);
-            if (move.promotionOrCastleside == PieceType::King) 
+            if (move.isCastleKingside) 
             {
                 if (!castleChecker.CanCastleKingSide())
                 {
@@ -93,7 +93,7 @@ int main()
                 validMoveIsGiven = true;
                 continue;
             }
-            if (move.promotionOrCastleside == PieceType::Pawn) 
+            if (move.isCastleQueenside) 
             {
                 if (!castleChecker.CanCastleQueenSide())
                 {
@@ -142,7 +142,7 @@ int main()
             if (IsPromotion(board, move))
             {
                 board.RemovePieceFromSquare(move.end);
-                switch (move.promotionOrCastleside)
+                switch (move.promotionPiece)
                 {
                     case PieceType::Knight:
                         board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
