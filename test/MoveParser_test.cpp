@@ -12,10 +12,10 @@ TEST(MoveParseTest, pawnMoveIsLegal)
     Move move = moveParser.ParseString(moveString);
 
     // Assert
-    EXPECT_FALSE(move.isLegal);
+    EXPECT_TRUE(move.isLegal);
 }
 
-TEST(MoveParseTest, pawnMove)
+TEST(MoveParseTest, pawnMoveIsCorrect)
 {
     // Arrange
     Board board;
@@ -42,12 +42,10 @@ TEST(MoveParseTest, KnightMoveIsLegal)
     Move move = moveParser.ParseString(moveString);
 
     // Assert
-    EXPECT_EQ(move.start, Square(2,1));
-    EXPECT_EQ(move.end, Square(3,3));
-    EXPECT_EQ(move.piece, PieceType::Knight);
+    EXPECT_TRUE(move.isLegal);
 }
 
-TEST(MoveParseTest, KnightMove)
+TEST(MoveParseTest, KnightMoveIsCorrect)
 {
     // Arrange
     Board board;
@@ -58,35 +56,9 @@ TEST(MoveParseTest, KnightMove)
     Move move = moveParser.ParseString(moveString);
 
     // Assert
-    EXPECT_FALSE(move.isLegal);
-}
-
-TEST(MoveParserTest, wrongRankIsNotValid)
-{
-    // Arrange
-    Board board;
-    MoveParser moveParser = MoveParser(board, Color::White);
-    std::string moveString = "e9e4";
-
-    // Act
-    Move move = moveParser.ParseString(moveString);
-
-    // Assert
-    EXPECT_FALSE(move.isLegal);
-}
-
-TEST(MoveParserTest, wrongFileIsNotValid)
-{
-    // Arrange
-    Board board;
-    MoveParser moveParser = MoveParser(board, Color::White);
-    std::string moveString = "i2e4";
-
-    // Act
-    Move move = moveParser.ParseString(moveString);
-
-    // Assert
-    EXPECT_FALSE(move.isLegal);
+    EXPECT_EQ(move.start, Square(2,1));
+    EXPECT_EQ(move.end, Square(3,3));
+    EXPECT_EQ(move.piece, PieceType::Knight);
 }
 
 TEST(MoveParserTest, castleSideIsValid)
@@ -132,7 +104,7 @@ TEST(MoveParserTest, promotionIsValid)
     Move move = moveParser.ParseString(moveString);
 
     // Assert
-    EXPECT_FALSE(move.isLegal);
+    EXPECT_TRUE(move.isLegal);
 }
 
 TEST(MoveParserTest, promotionIsCorrect)

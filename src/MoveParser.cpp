@@ -65,7 +65,7 @@ Move MoveParser::ParseString(const std::string& moveString) const
     }
     if (possibleMoves.size() == 1)
     {
-        move.start == possibleMoves[0].start;
+        move.start = possibleMoves[0].start;
         move.isLegal = true;
     }
     // check for file or rank

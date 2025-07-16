@@ -6,6 +6,15 @@
 
 int main()
 {
+
+    // debugging
+    Board boardx;
+    MoveParser moveParserx = MoveParser(boardx, Color::White);
+    std::string moveString = "e4";
+
+    // Act
+    Move movex = moveParserx.ParseString(moveString);
+
     MoveDialog moveDialog;
     Board board;
     BoardHistory boardHistory;
