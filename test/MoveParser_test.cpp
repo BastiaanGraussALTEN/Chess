@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "../header/MoveParser.h"
 
-TEST(MoveParseTest, StringIsTooLong)
+TEST(MoveParserTest, StringIsTooLong)
 {
     // Arrange
     Board board;
@@ -15,7 +15,7 @@ TEST(MoveParseTest, StringIsTooLong)
     EXPECT_FALSE(move.isLegal);
 }
 
-TEST(MoveParseTest, pawnMoveIsLegal)
+TEST(MoveParserTest, pawnMoveIsLegal)
 {
     // Arrange
     Board board;
@@ -29,7 +29,7 @@ TEST(MoveParseTest, pawnMoveIsLegal)
     EXPECT_TRUE(move.isLegal);
 }
 
-TEST(MoveParseTest, pawnMoveIsCorrect)
+TEST(MoveParserTest, pawnMoveIsCorrect)
 {
     // Arrange
     Board board;
@@ -45,7 +45,7 @@ TEST(MoveParseTest, pawnMoveIsCorrect)
     EXPECT_EQ(move.piece, PieceType::Pawn);
 }
 
-TEST(MoveParseTest, KnightMoveIsLegal)
+TEST(MoveParserTest, KnightMoveIsLegal)
 {
     // Arrange
     Board board;
@@ -59,7 +59,7 @@ TEST(MoveParseTest, KnightMoveIsLegal)
     EXPECT_TRUE(move.isLegal);
 }
 
-TEST(MoveParseTest, KnightMoveIsCorrect)
+TEST(MoveParserTest, KnightMoveIsCorrect)
 {
     // Arrange
     Board board;
@@ -156,4 +156,50 @@ TEST(MoveParserTest, promotionToKingNotAllowed)
 
     // Assert
     EXPECT_FALSE(move.isLegal);
+}
+
+TEST(MoveParserTest, AmbigiousMoveDifferentFile)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,5)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(4,5)));
+    MoveParser moveParser = MoveParser(board, Color::White);
+    std::string moveString = "Nbc3";
+
+    // Act
+    Move move = moveParser.ParseString(moveString);
+
+    // Assert
+    EXPECT_TRUE(move.isLegal);
+}
+
+TEST(MoveParserTest, AmbigiousMoveDifferentRank)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,5)));
+    MoveParser moveParser = MoveParser(board, Color::White);
+    std::string moveString = "N5c3";
+
+    // Act
+    Move move = moveParser.ParseString(moveString);
+
+    // Assert
+    EXPECT_TRUE(move.isLegal);
+}
+
+TEST(MoveParserTest, AmbigiousMoveDifferentSquare)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,5)));
+    MoveParser moveParser = MoveParser(board, Color::White);
+    std::string moveString = "Nb5c3";
+
+    // Act
+    Move move = moveParser.ParseString(moveString);
+
+    // Assert
+    EXPECT_TRUE(move.isLegal);
 }

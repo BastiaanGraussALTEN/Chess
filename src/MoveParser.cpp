@@ -79,6 +79,9 @@ Move MoveParser::ParseString(const std::string& moveString) const
     if (possibleMoves.size() > 1)
     {
         // pak substring na de piece, maar voor de x of endsquare
+        // kijk hoe lang de string is
+        // kijk of er een rank of file in de string staan
+        // kijk welke er verschillen van de mogelijke pieces
     }
 
     if (IsPromotion(move))
