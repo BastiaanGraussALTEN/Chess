@@ -9,11 +9,12 @@ int main()
 
     // debugging
     Board boardx;
+    boardx.RemovePieceFromSquare(Square(5,7));
+    boardx.AddPiece(PieceFactory::CreatePawn(Color::White, Square(5,7)));
     MoveParser moveParserx = MoveParser(boardx, Color::White);
-    std::string moveString = "e4";
-
-    // Act
+    std::string moveString = "e7e8=R";
     Move movex = moveParserx.ParseString(moveString);
+    // dedugging
 
     MoveDialog moveDialog;
     Board board;

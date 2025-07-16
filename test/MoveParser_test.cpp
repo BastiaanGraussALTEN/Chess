@@ -97,6 +97,9 @@ TEST(MoveParserTest, promotionIsValid)
 {
     // Arrange
     Board board;
+    board.RemovePieceFromSquare(Square(5,7));
+    board.RemovePieceFromSquare(Square(5,8));
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(5,7)));
     MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "e7e8=R";
 
@@ -111,6 +114,9 @@ TEST(MoveParserTest, promotionIsCorrect)
 {
     // Arrange
     Board board;
+    board.RemovePieceFromSquare(Square(5,7));
+    board.RemovePieceFromSquare(Square(5,8));
+    board.AddPiece(PieceFactory::CreatePawn(Color::White, Square(5,7)));
     MoveParser moveParser = MoveParser(board, Color::White);
     Move expectedMove = Move(Square(5,7), Square(5,8));
     expectedMove.promotionPiece == PieceType::Rook;

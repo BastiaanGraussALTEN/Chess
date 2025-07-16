@@ -80,6 +80,7 @@ Move MoveParser::ParseString(const std::string& moveString) const
         char piece = moveString.substr(moveString.length() - 2 )[1];
         move.promotionPiece = CharToPieceType(piece);
         move.isLegal = true;
+        //exception for promotion to king/pawn
     }
 
     return move;
@@ -152,6 +153,6 @@ PieceType MoveParser::CharToPieceType(const char &piece) const
 bool MoveParser::IsPromotion(const Move& move) const
 {
     return (move.piece == PieceType::Pawn) 
-    && (((move.end.y == 1) && (m_board.GetPieceFromSquare(move.end)->color == Color::Black)) 
-    || ((move.end.y == 8) && (m_board.GetPieceFromSquare(move.end)->color == Color::White)));
+    && (((move.end.y == 1) && (m_board.GetPieceFromSquare(move.start)->color == Color::Black)) 
+    || ((move.end.y == 8) && (m_board.GetPieceFromSquare(move.start)->color == Color::White)));
 }
