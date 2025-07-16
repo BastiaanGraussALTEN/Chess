@@ -9,6 +9,13 @@ MoveParser::MoveParser(const Board &board, const Color& color)
 Move MoveParser::ParseString(const std::string& moveString) const
 {
     Move move = Move(Square(1, 1),Square(1, 1));
+    // check if string is too long
+    if (moveString.size() > 6)
+    {
+        move.isLegal = false;
+        return move;
+    }
+
     //check if castle
     if (moveString == "0-0")
     {
@@ -71,7 +78,7 @@ Move MoveParser::ParseString(const std::string& moveString) const
     // check for file or rank
     if (possibleMoves.size() > 1)
     {
-
+        // pak substring na de piece, maar voor de x of endsquare
     }
 
     if (IsPromotion(move))

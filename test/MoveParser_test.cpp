@@ -1,6 +1,20 @@
 #include "gtest/gtest.h"
 #include "../header/MoveParser.h"
 
+TEST(MoveParseTest, StringIsTooLong)
+{
+    // Arrange
+    Board board;
+    MoveParser moveParser = MoveParser(board, Color::White);
+    std::string moveString = "testteste4";
+
+    // Act
+    Move move = moveParser.ParseString(moveString);
+
+    // Assert
+    EXPECT_FALSE(move.isLegal);
+}
+
 TEST(MoveParseTest, pawnMoveIsLegal)
 {
     // Arrange
