@@ -77,10 +77,15 @@ Move MoveParser::ParseString(const std::string& moveString) const
     if (IsPromotion(move))
     {
         move.isPromotion = true;
-        char piece = moveString.substr(moveString.length() - 2 )[1];
-        move.promotionPiece = CharToPieceType(piece);
+        PieceType piece = CharToPieceType(moveString.substr(moveString.length() - 2 )[1]);
+        if (piece == PieceType::Pawn || piece == PieceType::King)
+        {
+            move.isLegal = false;
+            return move;
+        }
+        
+        move.promotionPiece = piece;
         move.isLegal = true;
-        //exception for promotion to king/pawn
     }
 
     return move;
