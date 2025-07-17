@@ -62,8 +62,9 @@ std::string BoardPrinter::PieceToUnicode(const std::shared_ptr<Piece>& piece) co
     {
         switch(piece->pieceType)
         {
+            //ඞ
             case PieceType::Pawn:
-                return "ඞ";
+                return "♣";
                 break;
             case PieceType::Knight:
                 return "♞";
