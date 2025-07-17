@@ -26,6 +26,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             if (dangerChecker.IsKingUnderAttack())
             {
                 moveDialog.ShowCheckMate();
@@ -41,6 +42,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.Show50MoveDraw();
             continue;
         }
@@ -49,6 +51,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.ShowThreeFoldRepetition();
             continue;
         }
@@ -57,6 +60,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.ShowInsufficientMaterial();
             continue;
         }
