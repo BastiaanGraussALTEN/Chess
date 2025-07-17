@@ -4,6 +4,7 @@ set(SRC_FILES
     Bishop.cpp
     Board.cpp
     BoardHistory.cpp
+    BoardPrinter.cpp
     CastleChecker.cpp
     CheckChecker.cpp
     DangerChecker.cpp
@@ -25,6 +26,7 @@ set(HEADER_FILES
     ../header/Bishop.h
     ../header/Board.h
     ../header/BoardHistory.h
+    ../header/BoardPrinter.h
     ../header/CastleChecker.h
     ../header/CheckChecker.h
     ../header/Color.h

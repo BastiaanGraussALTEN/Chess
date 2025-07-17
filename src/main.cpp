@@ -3,6 +3,7 @@
 #include "../header/CastleChecker.h"
 #include "../header/CheckChecker.h"
 #include "../header/BoardHistory.h"
+#include "../header/BoardPrinter.h"
 
 int main()
 {
@@ -13,6 +14,8 @@ int main()
     while(!isGameEnded)
     {
         boardHistory.AddBoard(board);
+        BoardPrinter boardPrinter = BoardPrinter(board);
+        boardPrinter.PrintEmptyBoard();
         Color colorToMove = moveDialog.GetCurrentTurn();
         MoveParser moveParser(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
