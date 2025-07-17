@@ -162,10 +162,10 @@ TEST(MoveParserTest, AmbigiousMoveDifferentFile)
 {
     // Arrange
     Board board;
-    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,5)));
-    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(4,5)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(3,5)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(5,5)));
     MoveParser moveParser = MoveParser(board, Color::White);
-    std::string moveString = "Nbc3";
+    std::string moveString = "Ncd3";
 
     // Act
     Move move = moveParser.ParseString(moveString);
@@ -194,8 +194,24 @@ TEST(MoveParserTest, AmbigiousMoveDifferentSquare)
     // Arrange
     Board board;
     board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,5)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(4,5)));
     MoveParser moveParser = MoveParser(board, Color::White);
     std::string moveString = "Nb5c3";
+
+    // Act
+    Move move = moveParser.ParseString(moveString);
+
+    // Assert
+    EXPECT_TRUE(move.isLegal);
+}
+
+TEST(MoveParserTest, AmbigiousPawnMove)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreatePawn(Color::Black, Square(5,3)));
+    MoveParser moveParser = MoveParser(board, Color::White);
+    std::string moveString = "dxe3";
 
     // Act
     Move move = moveParser.ParseString(moveString);

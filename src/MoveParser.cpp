@@ -78,10 +78,52 @@ Move MoveParser::ParseString(const std::string& moveString) const
     // check for file or rank
     if (possibleMoves.size() > 1)
     {
-        // pak substring na de piece, maar voor de x of endsquare
-        // kijk hoe lang de string is
-        // kijk of er een rank of file in de string staan
-        // kijk welke er verschillen van de mogelijke pieces
+        // substring voor endsquare
+        int position = moveString.find(endSquaresString);
+        std::string moveStringBegin = moveString.substr(0, position);
+        // als piece niet pawn, remove eerste letter
+        if (move.piece != PieceType::Pawn)
+        {
+            moveStringBegin = moveStringBegin.substr(1);
+        }
+        // nu heb je substring met rank/file en potentieel x
+        // check of ze getal of alfabet zijn
+        int file = 0;
+        int rank = 0;
+        for (int i = 0; i < moveStringBegin.size(); i++)
+        {
+            if (moveStringBegin[i] -'a' + 1 < 9 
+                && moveStringBegin[i] -'a' + 1 > 0)
+                {
+                    file = moveStringBegin[i] - 'a' + 1;
+                }
+            if (moveStringBegin[i] -'0' < 9 
+                && moveStringBegin[i] -'0' >  0)
+                {
+                    rank = moveStringBegin[i] -'0';
+                }
+        }
+        for (int i = 0; i < possibleMoves.size(); i++)
+        {
+            if (file != 0 && possibleMoves[i].start.x != file)
+            {
+                possibleMoves.erase(possibleMoves.begin() + i);
+            }
+            if (rank != 0 && possibleMoves[i].start.y != rank)
+            {
+                possibleMoves.erase(possibleMoves.begin() + i);
+            }
+        }
+        if (possibleMoves.size() == 1)
+        {
+            move.start = possibleMoves[0].start;
+            move.isLegal = true;
+        }
+        else
+        {
+            move.isLegal = false;
+            return move;
+        }
     }
 
     if (IsPromotion(move))
