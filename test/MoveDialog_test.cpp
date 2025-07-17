@@ -29,12 +29,13 @@ TEST(MoveDialogTest, dialogAfterMove)
     moveDialog.SetMove("White1");
 
     // Act
+    moveDialog.ShowMoveHistory();
     moveDialog.ShowDialog();
     std::cout.rdbuf(oldCoutStreamBuf);
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\n1. White1\n\nBlack to move, insert your Move: \n");
+    EXPECT_EQ(output,  "\nMove history:\n1. White1\n\n\nBlack to move, insert your Move: \n");
     EXPECT_EQ(moveDialog.GetCurrentTurn(), Color::Black);
 }
 
@@ -50,10 +51,11 @@ TEST(MoveDialogTest, dialogAfterThreeMoves)
     moveDialog.SetMove("White2");
 
     // Act
+    moveDialog.ShowMoveHistory();
     moveDialog.ShowDialog();
     std::cout.rdbuf(oldCoutStreamBuf);
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\n1. White1 Black1\n2. White2\n\nBlack to move, insert your Move: \n");
+    EXPECT_EQ(output,  "\nMove history:\n1. White1 Black1\n2. White2\n\n\nBlack to move, insert your Move: \n");
 }

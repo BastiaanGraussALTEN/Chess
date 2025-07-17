@@ -14,14 +14,12 @@ void MoveDialog::SetMove(std::string move)
 
 void MoveDialog::ShowDialog()
 {
-    std::string dialog = GetSingleLineDialog();
-    std::cout << dialog << std::endl;
+    std::cout << GetSingleLineDialog() << std::endl;
 }
 
 void MoveDialog::ShowMoveHistory()
 {
-    std::string moveHistory = GetMoveHistory();
-    std::cout << moveHistory << std::endl;
+    std::cout << GetMoveHistory() << std::endl;
 }
 
 void MoveDialog::ShowStringNotValid()
