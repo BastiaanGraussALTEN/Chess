@@ -103,8 +103,30 @@ Move MoveParser::ParseString(const std::string& moveString) const
 
 std::string MoveParser::MoveToString(const Move& move) const
 {
-    std::string test = "test";
-    return test;
+    std::string moveString = "";
+    if (move.isCastleKingside)
+    {
+        return "0-0";
+    }
+    if (move.isCastleQueenside)
+    {
+        return "0-0-0";
+    }
+
+    moveString += PieceTypeToString(move.piece);
+    moveString += char(move.start.x) + 'a' - 1;
+    moveString += std::to_string(move.start.y);
+    moveString += "-";
+    moveString += char(move.end.x) + 'a' - 1;
+    moveString += std::to_string(move.end.y);
+    
+    if (move.isPromotion)
+    {
+        moveString += "=";
+        moveString += PieceTypeToString(move.promotionPiece);
+    }
+
+    return moveString;
 }
 
 std::vector<Move> MoveParser::GetPossibleMovesWithEndSquare(const std::string& moveString, const Move& move) const
@@ -224,4 +246,31 @@ bool MoveParser::IsPromotion(const Move& move) const
     return (move.piece == PieceType::Pawn) 
     && (((move.end.y == 1) && (m_board.GetPieceFromSquare(move.start)->color == Color::Black)) 
     || ((move.end.y == 8) && (m_board.GetPieceFromSquare(move.start)->color == Color::White)));
+}
+
+std::string MoveParser::PieceTypeToString(const PieceType& pieceType) const
+{
+    std::string pieceString = "";
+    if (pieceType == PieceType::Knight)
+    {
+        pieceString += "N";
+    }
+    if (pieceType == PieceType::Bishop)
+    {
+        pieceString += "B";
+    }
+    if (pieceType == PieceType::Rook)
+    {
+        pieceString += "R";
+    }
+    if (pieceType == PieceType::Queen)
+    {
+        pieceString += "Q";
+    }
+    if (pieceType == PieceType::King)
+    {
+        pieceString += "K";
+    }
+
+    return pieceString;
 }

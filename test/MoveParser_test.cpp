@@ -244,6 +244,58 @@ TEST(MoveParserTest, PawnMoveGivesString)
     Move move = Move(Square(5,2),Square(5,4));
 
     // Act
+    std::string moveString = moveParser.MoveToString(move);
 
     // Assert
+    ASSERT_EQ(moveString, "e2-e4");
+}
+
+TEST(MoveParserTest, KnightMoveGivesString)
+{
+    // Arrange
+    Board board;
+    MoveParser moveParser = MoveParser(board, Color::White);
+    Move move = Move(Square(2,1),Square(3,3));
+    move.piece = PieceType::Knight;
+
+    // Act
+    std::string moveString = moveParser.MoveToString(move);
+
+    // Assert
+    ASSERT_EQ(moveString, "Nb1-c3");
+}
+
+TEST(MoveParserTest, CastleGivesMoveString)
+{
+    // Arrange
+    Board board;
+    MoveParser moveParser = MoveParser(board, Color::White);
+    Move castleKingside = Move(Square(1,1),Square(1,1));
+    castleKingside.isCastleKingside = true;
+    Move castleQueenside = Move(Square(1,1),Square(1,1));
+    castleQueenside.isCastleQueenside = true;
+
+    // Act
+    std::string castleKingsideString = moveParser.MoveToString(castleKingside);
+    std::string castleQueensideString = moveParser.MoveToString(castleQueenside);
+
+    // Assert
+    ASSERT_EQ(castleKingsideString, "0-0");
+    ASSERT_EQ(castleQueensideString, "0-0-0");
+}
+
+TEST(MoveParserTest, PromotionGivesMoveString)
+{
+    // Arrange
+    Board board;
+    MoveParser moveParser = MoveParser(board, Color::White);
+    Move move = Move(Square(5,2),Square(5,4));
+    move.isPromotion = true;
+    move.promotionPiece = PieceType::Knight;
+
+    // Act
+    std::string moveString = moveParser.MoveToString(move);
+
+    // Assert
+    ASSERT_EQ(moveString, "e2-e4=N");
 }

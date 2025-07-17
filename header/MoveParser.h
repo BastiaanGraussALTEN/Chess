@@ -21,4 +21,5 @@ class MoveParser
         bool CharIsValidPromotionPiece(const char& piece) const;
         bool IsPromotion(const Move& move) const;
         PieceType CharToPieceType(const char& piece) const;
+        std::string PieceTypeToString(const PieceType& pieceType) const;
 };
