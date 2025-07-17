@@ -71,7 +71,7 @@ Move MoveParser::ParseString(const std::string& moveString) const
             moveStringBegin = moveStringBegin.substr(1);
         }
         
-        possibleMoves = ElimateMovesBasedOnStartSquareInfo(possibleMoves, moveStringBegin);
+        possibleMoves = ElimateMovesUsingStartSquareInfo(possibleMoves, moveStringBegin);
         if (possibleMoves.size() == 1)
         {
             move.start = possibleMoves[0].start;
@@ -101,6 +101,12 @@ Move MoveParser::ParseString(const std::string& moveString) const
     return move;
 }
 
+std::string MoveParser::MoveToString(const Move& move) const
+{
+    std::string test = "test";
+    return test;
+}
+
 std::vector<Move> MoveParser::GetPossibleMovesWithEndSquare(const std::string& moveString, const Move& move) const
 {
     std::vector<Move> allMoves = m_legalityChecker.GetAllPossibleMoves(m_color);
@@ -117,7 +123,7 @@ std::vector<Move> MoveParser::GetPossibleMovesWithEndSquare(const std::string& m
     return possibleMoves;
 }
 
-std::vector<Move> MoveParser::ElimateMovesBasedOnStartSquareInfo(std::vector<Move> possibleMoves, const std::string& moveStringBegin) const
+std::vector<Move> MoveParser::ElimateMovesUsingStartSquareInfo(std::vector<Move> possibleMoves, const std::string& moveStringBegin) const
 {
     int file = 0;
     int rank = 0;

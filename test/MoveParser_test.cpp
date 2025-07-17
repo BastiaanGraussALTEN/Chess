@@ -235,3 +235,15 @@ TEST(MoveParserTest, AmbigiousMoveIsNotAllowed)
     // Assert
     EXPECT_FALSE(move.isLegal);
 }
+
+TEST(MoveParserTest, PawnMoveGivesString)
+{
+    // Arrange
+    Board board;
+    MoveParser moveParser = MoveParser(board, Color::White);
+    Move move = Move(Square(5,2),Square(5,4));
+
+    // Act
+
+    // Assert
+}
