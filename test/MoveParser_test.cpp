@@ -219,3 +219,19 @@ TEST(MoveParserTest, AmbigiousPawnMove)
     // Assert
     EXPECT_TRUE(move.isLegal);
 }
+
+TEST(MoveParserTest, AmbigiousMoveIsNotAllowed)
+{
+    // Arrange
+    Board board;
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(2,5)));
+    board.AddPiece(PieceFactory::CreateKnight(Color::White, Square(4,5)));
+    MoveParser moveParser = MoveParser(board, Color::White);
+    std::string moveString = "Nbc3";
+
+    // Act
+    Move move = moveParser.ParseString(moveString);
+
+    // Assert
+    EXPECT_FALSE(move.isLegal);
+}

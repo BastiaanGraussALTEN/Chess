@@ -9,14 +9,12 @@ MoveParser::MoveParser(const Board &board, const Color& color)
 Move MoveParser::ParseString(const std::string& moveString) const
 {
     Move move = Move(Square(1, 1),Square(1, 1));
-    // check if string is too long
     if (moveString.size() > 6)
     {
         move.isLegal = false;
         return move;
     }
 
-    //check if castle
     if (moveString == "0-0")
     {
         move.isCastleKingside = true;
@@ -30,10 +28,8 @@ Move MoveParser::ParseString(const std::string& moveString) const
         return move;
     }
     
-    // set piece
     move.piece = CharToPieceType(moveString[0]);
 
-    //find end square
     std::string endSquaresString = moveString.substr(moveString.length() - 2);
     if (IsStringPromotion(moveString))
     {
@@ -46,7 +42,6 @@ Move MoveParser::ParseString(const std::string& moveString) const
     }
     move.end = stringToSquare(endSquaresString);
 
-    // check if capture is intended and possible
     if (moveString.find('x') != std::string::npos 
     && m_board.GetPieceFromSquare(move.end) == nullptr)
     {
@@ -54,17 +49,8 @@ Move MoveParser::ParseString(const std::string& moveString) const
         return move;
     }
 
-    // check how many pieces can end at this square
-    std::vector<Move> allMoves = m_legalityChecker.GetAllPossibleMoves(m_color);
-    std::vector<Move> possibleMoves;
-    for (const auto& pontentialMove : allMoves)
-    {
-        if (pontentialMove.end == move.end 
-            && m_board.GetPieceFromSquare(pontentialMove.start)->pieceType == move.piece)
-        {
-            possibleMoves.push_back(pontentialMove);
-        }
-    }
+    std::vector<Move> possibleMoves = GetPossibleMovesWithEndSquare(moveString, move);
+
     if (possibleMoves.size() == 0)
     {
         move.isLegal = false;
@@ -75,45 +61,17 @@ Move MoveParser::ParseString(const std::string& moveString) const
         move.start = possibleMoves[0].start;
         move.isLegal = true;
     }
-    // check for file or rank
+
     if (possibleMoves.size() > 1)
     {
-        // substring voor endsquare
         int position = moveString.find(endSquaresString);
         std::string moveStringBegin = moveString.substr(0, position);
-        // als piece niet pawn, remove eerste letter
         if (move.piece != PieceType::Pawn)
         {
             moveStringBegin = moveStringBegin.substr(1);
         }
-        // nu heb je substring met rank/file en potentieel x
-        // check of ze getal of alfabet zijn
-        int file = 0;
-        int rank = 0;
-        for (int i = 0; i < moveStringBegin.size(); i++)
-        {
-            if (moveStringBegin[i] -'a' + 1 < 9 
-                && moveStringBegin[i] -'a' + 1 > 0)
-                {
-                    file = moveStringBegin[i] - 'a' + 1;
-                }
-            if (moveStringBegin[i] -'0' < 9 
-                && moveStringBegin[i] -'0' >  0)
-                {
-                    rank = moveStringBegin[i] -'0';
-                }
-        }
-        for (int i = 0; i < possibleMoves.size(); i++)
-        {
-            if (file != 0 && possibleMoves[i].start.x != file)
-            {
-                possibleMoves.erase(possibleMoves.begin() + i);
-            }
-            if (rank != 0 && possibleMoves[i].start.y != rank)
-            {
-                possibleMoves.erase(possibleMoves.begin() + i);
-            }
-        }
+        
+        possibleMoves = ElimateMovesBasedOnStartSquareInfo(possibleMoves, moveStringBegin);
         if (possibleMoves.size() == 1)
         {
             move.start = possibleMoves[0].start;
@@ -141,6 +99,54 @@ Move MoveParser::ParseString(const std::string& moveString) const
     }
 
     return move;
+}
+
+std::vector<Move> MoveParser::GetPossibleMovesWithEndSquare(const std::string& moveString, const Move& move) const
+{
+    std::vector<Move> allMoves = m_legalityChecker.GetAllPossibleMoves(m_color);
+    std::vector<Move> possibleMoves;
+    for (const auto& pontentialMove : allMoves)
+    {
+        if (pontentialMove.end == move.end 
+            && m_board.GetPieceFromSquare(pontentialMove.start)->pieceType == move.piece)
+        {
+            possibleMoves.push_back(pontentialMove);
+        }
+    }
+
+    return possibleMoves;
+}
+
+std::vector<Move> MoveParser::ElimateMovesBasedOnStartSquareInfo(std::vector<Move> possibleMoves, const std::string& moveStringBegin) const
+{
+    int file = 0;
+    int rank = 0;
+    for (int i = 0; i < moveStringBegin.size(); i++)
+    {
+        if (moveStringBegin[i] -'a' + 1 < 9 
+            && moveStringBegin[i] -'a' + 1 > 0)
+            {
+                file = moveStringBegin[i] - 'a' + 1;
+            }
+        if (moveStringBegin[i] -'0' < 9 
+            && moveStringBegin[i] -'0' >  0)
+            {
+                rank = moveStringBegin[i] -'0';
+            }
+    }
+    for (int i = 0; i < possibleMoves.size(); i++)
+    {
+        if (file != 0 && possibleMoves[i].start.x != file)
+        {
+            possibleMoves.erase(possibleMoves.begin() + i);
+        }
+        if (rank != 0 && possibleMoves[i].start.y != rank)
+        {
+            possibleMoves.erase(possibleMoves.begin() + i);
+        }
+    }
+
+    return possibleMoves;
 }
 
 bool MoveParser::IsStringPromotion(const std::string &moveString) const
