@@ -218,28 +218,26 @@ bool MoveParser::CharIsValidPromotionPiece(const char &piece) const
 
 PieceType MoveParser::CharToPieceType(const char &piece) const
 {
-    if (piece == 'N')
+    switch(piece)
     {
-        return PieceType::Knight;
+        case 'N':
+            return PieceType::Knight;
+            break;
+        case 'B':
+            return PieceType::Bishop;
+            break;
+        case 'R':
+            return PieceType::Rook;
+            break;
+        case 'Q':
+            return PieceType::Queen;
+            break;
+        case 'K':
+            return PieceType::King;
+            break;
+        default:
+            return PieceType::Pawn;
     }
-    if (piece == 'B')
-    {
-        return PieceType::Bishop;
-    }
-    if (piece == 'R')
-    {
-        return PieceType::Rook;
-    }
-    if (piece == 'Q')
-    {
-        return PieceType::Queen;
-    }
-    if (piece == 'K')
-    {
-        return PieceType::King;
-    }
-    
-    return PieceType::Pawn;
 }
 
 bool MoveParser::IsPromotion(const Move& move) const
@@ -251,27 +249,24 @@ bool MoveParser::IsPromotion(const Move& move) const
 
 std::string MoveParser::PieceTypeToString(const PieceType& pieceType) const
 {
-    std::string pieceString = "";
-    if (pieceType == PieceType::Knight)
+    switch(pieceType)
     {
-        pieceString += "N";
+        case PieceType::Knight:
+            return "N";
+            break;
+        case PieceType::Bishop:
+            return "B";
+            break;
+        case PieceType::Rook:
+            return "R";
+            break;
+        case PieceType::Queen:
+            return "Q";
+            break;
+        case PieceType::King:
+            return "K";
+            break;
+        default:
+            return "";
     }
-    if (pieceType == PieceType::Bishop)
-    {
-        pieceString += "B";
-    }
-    if (pieceType == PieceType::Rook)
-    {
-        pieceString += "R";
-    }
-    if (pieceType == PieceType::Queen)
-    {
-        pieceString += "Q";
-    }
-    if (pieceType == PieceType::King)
-    {
-        pieceString += "K";
-    }
-
-    return pieceString;
 }
