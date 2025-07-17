@@ -9,10 +9,10 @@ BoardPrinter::BoardPrinter(const Board& board) : m_board(board)
 
 void BoardPrinter::PrintBoard() const
 {
-    for(int i = 8; i > Constants::boardBegin - 1; i--)
+    for(int i = Constants::boardEnd; i > Constants::boardBegin - 1; i--)
     {
         std::string row = std::to_string(i);
-        for (int j = 1; j < Constants::boardEnd + 1; j++)
+        for (int j = Constants::boardBegin; j < Constants::boardEnd + 1; j++)
         {
             auto piece = m_board.GetPieceFromSquare(Square(j, i));
             if (piece == nullptr)
