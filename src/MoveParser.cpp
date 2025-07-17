@@ -9,7 +9,7 @@ MoveParser::MoveParser(const Board &board, const Color& color)
 Move MoveParser::ParseString(const std::string& moveString) const
 {
     Move move = Move(Square(1, 1),Square(1, 1));
-    if (moveString.size() > 6)
+    if (moveString.size() > 6 || moveString.size() < 2)
     {
         move.isLegal = false;
         return move;
