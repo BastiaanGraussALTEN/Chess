@@ -114,12 +114,13 @@ std::string MoveParser::MoveToString(const Move& move) const
     }
 
     moveString += PieceTypeToString(move.piece);
+    
     moveString += char(move.start.x) + 'a' - 1;
     moveString += std::to_string(move.start.y);
     moveString += "-";
     moveString += char(move.end.x) + 'a' - 1;
     moveString += std::to_string(move.end.y);
-    
+
     if (move.isPromotion)
     {
         moveString += "=";

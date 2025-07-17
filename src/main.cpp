@@ -151,7 +151,7 @@ int main()
                         break;
                 }
             }
-            moveDialog.SetMove(moveString);
+            moveDialog.SetMove(moveParser.MoveToString(move));
             validMoveIsGiven = true;
             continue;
         }
