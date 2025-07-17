@@ -14,9 +14,8 @@ void MoveDialog::SetMove(std::string move)
 
 void MoveDialog::ShowDialog()
 {
-    std::string moveHistory = GetMoveHistory();
     std::string dialog = GetSingleLineDialog();
-    std::cout << moveHistory << dialog << std::endl;
+    std::cout << dialog << std::endl;
 }
 
 void MoveDialog::ShowMoveHistory()

@@ -15,7 +15,6 @@ int main()
     {
         boardHistory.AddBoard(board);
         BoardPrinter boardPrinter = BoardPrinter(board);
-        boardPrinter.PrintEmptyBoard();
         Color colorToMove = moveDialog.GetCurrentTurn();
         MoveParser moveParser(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
@@ -67,6 +66,8 @@ int main()
 
         while(!validMoveIsGiven)
         {
+            moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.ShowDialog();
             std::cin >> moveString;
             Move move = moveParser.ParseString(moveString);

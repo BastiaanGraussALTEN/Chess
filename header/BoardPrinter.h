@@ -6,8 +6,8 @@ class BoardPrinter
 {
     public:
         BoardPrinter(const Board& board);
-        void PrintEmptyBoard() const;
         void PrintBoard() const;
     private:
         Board m_board;
+        std::string PieceToUnicode(const std::shared_ptr<Piece>& piece) const;
 };
