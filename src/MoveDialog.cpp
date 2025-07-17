@@ -117,6 +117,6 @@ std::string MoveDialog::GetMoveHistory()
         moveHistoryString += " " + m_moveHistory[i];
     }
     
-    moveHistoryString += "\n\n";
+    moveHistoryString += "\n";
     return moveHistoryString;
 }

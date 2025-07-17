@@ -35,7 +35,7 @@ TEST(MoveDialogTest, dialogAfterMove)
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\n1. White1\n\n\nBlack to move, insert your Move: \n");
+    EXPECT_EQ(output,  "\nMove history:\n1. White1\n\nBlack to move, insert your Move: \n");
     EXPECT_EQ(moveDialog.GetCurrentTurn(), Color::Black);
 }
 
@@ -57,5 +57,5 @@ TEST(MoveDialogTest, dialogAfterThreeMoves)
     std::string output = buffer.str();
 
     // Assert
-    EXPECT_EQ(output,  "\nMove history:\n1. White1 Black1\n2. White2\n\n\nBlack to move, insert your Move: \n");
+    EXPECT_EQ(output,  "\nMove history:\n1. White1 Black1\n2. White2\n\nBlack to move, insert your Move: \n");
 }
