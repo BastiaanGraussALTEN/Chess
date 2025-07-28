@@ -4,86 +4,61 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-BoardPrinter::BoardPrinter(const Board& board) : m_board(board)
+BoardPrinter::BoardPrinter(const Board& board) 
+    : m_board(board), 
+    m_squareSize(80),
+    lightColor(240, 217, 181),
+    darkColor(181, 136, 99)
 {
+    m_windowSize = m_squareSize * 8;
 }
 
 void BoardPrinter::PrintBoard() const
 {
-    for(int i = Constants::boardEnd; i > Constants::boardBegin - 1; i--)
+    auto window = sf::RenderWindow(sf::VideoMode({m_windowSize, m_windowSize}), "Chessboard");
+    window.setFramerateLimit(144);
+
+    sf::Texture texture;
+    if (!texture.loadFromFile("../textures/Chess_BB.png"))
     {
-        std::string row = std::to_string(i);
-        for (int j = Constants::boardBegin; j < Constants::boardEnd + 1; j++)
+        std::cerr << "Failed to load Chess_BB.png" << std::endl;
+    }
+
+    texture.setSmooth(true);
+    sf::Sprite sprite(texture);
+        
+    sf::Vector2u textureSize = texture.getSize();
+    float scaleX = (float)m_squareSize / textureSize.x;
+    float scaleY = (float)m_squareSize / textureSize.y;
+    sprite.setScale(sf::Vector2f(scaleX, scaleY));
+
+    while (window.isOpen())
+    {
+        while (const std::optional event = window.pollEvent())
         {
-            auto piece = m_board.GetPieceFromSquare(Square(j, i));
-            if (piece == nullptr)
+            if (event->is<sf::Event::Closed>())
             {
-                row += "  ";
-            }
-            else
-            {
-                row += " " + PieceToUnicode(piece);
+                window.close();
             }
         }
-        
-        std::cout << row << std::endl;
+
+        window.clear();
+        DrawEmptyChessBoard(window, sf::RenderStates::Default);
+        window.draw(sprite);
+        window.display();
     }
-    
-    std::cout << "  A B C D E F G H" << std::endl;
-    std::cout << "" << std::endl;
 }
 
-std::string BoardPrinter::PieceToUnicode(const std::shared_ptr<Piece>& piece) const
+void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if (piece->color == Color::White)
+    for (int row = 0; row < size; ++row) 
     {
-        switch(piece->pieceType)
+        for (int column = 0; column < size; ++column) 
         {
-            case PieceType::Pawn:
-                return "♙";
-                break;
-            case PieceType::Knight:
-                return "♘";
-                break;
-            case PieceType::Bishop:
-                return "♗";
-                break;
-            case PieceType::Rook:
-                return "♖";
-                break;
-            case PieceType::Queen:
-                return "♕";
-                break;
-            case PieceType::King:
-                return "♔";
-                break;
+            sf::RectangleShape square(sf::Vector2f(m_squareSize, m_squareSize));
+            square.setPosition(sf::Vector2f(column * m_squareSize, row * m_squareSize));
+            square.setFillColor((row + column) % 2 ? darkColor : lightColor);
+            target.draw(square, states);
         }
     }
-    if (piece->color == Color::Black)
-    {
-        switch(piece->pieceType)
-        {
-            //ඞ
-            case PieceType::Pawn:
-                return "♣";
-                break;
-            case PieceType::Knight:
-                return "♞";
-                break;
-            case PieceType::Bishop:
-                return "♝";
-                break;
-            case PieceType::Rook:
-                return "♜";
-                break;
-            case PieceType::Queen:
-                return "♛";
-                break;
-            case PieceType::King:
-                return "♚";
-                break;
-        }
-    }
-
-    return "";
 }
