@@ -48,8 +48,6 @@ set(HEADER_FILES
     ../header/TestFunctions.h
 )
 
-# Add the executable or library
 add_library(src STATIC ${SRC_FILES} ${HEADER_FILES})
 
-add_executable(Chess main.cpp)
-target_link_libraries(Chess PRIVATE src)
+target_link_libraries(src PUBLIC sfml-graphics sfml-window sfml-system)

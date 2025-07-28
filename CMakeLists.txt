@@ -12,3 +12,6 @@ add_subdirectory(src)
 add_subdirectory(external/googletest)
 add_subdirectory(external/SFML)
 add_subdirectory(test)
+
+add_executable(Chess src/main.cpp)
+target_link_libraries(Chess PRIVATE src)

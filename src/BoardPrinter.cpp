@@ -1,6 +1,7 @@
 #include "../header/BoardPrinter.h"
 #include "../header/Constants.h"
 
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 BoardPrinter::BoardPrinter(const Board& board) : m_board(board)
