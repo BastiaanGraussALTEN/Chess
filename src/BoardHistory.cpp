@@ -1,6 +1,5 @@
 #include "../header/BoardHistory.h"
 
-#include <map>
 #include <iostream>
 
 bool BoardHistory::IsThreeFoldRepetition()

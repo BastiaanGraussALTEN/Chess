@@ -10,4 +10,5 @@ enable_testing()
 # Add src and test directories
 add_subdirectory(src)
 add_subdirectory(external/googletest)
+add_subdirectory(external/SFML)
 add_subdirectory(test)
