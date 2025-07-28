@@ -18,20 +18,6 @@ void BoardPrinter::PrintBoard() const
     auto window = sf::RenderWindow(sf::VideoMode({m_windowSize, m_windowSize}), "Chessboard");
     window.setFramerateLimit(144);
 
-    sf::Texture texture;
-    if (!texture.loadFromFile("../textures/Chess_BB.png"))
-    {
-        std::cerr << "Failed to load Chess_BB.png" << std::endl;
-    }
-
-    texture.setSmooth(true);
-    sf::Sprite sprite(texture);
-        
-    sf::Vector2u textureSize = texture.getSize();
-    float scaleX = (float)m_squareSize / textureSize.x;
-    float scaleY = (float)m_squareSize / textureSize.y;
-    sprite.setScale(sf::Vector2f(scaleX, scaleY));
-
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -44,16 +30,16 @@ void BoardPrinter::PrintBoard() const
 
         window.clear();
         DrawEmptyChessBoard(window, sf::RenderStates::Default);
-        window.draw(sprite);
+        DrawPiece(window, sf::RenderStates::Default, Color::White, PieceType::Queen);
         window.display();
     }
 }
 
 void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (int row = 0; row < size; ++row) 
+    for (int row = 0; row < Constants::boardEnd; ++row) 
     {
-        for (int column = 0; column < size; ++column) 
+        for (int column = 0; column < Constants::boardEnd; ++column) 
         {
             sf::RectangleShape square(sf::Vector2f(m_squareSize, m_squareSize));
             square.setPosition(sf::Vector2f(column * m_squareSize, row * m_squareSize));
@@ -61,4 +47,82 @@ void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderState
             target.draw(square, states);
         }
     }
+}
+
+void BoardPrinter::DrawPiece(sf::RenderTarget& target, sf::RenderStates states, const Color& color, const PieceType& pieceType) const
+{
+    std::string path = PieceToPath(color, pieceType);
+    sf::Texture texture;
+    if (!texture.loadFromFile(path))
+    {
+        std::cerr << "Failed to load " + path << std::endl;
+    }
+
+    texture.setSmooth(true);
+    sf::Sprite sprite(texture);
+
+    sf::Vector2u textureSize = texture.getSize();
+    float scaleX = (float)m_squareSize / textureSize.x;
+    float scaleY = (float)m_squareSize / textureSize.y;
+    sprite.setScale(sf::Vector2f(scaleX, scaleY));
+
+    target.draw(sprite);
+}
+
+std::string BoardPrinter::PieceToPath(const Color& color, const PieceType& pieceType) const
+{
+    if (color == Color::White)
+    {
+        switch(pieceType)
+        {
+            case PieceType::Pawn:
+                return "../textures/Chess_WP.png";
+                break;
+            case PieceType::Knight:
+                return "../textures/Chess_WN.png";
+                break;
+            case PieceType::Bishop:
+                return "../textures/Chess_WB.png";
+                break;
+            case PieceType::Rook:
+                return "../textures/Chess_WR.png";
+                break;
+            case PieceType::Queen:
+                return "../textures/Chess_WQ.png";
+                break;
+            case PieceType::King:
+                return "../textures/Chess_WK.png";
+                break;
+            default:
+                return "";
+        }
+    }
+    else
+    {
+        switch(pieceType)
+        {
+            case PieceType::Pawn:
+                return "../textures/Chess_BP.png";
+                break;
+            case PieceType::Knight:
+                return "../textures/Chess_BN.png";
+                break;
+            case PieceType::Bishop:
+                return "../textures/Chess_BB.png";
+                break;
+            case PieceType::Rook:
+                return "../textures/Chess_BR.png";
+                break;
+            case PieceType::Queen:
+                return "../textures/Chess_BQ.png";
+                break;
+            case PieceType::King:
+                return "../textures/Chess_BK.png";
+                break;
+            default:
+                return "";
+        }
+    }
+
+    return "";
 }
