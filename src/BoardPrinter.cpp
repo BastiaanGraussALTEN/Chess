@@ -29,13 +29,13 @@ void BoardPrinter::PrintBoard() const
         }
 
         window.clear();
-        DrawEmptyChessBoard(window, sf::RenderStates::Default);
-        DrawPieces(window, sf::RenderStates::Default);
+        DrawEmptyChessBoard(window);
+        DrawPieces(window);
         window.display();
     }
 }
 
-void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderStates states) const
+void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target) const
 {
     for (int row = 0; row < Constants::boardEnd; ++row) 
     {
@@ -44,21 +44,21 @@ void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderState
             sf::RectangleShape squareShape(sf::Vector2f(m_squareSize, m_squareSize));
             squareShape.setPosition(sf::Vector2f(column * m_squareSize, row * m_squareSize));
             squareShape.setFillColor((row + column) % 2 ? darkColor : lightColor);
-            target.draw(squareShape, states);
+            target.draw(squareShape, m_states);
         }
     }
 }
 
-void BoardPrinter::DrawPieces(sf::RenderTarget& target, sf::RenderStates states) const
+void BoardPrinter::DrawPieces(sf::RenderTarget& target) const
 {
     for (const auto& piece : m_board.GetPieces())
     {
         sf::Vector2f position = SquareToPosition(piece->position);
-        DrawPieceSprite(target, states, piece->color, piece->pieceType, position);
+        DrawPieceSprite(target, piece->color, piece->pieceType, position);
     }
 }
 
-void BoardPrinter::DrawPieceSprite(sf::RenderTarget& target, sf::RenderStates states, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const
+void BoardPrinter::DrawPieceSprite(sf::RenderTarget& target, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const
 {
     std::string path = PieceToPath(color, pieceType);
 
@@ -85,7 +85,7 @@ void BoardPrinter::DrawPieceSprite(sf::RenderTarget& target, sf::RenderStates st
     sprite.setScale(sf::Vector2f(scaleX, scaleY));
 
     sprite.setPosition(position);
-    target.draw(sprite, states);
+    target.draw(sprite, m_states);
 }
 
 std::string BoardPrinter::PieceToPath(const Color& color, const PieceType& pieceType) const

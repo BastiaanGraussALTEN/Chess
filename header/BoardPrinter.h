@@ -11,12 +11,13 @@ class BoardPrinter
         BoardPrinter(const Board& board);
         void PrintBoard() const;
     private:
-        void DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderStates states) const;
-        void DrawPieces(sf::RenderTarget& target, sf::RenderStates states) const;
-        void DrawPieceSprite(sf::RenderTarget& target, sf::RenderStates states, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const;
+        void DrawEmptyChessBoard(sf::RenderTarget& target) const;
+        void DrawPieces(sf::RenderTarget& target) const;
+        void DrawPieceSprite(sf::RenderTarget& target, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const;
         std::string PieceToPath(const Color& color, const PieceType& pieceType) const;
         sf::Vector2f SquareToPosition(const Square& square) const;
         Board m_board;
+        sf::RenderStates m_states = sf::RenderStates::Default;
         unsigned int m_squareSize;
         unsigned int m_windowSize;
         sf::Color lightColor;
