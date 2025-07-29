@@ -29,54 +29,62 @@ void BoardPrinter::PrintBoard() const
         }
 
         window.clear();
-        DrawChessBoard(window, sf::RenderStates::Default);
+        DrawEmptyChessBoard(window, sf::RenderStates::Default);
+        DrawPieces(window, sf::RenderStates::Default);
         window.display();
     }
 }
 
-void BoardPrinter::DrawChessBoard(sf::RenderTarget& target, sf::RenderStates states) const
+void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for (int row = 0; row < Constants::boardEnd; ++row) 
     {
         for (int column = 0; column < Constants::boardEnd; ++column) 
         {
-            sf::RectangleShape square(sf::Vector2f(m_squareSize, m_squareSize));
-            square.setPosition(sf::Vector2f(column * m_squareSize, row * m_squareSize));
-            square.setFillColor((row + column) % 2 ? darkColor : lightColor);
-            target.draw(square, states);
-
-            int squareRow = row + 1;
-            int squareColumn = column + 1;
-            if (m_board.GetPieceFromSquare(Square(squareRow, squareColumn)) != nullptr)
-            {
-                Color pieceColor = m_board.GetPieceFromSquare(Square(squareRow, squareColumn))->color;
-                PieceType pieceType = m_board.GetPieceFromSquare(Square(squareRow, squareColumn))->pieceType;
-                sf::Vector2f position = SquareToPosition(Square(squareRow, squareColumn));
-                DrawPieceSprite(target, states, pieceColor, pieceType, position);
-            }
+            sf::RectangleShape squareShape(sf::Vector2f(m_squareSize, m_squareSize));
+            squareShape.setPosition(sf::Vector2f(column * m_squareSize, row * m_squareSize));
+            squareShape.setFillColor((row + column) % 2 ? darkColor : lightColor);
+            target.draw(squareShape, states);
         }
+    }
+}
+
+void BoardPrinter::DrawPieces(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    for (const auto& piece : m_board.GetPieces())
+    {
+        sf::Vector2f position = SquareToPosition(piece->position);
+        DrawPieceSprite(target, states, piece->color, piece->pieceType, position);
     }
 }
 
 void BoardPrinter::DrawPieceSprite(sf::RenderTarget& target, sf::RenderStates states, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const
 {
     std::string path = PieceToPath(color, pieceType);
-    sf::Texture texture;
-    if (!texture.loadFromFile(path))
+
+    auto it = m_textureCache.find(path);
+    if (it == m_textureCache.end())
     {
-        std::cerr << "Failed to load " + path << std::endl;
+        sf::Texture texture;
+        if (!texture.loadFromFile(path))
+        {
+            std::cerr << "Failed to load " << path << std::endl;
+            return;
+        }
+        texture.setSmooth(true);
+        m_textureCache[path] = texture;
+        it = m_textureCache.find(path);
     }
 
-    texture.setSmooth(true);
+    const sf::Texture& texture = it->second;
     sf::Sprite sprite(texture);
 
     sf::Vector2u textureSize = texture.getSize();
-    float scaleX = (float)m_squareSize / textureSize.x;
-    float scaleY = (float)m_squareSize / textureSize.y;
+    float scaleX = static_cast<float>(m_squareSize) / textureSize.x;
+    float scaleY = static_cast<float>(m_squareSize) / textureSize.y;
     sprite.setScale(sf::Vector2f(scaleX, scaleY));
 
     sprite.setPosition(position);
-
     target.draw(sprite, states);
 }
 
@@ -141,6 +149,6 @@ std::string BoardPrinter::PieceToPath(const Color& color, const PieceType& piece
 sf::Vector2f BoardPrinter::SquareToPosition(const Square& square) const
 {
     float x = (square.x - 1) * m_squareSize;
-    float y = ((square.y * -1) + 8) * m_squareSize;
+    float y = (7 - (square.y - 1)) * m_squareSize;
     return sf::Vector2f(x, y);
 }
