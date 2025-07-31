@@ -4,13 +4,35 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-BoardPrinter::BoardPrinter(const Board& board, unsigned int squareSize) 
+BoardPrinter::BoardPrinter(const Board& board) 
     : m_board(board), 
-    m_squareSize(squareSize),
+    m_squareSize(80),
     lightColor(240, 217, 181),
     darkColor(181, 136, 99)
 {
     m_windowSize = m_squareSize * 8;
+}
+
+void BoardPrinter::PrintBoard() const
+{
+    auto window = sf::RenderWindow(sf::VideoMode({m_windowSize, m_windowSize}), "Chessboard");
+    window.setFramerateLimit(144);
+
+    while (window.isOpen())
+    {
+        while (const std::optional event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+            {
+                window.close();
+            }
+        }
+
+        window.clear();
+        DrawEmptyChessBoard(window);
+        DrawPieces(window);
+        window.display();
+    }
 }
 
 void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target) const

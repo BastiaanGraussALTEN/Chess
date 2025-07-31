@@ -5,26 +5,16 @@
 #include "../header/BoardHistory.h"
 #include "../header/BoardPrinter.h"
 
-#include <thread>
-#include <atomic>
-#include <mutex>
-
-unsigned int squareSize = 80;
-unsigned int windowSize = squareSize * 8;
-std::atomic<bool> isGameEnded = false;
-std::mutex boardMutex;
-Board board;
-std::mutex moveStringMutex;
-std::string moveString;
-
-void terminalInput()
+int main()
 {
-    std::cout << "Input thread started\n";
     MoveDialog moveDialog;
+    Board board;
     BoardHistory boardHistory;
+    bool isGameEnded = false;
     while(!isGameEnded)
     {
         boardHistory.AddBoard(board);
+        BoardPrinter boardPrinter = BoardPrinter(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
         MoveParser moveParser(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
@@ -36,6 +26,7 @@ void terminalInput()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             if (dangerChecker.IsKingUnderAttack())
             {
                 moveDialog.ShowCheckMate();
@@ -51,6 +42,7 @@ void terminalInput()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.Show50MoveDraw();
             continue;
         }
@@ -59,6 +51,7 @@ void terminalInput()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.ShowThreeFoldRepetition();
             continue;
         }
@@ -67,33 +60,23 @@ void terminalInput()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.ShowInsufficientMaterial();
             continue;
         }
         
+        std::string moveString;
         bool validMoveIsGiven = false;
 
         while(!validMoveIsGiven)
         {
             moveDialog.ShowMoveHistory();
+            boardPrinter.PrintBoard();
             moveDialog.ShowDialog();
-            std::string inputMove;
-            if (!std::getline(std::cin, inputMove))
-            {
-                isGameEnded = true;
-                break;
-            }
-            {
-                std::lock_guard<std::mutex> lock2(moveStringMutex);
-                moveString = inputMove;
-            }
+            std::cin >> moveString;
             Move move = moveParser.ParseString(moveString);
             if (!move.isLegal)
             {
-                {
-                    std::lock_guard<std::mutex> lock2(moveStringMutex);
-                    moveString.clear();
-                }
                 moveDialog.ShowStringNotValid();
                 continue;
             }
@@ -106,10 +89,7 @@ void terminalInput()
                     continue;
                 }
 
-                {
-                    std::lock_guard<std::mutex> lock1(boardMutex);
-                    board.CastleKingside(colorToMove);
-                }
+                board.CastleKingside(colorToMove);
                 moveDialog.SetMove(moveString);
                 validMoveIsGiven = true;
                 continue;
@@ -122,10 +102,7 @@ void terminalInput()
                     continue;
                 }
                 
-                {
-                    std::lock_guard<std::mutex> lock1(boardMutex);
-                    board.CastleQueenside(colorToMove);
-                }
+                board.CastleQueenside(colorToMove);
                 moveDialog.SetMove(moveString);
                 validMoveIsGiven = true;
                 continue;
@@ -152,7 +129,6 @@ void terminalInput()
 
             if (legalityChecker.DoesMoveCapturePiece(move))
             {
-                std::lock_guard<std::mutex> lock1(boardMutex);
                 board.RemovePieceFromSquare(move.end);
                 boardHistory.ClearHistory();
             }
@@ -162,14 +138,10 @@ void terminalInput()
                 boardHistory.ClearHistory();
             }
 
-            {
-                std::lock_guard<std::mutex> lock1(boardMutex);
-                board.MovePiece(move);
-            }
+            board.MovePiece(move);
 
             if (move.isPromotion)
             {
-                std::lock_guard<std::mutex> lock1(boardMutex);
                 board.RemovePieceFromSquare(move.end);
                 switch (move.promotionPiece)
                 {
@@ -192,48 +164,6 @@ void terminalInput()
             continue;
         }
     }
-}
 
-int main()
-{
-    auto window = sf::RenderWindow(sf::VideoMode({windowSize, windowSize}), "Chessboard");
-    window.setFramerateLimit(144);
-    
-    BoardPrinter boardPrinter = BoardPrinter(board, squareSize);
-    std::thread inputThread(terminalInput);
-
-    while (window.isOpen())
-    {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                window.close();
-            }
-        }
-
-        std::string moveToPrint;
-        {
-            std::lock_guard<std::mutex> lock(moveStringMutex);
-            moveToPrint  = moveString;
-            moveString.clear();
-        }
-
-        if (!moveToPrint.empty()) 
-        {
-            std::cout << "Processing move: " << moveToPrint  << std::endl;
-        }
-
-        {
-            window.clear();
-            std::lock_guard<std::mutex> lock(boardMutex);
-            boardPrinter.DrawEmptyChessBoard(window);
-            boardPrinter.DrawPieces(window);
-            window.display();
-        }
-    }
-
-    std::cout << "Window closed" << std::endl;
-    inputThread.join();
     return 0;
 }

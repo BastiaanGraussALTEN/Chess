@@ -8,10 +8,11 @@
 class BoardPrinter
 {
     public:
-        BoardPrinter(const Board& board, unsigned int squareSize);
+        BoardPrinter(const Board& board);
+        void PrintBoard() const;
+    private:
         void DrawEmptyChessBoard(sf::RenderTarget& target) const;
         void DrawPieces(sf::RenderTarget& target) const;
-    private:
         void DrawPieceSprite(sf::RenderTarget& target, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const;
         std::string PieceToPath(const Color& color, const PieceType& pieceType) const;
         sf::Vector2f SquareToPosition(const Square& square) const;
