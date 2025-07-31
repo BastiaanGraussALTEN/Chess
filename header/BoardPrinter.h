@@ -8,8 +8,8 @@
 class BoardPrinter
 {
     public:
-        BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces);
-        void PrintBoard() const;
+        BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces, unsigned int squareSize);
+        void PrintBoard(sf::RenderWindow& window) const;
     private:
         void CopyPieces(const std::vector<std::shared_ptr<Piece>>& pieces);
         void DrawEmptyChessBoard(sf::RenderTarget& target) const;

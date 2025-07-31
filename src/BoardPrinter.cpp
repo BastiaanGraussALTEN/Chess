@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-BoardPrinter::BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces) 
-    : m_squareSize(80),
+BoardPrinter::BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces, unsigned int squareSize) 
+    : m_squareSize(squareSize),
     lightColor(240, 217, 181),
     darkColor(181, 136, 99)
 {
@@ -13,26 +13,12 @@ BoardPrinter::BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces)
     m_windowSize = m_squareSize * 8;
 }
 
-void BoardPrinter::PrintBoard() const
+void BoardPrinter::PrintBoard(sf::RenderWindow& window) const
 {
-    auto window = sf::RenderWindow(sf::VideoMode({m_windowSize, m_windowSize}), "Chessboard");
-    window.setFramerateLimit(144);
-
-    while (window.isOpen())
-    {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                window.close();
-            }
-        }
-
-        window.clear();
-        DrawEmptyChessBoard(window);
-        DrawPieces(window);
-        window.display();
-    }
+    window.clear();
+    DrawEmptyChessBoard(window);
+    DrawPieces(window);
+    window.display();
 }
 
 void BoardPrinter::CopyPieces(const std::vector<std::shared_ptr<Piece>>& pieces)
