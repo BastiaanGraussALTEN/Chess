@@ -8,25 +8,40 @@
 int main()
 {
     MoveDialog moveDialog;
-    Board board;
     BoardHistory boardHistory;
+    Board board;
+    unsigned int squareSize = 80;
+    BoardPrinter boardPrinter = BoardPrinter(board.GetPieces(), squareSize);
     bool isGameEnded = false;
-    while(!isGameEnded)
+    auto window = sf::RenderWindow(
+        sf::VideoMode(
+            {squareSize * Constants::boardEnd, squareSize * Constants::boardEnd}), "Chessboard");
+    window.setFramerateLimit(0);
+
+    while (window.isOpen() && !isGameEnded)
     {
+        while (const std::optional event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+            {
+                window.close();  
+            }
+        }
+        
         boardHistory.AddBoard(board);
-        BoardPrinter boardPrinter = BoardPrinter(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
         MoveParser moveParser(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
         DangerChecker dangerChecker = DangerChecker(board, colorToMove);
         CastleChecker castleChecker = CastleChecker(board, colorToMove);
         CheckChecker checkChecker = CheckChecker(board, colorToMove);
-
+            
         if (checkChecker.EveryMoveChecksSelf())
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            boardPrinter.CopyPieces(board.GetPieces());
+            boardPrinter.PrintBoard(window);
             if (dangerChecker.IsKingUnderAttack())
             {
                 moveDialog.ShowCheckMate();
@@ -37,30 +52,33 @@ int main()
             }
             continue;
         }
-
+        
         if (board.IsFiftyMoveRule())
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            boardPrinter.CopyPieces(board.GetPieces());
+            boardPrinter.PrintBoard(window);
             moveDialog.Show50MoveDraw();
             continue;
         }
-
+        
         if (boardHistory.IsThreeFoldRepetition())
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            boardPrinter.CopyPieces(board.GetPieces());
+            boardPrinter.PrintBoard(window);
             moveDialog.ShowThreeFoldRepetition();
             continue;
         }
-
+        
         if (!checkChecker.SufficientMaterialForCheckmate())
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            boardPrinter.CopyPieces(board.GetPieces());
+            boardPrinter.PrintBoard(window);
             moveDialog.ShowInsufficientMaterial();
             continue;
         }
@@ -71,7 +89,8 @@ int main()
         while(!validMoveIsGiven)
         {
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            boardPrinter.CopyPieces(board.GetPieces());
+            boardPrinter.PrintBoard(window);
             moveDialog.ShowDialog();
             std::cin >> moveString;
             Move move = moveParser.ParseString(moveString);
@@ -88,7 +107,7 @@ int main()
                     moveDialog.ShowIllegalCastling();
                     continue;
                 }
-
+                
                 board.CastleKingside(colorToMove);
                 moveDialog.SetMove(moveString);
                 validMoveIsGiven = true;
@@ -113,14 +132,14 @@ int main()
                 moveDialog.ShowMoveNotLegal();
                 continue;
             }
-
+            
             if ((!board.IsThereAPieceOfThisColorHere(colorToMove, move.start))
-                && (board.GetPieceFromSquare(move.start) != nullptr))
+            && (board.GetPieceFromSquare(move.start) != nullptr))
             {
                 moveDialog.ShowPieceWrongColor();
                 continue;
             }
-
+            
             if (!checkChecker.IsKingSafeAfterMove(move))
             {
                 moveDialog.ShowMovePutsKingInCheck();
@@ -132,12 +151,12 @@ int main()
                 board.RemovePieceFromSquare(move.end);
                 boardHistory.ClearHistory();
             }
-
+            
             if (board.GetPieceFromSquare(move.start)->pieceType == PieceType::Pawn)
             {
                 boardHistory.ClearHistory();
             }
-
+            
             board.MovePiece(move);
 
             if (move.isPromotion)
@@ -146,24 +165,24 @@ int main()
                 switch (move.promotionPiece)
                 {
                     case PieceType::Knight:
-                        board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
-                        break;
+                    board.AddPiece(PieceFactory::CreateKnight(colorToMove, move.end));
+                    break;
                     case PieceType::Bishop:
-                        board.AddPiece(PieceFactory::CreateBishop(colorToMove, move.end));
-                        break;
+                    board.AddPiece(PieceFactory::CreateBishop(colorToMove, move.end));
+                    break;
                     case PieceType::Rook:
-                        board.AddPiece(PieceFactory::CreateRook(colorToMove, move.end));
-                        break;
+                    board.AddPiece(PieceFactory::CreateRook(colorToMove, move.end));
+                    break;
                     case PieceType::Queen:
-                        board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
-                        break;
+                    board.AddPiece(PieceFactory::CreateQueen(colorToMove, move.end));
+                    break;
                 }
             }
             moveDialog.SetMove(moveParser.MoveToString(move));
             validMoveIsGiven = true;
             continue;
         }
+        
     }
-
     return 0;
 }

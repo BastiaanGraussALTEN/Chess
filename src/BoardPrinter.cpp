@@ -4,86 +4,154 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-BoardPrinter::BoardPrinter(const Board& board) : m_board(board)
+BoardPrinter::BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces, unsigned int squareSize) 
+    : m_squareSize(squareSize),
+    lightColor(240, 217, 181),
+    darkColor(181, 136, 99)
 {
+    CopyPieces(pieces);
+    m_windowSize = m_squareSize * 8;
 }
 
-void BoardPrinter::PrintBoard() const
+void BoardPrinter::PrintBoard(sf::RenderWindow& window) const
 {
-    for(int i = Constants::boardEnd; i > Constants::boardBegin - 1; i--)
-    {
-        std::string row = std::to_string(i);
-        for (int j = Constants::boardBegin; j < Constants::boardEnd + 1; j++)
-        {
-            auto piece = m_board.GetPieceFromSquare(Square(j, i));
-            if (piece == nullptr)
-            {
-                row += "  ";
-            }
-            else
-            {
-                row += " " + PieceToUnicode(piece);
-            }
-        }
-        
-        std::cout << row << std::endl;
-    }
-    
-    std::cout << "  A B C D E F G H" << std::endl;
-    std::cout << "" << std::endl;
+    window.clear();
+    DrawEmptyChessBoard(window);
+    DrawPieces(window);
+    window.display();
 }
 
-std::string BoardPrinter::PieceToUnicode(const std::shared_ptr<Piece>& piece) const
+void BoardPrinter::CopyPieces(const std::vector<std::shared_ptr<Piece>>& pieces)
 {
-    if (piece->color == Color::White)
+    m_pieces.clear();
+    m_pieces.reserve(pieces.size());
+    for (const auto& piecePtr : pieces) 
     {
-        switch(piece->pieceType)
+        if (piecePtr) 
         {
-            case PieceType::Pawn:
-                return "♙";
-                break;
-            case PieceType::Knight:
-                return "♘";
-                break;
-            case PieceType::Bishop:
-                return "♗";
-                break;
-            case PieceType::Rook:
-                return "♖";
-                break;
-            case PieceType::Queen:
-                return "♕";
-                break;
-            case PieceType::King:
-                return "♔";
-                break;
+            m_pieces.push_back(piecePtr->clone());
+        } 
+        else 
+        {
+            m_pieces.push_back(nullptr);
         }
     }
-    if (piece->color == Color::Black)
+}
+
+void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target) const
+{
+    for (int row = 0; row < Constants::boardEnd; ++row) 
     {
-        switch(piece->pieceType)
+        for (int column = 0; column < Constants::boardEnd; ++column) 
         {
-            //ඞ
+            sf::RectangleShape squareShape(sf::Vector2f(m_squareSize, m_squareSize));
+            squareShape.setPosition(sf::Vector2f(column * m_squareSize, row * m_squareSize));
+            squareShape.setFillColor((row + column) % 2 ? darkColor : lightColor);
+            target.draw(squareShape, m_states);
+        }
+    }
+}
+
+void BoardPrinter::DrawPieces(sf::RenderTarget& target) const
+{
+    for (const auto& piece : m_pieces)
+    {
+        sf::Vector2f position = SquareToPosition(piece->position);
+        DrawPieceSprite(target, piece->color, piece->pieceType, position);
+    }
+}
+
+void BoardPrinter::DrawPieceSprite(sf::RenderTarget& target, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const
+{
+    std::string path = PieceToPath(color, pieceType);
+
+    auto it = m_textureCache.find(path);
+    if (it == m_textureCache.end())
+    {
+        sf::Texture texture;
+        if (!texture.loadFromFile(path))
+        {
+            std::cerr << "Failed to load " << path << std::endl;
+            return;
+        }
+        texture.setSmooth(true);
+        m_textureCache[path] = texture;
+        it = m_textureCache.find(path);
+    }
+
+    const sf::Texture& texture = it->second;
+    sf::Sprite sprite(texture);
+
+    sf::Vector2u textureSize = texture.getSize();
+    float scaleX = static_cast<float>(m_squareSize) / textureSize.x;
+    float scaleY = static_cast<float>(m_squareSize) / textureSize.y;
+    sprite.setScale(sf::Vector2f(scaleX, scaleY));
+
+    sprite.setPosition(position);
+    target.draw(sprite, m_states);
+}
+
+std::string BoardPrinter::PieceToPath(const Color& color, const PieceType& pieceType) const
+{
+    if (color == Color::White)
+    {
+        switch(pieceType)
+        {
             case PieceType::Pawn:
-                return "♣";
+                return "../textures/Chess_WP.png";
                 break;
             case PieceType::Knight:
-                return "♞";
+                return "../textures/Chess_WN.png";
                 break;
             case PieceType::Bishop:
-                return "♝";
+                return "../textures/Chess_WB.png";
                 break;
             case PieceType::Rook:
-                return "♜";
+                return "../textures/Chess_WR.png";
                 break;
             case PieceType::Queen:
-                return "♛";
+                return "../textures/Chess_WQ.png";
                 break;
             case PieceType::King:
-                return "♚";
+                return "../textures/Chess_WK.png";
                 break;
+            default:
+                return "";
+        }
+    }
+    else
+    {
+        switch(pieceType)
+        {
+            case PieceType::Pawn:
+                return "../textures/Chess_BP.png";
+                break;
+            case PieceType::Knight:
+                return "../textures/Chess_BN.png";
+                break;
+            case PieceType::Bishop:
+                return "../textures/Chess_BB.png";
+                break;
+            case PieceType::Rook:
+                return "../textures/Chess_BR.png";
+                break;
+            case PieceType::Queen:
+                return "../textures/Chess_BQ.png";
+                break;
+            case PieceType::King:
+                return "../textures/Chess_BK.png";
+                break;
+            default:
+                return "";
         }
     }
 
     return "";
+}
+
+sf::Vector2f BoardPrinter::SquareToPosition(const Square& square) const
+{
+    float x = (square.x - 1) * m_squareSize;
+    float y = (7 - (square.y - 1)) * m_squareSize;
+    return sf::Vector2f(x, y);
 }
