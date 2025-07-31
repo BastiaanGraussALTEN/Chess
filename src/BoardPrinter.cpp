@@ -23,6 +23,7 @@ void BoardPrinter::PrintBoard(sf::RenderWindow& window) const
 
 void BoardPrinter::CopyPieces(const std::vector<std::shared_ptr<Piece>>& pieces)
 {
+    m_pieces.clear();
     m_pieces.reserve(pieces.size());
     for (const auto& piecePtr : pieces) 
     {

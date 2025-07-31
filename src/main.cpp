@@ -16,19 +16,17 @@ int main()
     auto window = sf::RenderWindow(
         sf::VideoMode(
             {squareSize * Constants::boardEnd, squareSize * Constants::boardEnd}), "Chessboard");
-    window.setFramerateLimit(144);
+    window.setFramerateLimit(0);
 
-    while (window.isOpen())
+    while (window.isOpen() && !isGameEnded)
     {
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
             {
-                window.close();
+                window.close();  
             }
-        }
-        while(!isGameEnded)
-        {
+
             boardHistory.AddBoard(board);
             Color colorToMove = moveDialog.GetCurrentTurn();
             MoveParser moveParser(board, colorToMove);
@@ -42,6 +40,7 @@ int main()
                 isGameEnded = true;
                 moveDialog.ShowMoveHistory();
                 // boardPrinter.PrintBoard();
+                boardPrinter.CopyPieces(board.GetPieces());
                 boardPrinter.PrintBoard(window);
                 if (dangerChecker.IsKingUnderAttack())
                 {
@@ -59,6 +58,7 @@ int main()
                 isGameEnded = true;
                 moveDialog.ShowMoveHistory();
                 // boardPrinter.PrintBoard();
+                boardPrinter.CopyPieces(board.GetPieces());
                 boardPrinter.PrintBoard(window);
                 moveDialog.Show50MoveDraw();
                 continue;
@@ -69,6 +69,7 @@ int main()
                 isGameEnded = true;
                 moveDialog.ShowMoveHistory();
                 // boardPrinter.PrintBoard();
+                boardPrinter.CopyPieces(board.GetPieces());
                 boardPrinter.PrintBoard(window);
                 moveDialog.ShowThreeFoldRepetition();
                 continue;
@@ -79,6 +80,7 @@ int main()
                 isGameEnded = true;
                 moveDialog.ShowMoveHistory();
                 // boardPrinter.PrintBoard();
+                boardPrinter.CopyPieces(board.GetPieces());
                 boardPrinter.PrintBoard(window);
                 moveDialog.ShowInsufficientMaterial();
                 continue;
@@ -86,11 +88,12 @@ int main()
             
             std::string moveString;
             bool validMoveIsGiven = false;
-            
+
             while(!validMoveIsGiven)
             {
                 moveDialog.ShowMoveHistory();
                 // boardPrinter.PrintBoard();
+                boardPrinter.CopyPieces(board.GetPieces());
                 boardPrinter.PrintBoard(window);
                 moveDialog.ShowDialog();
                 std::cin >> moveString;
@@ -127,7 +130,7 @@ int main()
                     validMoveIsGiven = true;
                     continue;
                 }
-
+    
                 if (!legalityChecker.CheckMoveLegality(move))
                 {
                     moveDialog.ShowMoveNotLegal();
@@ -146,7 +149,7 @@ int main()
                     moveDialog.ShowMovePutsKingInCheck();
                     continue;
                 }
-
+    
                 if (legalityChecker.DoesMoveCapturePiece(move))
                 {
                     board.RemovePieceFromSquare(move.end);
@@ -159,7 +162,7 @@ int main()
                 }
                 
                 board.MovePiece(move);
-
+    
                 if (move.isPromotion)
                 {
                     board.RemovePieceFromSquare(move.end);
@@ -184,6 +187,7 @@ int main()
                 continue;
             }
         }
+        
     }
     return 0;
 }
