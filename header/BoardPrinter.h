@@ -8,15 +8,16 @@
 class BoardPrinter
 {
     public:
-        BoardPrinter(const Board& board);
+        BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces);
         void PrintBoard() const;
     private:
+        void CopyPieces(const std::vector<std::shared_ptr<Piece>>& pieces);
         void DrawEmptyChessBoard(sf::RenderTarget& target) const;
         void DrawPieces(sf::RenderTarget& target) const;
         void DrawPieceSprite(sf::RenderTarget& target, const Color& color, const PieceType& pieceType, const sf::Vector2f& position) const;
         std::string PieceToPath(const Color& color, const PieceType& pieceType) const;
         sf::Vector2f SquareToPosition(const Square& square) const;
-        Board m_board;
+        std::vector<std::shared_ptr<Piece>> m_pieces;
         sf::RenderStates m_states = sf::RenderStates::Default;
         unsigned int m_squareSize;
         unsigned int m_windowSize;

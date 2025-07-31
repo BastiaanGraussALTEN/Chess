@@ -4,12 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-BoardPrinter::BoardPrinter(const Board& board) 
-    : m_board(board), 
-    m_squareSize(80),
+BoardPrinter::BoardPrinter(const std::vector<std::shared_ptr<Piece>>& pieces) 
+    : m_squareSize(80),
     lightColor(240, 217, 181),
     darkColor(181, 136, 99)
 {
+    CopyPieces(pieces);
     m_windowSize = m_squareSize * 8;
 }
 
@@ -35,6 +35,22 @@ void BoardPrinter::PrintBoard() const
     }
 }
 
+void BoardPrinter::CopyPieces(const std::vector<std::shared_ptr<Piece>>& pieces)
+{
+    m_pieces.reserve(pieces.size());
+    for (const auto& piecePtr : pieces) 
+    {
+        if (piecePtr) 
+        {
+            m_pieces.push_back(piecePtr->clone());
+        } 
+        else 
+        {
+            m_pieces.push_back(nullptr);
+        }
+    }
+}
+
 void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target) const
 {
     for (int row = 0; row < Constants::boardEnd; ++row) 
@@ -51,7 +67,7 @@ void BoardPrinter::DrawEmptyChessBoard(sf::RenderTarget& target) const
 
 void BoardPrinter::DrawPieces(sf::RenderTarget& target) const
 {
-    for (const auto& piece : m_board.GetPieces())
+    for (const auto& piece : m_pieces)
     {
         sf::Vector2f position = SquareToPosition(piece->position);
         DrawPieceSprite(target, piece->color, piece->pieceType, position);

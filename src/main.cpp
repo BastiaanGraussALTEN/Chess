@@ -14,7 +14,7 @@ int main()
     while(!isGameEnded)
     {
         boardHistory.AddBoard(board);
-        BoardPrinter boardPrinter = BoardPrinter(board);
+        // BoardPrinter boardPrinter = BoardPrinter(board);
         Color colorToMove = moveDialog.GetCurrentTurn();
         MoveParser moveParser(board, colorToMove);
         LegalityChecker legalityChecker = LegalityChecker(board);
@@ -26,7 +26,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            // boardPrinter.PrintBoard();
             if (dangerChecker.IsKingUnderAttack())
             {
                 moveDialog.ShowCheckMate();
@@ -42,7 +42,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            // boardPrinter.PrintBoard();
             moveDialog.Show50MoveDraw();
             continue;
         }
@@ -51,7 +51,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            // boardPrinter.PrintBoard();
             moveDialog.ShowThreeFoldRepetition();
             continue;
         }
@@ -60,7 +60,7 @@ int main()
         {
             isGameEnded = true;
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            // boardPrinter.PrintBoard();
             moveDialog.ShowInsufficientMaterial();
             continue;
         }
@@ -71,7 +71,7 @@ int main()
         while(!validMoveIsGiven)
         {
             moveDialog.ShowMoveHistory();
-            boardPrinter.PrintBoard();
+            // boardPrinter.PrintBoard();
             moveDialog.ShowDialog();
             std::cin >> moveString;
             Move move = moveParser.ParseString(moveString);
