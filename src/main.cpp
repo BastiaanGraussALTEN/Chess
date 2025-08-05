@@ -145,15 +145,23 @@ int main()
                 moveDialog.ShowMovePutsKingInCheck();
                 continue;
             }
-
+            
             if (legalityChecker.DoesMoveCapturePiece(move))
             {
                 board.RemovePieceFromSquare(move.end);
                 boardHistory.ClearHistory();
             }
             
-            if (board.GetPieceFromSquare(move.start)->pieceType == PieceType::Pawn)
+            auto piece = board.GetPieceFromSquare(move.start);
+            if (piece->pieceType == PieceType::Pawn)
             {
+                std::shared_ptr<Pawn> pawn = std::dynamic_pointer_cast<Pawn>(piece);
+                if (legalityChecker.IsEnPassant(move, pawn))
+                {
+                    Square captureSquare = Square(move.end.x, 1);
+                    pawn->color == Color::White ? captureSquare.y = 5 : captureSquare.y = 4;
+                    board.RemovePieceFromSquare(captureSquare);
+                }
                 boardHistory.ClearHistory();
             }
             
